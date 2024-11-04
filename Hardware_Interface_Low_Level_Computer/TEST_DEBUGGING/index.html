@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Hardware_Interface_Low_Level_Computer - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Hardware_Interface_Low_Level_Computer";
+        var mkdocs_page_input_path = "Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING.md";
+        var mkdocs_page_url = "/autonomous_platform/Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Hardware_Interface_Low_Level_Computer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#raspberry-pi-4b-bootup-failed">Raspberry Pi 4b Bootup failed</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#software-container-not-started">Software container not started?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#no-ros2-topic-shows-in-terminal">No ROS2 topic shows in terminal</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ros2-node-did-not-start-when-starting-container">ROS2 Node did not start when starting container</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Test & Debugging</li>
+      <li class="breadcrumb-item active">Hardware_Interface_Low_Level_Computer</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="test-and-debugging-of-hardware-interface-low-level-computer">Test and Debugging of Hardware Interface Low Level Computer</h2>
+<p>This document aims to describe how to test and debugg the low level software if any error occours. If you stumble upon a new error which has been been described below, please add it to the documentation and how you resovled it. It will help future project members.</p>
+<h3 id="raspberry-pi-4b-bootup-failed">Raspberry Pi 4b Bootup failed</h3>
+<p>The Raspberry Pi 4b can fail to boot-up if there are corrupted files on the micro SD card or if the micro SD card has run out of empty storage. The docker temporary files can grow very large in size.</p>
+<p>This is a known issue and is noted down in <code>ISSUES_AND_FUTURE_WORK.md</code>.</p>
+<p>Connect a display, mouse and keyboard and resolve issues presented in terminal. You probably have to clean something in the filesystem.</p>
+<p>If this fails, there is a backup micro SD card containing a copy of the system availible <a href="https://infotiv.sharepoint.com/sites/AutonomousPlatform/Delade%20dokument/Forms/AllItems.aspx?id=%2Fsites%2FAutonomousPlatform%2FDelade%20dokument%2FGeneral%2FBackups&amp;viewid=dfe2fcef%2Dde52%2D4cb2%2D9cb5%2Da3f10ac871e4">here</a> for download. Make sure you have permission to access this project on Infotiv sharepoint. If this does not work, the procedure of setting up a fresh Raspberry Pi 4b is described in <code>SETUP_OF_RASPBERRY_PI.md</code> located in this directory.</p>
+<h3 id="software-container-not-started">Software container not started?</h3>
+<p>Has the Raspberry Pi 4b booted up without automatically starting the low level software docker container?</p>
+<p>There could be several causes for this, some of them are;</p>
+<ul>
+<li>Linux startup service did not run during boot-up</li>
+<li>docker container could not be built due to;</li>
+<li>Lack of Internet connection</li>
+<li>Errors in dockerfile configuration</li>
+<li>Corrupted files on micro SD card.</li>
+</ul>
+<p>First, check if the container is running or not using the following command.</p>
+<pre><code class="language-bash">docker container ps
+</code></pre>
+<p>If the docker container is running, the expected output would be:</p>
+<pre><code class="language-bash">CONTAINER ID   IMAGE COMMAND CREATED STATUS PORTS NAMES
+
+xxxx   hardware_interface_low_level_computer_ros2   xxxx   10 seconds ago   Up 10 seconds             ap4hwi
+</code></pre>
+<p>If the docker container is not running there could be two causes:</p>
+<ul>
+<li>The container is still being built (Can take up to 10 minutes when building from scratch)</li>
+<li>The container failed to build</li>
+</ul>
+<p>Either of these alternatives can be verified by looking at the status of the startup service.
+In a terminal check the status of the serive.</p>
+<pre><code class="language-bash">sudo systemctl status startup_lowlevel.service
+</code></pre>
+<p>output:</p>
+<p><img alt="systemd status" src="../../Resources/extra_documentation_images/systemd_status.png" />
+In the terminal it would explicity say if something has failed and the service did not start properly. It will also explain exactly what failed. Note that it says ERROR in the screenshot above. Something is therefore wrong! Resolve any issues if present and reboot Raspberry Pi 4b.</p>
+<h3 id="no-ros2-topic-shows-in-terminal">No ROS2 topic shows in terminal</h3>
+<p>The following command shall display what topics are active on the ROS2 network.</p>
+<pre><code class="language-bash">ros2 topic list
+</code></pre>
+<p>The expected output would be similar to:</p>
+<p>This section describes how to troubleshoot no topic showing up at all. If some topics show up but not the one you expected, look at <code>ROS2 Node did not start when starting container</code> section in this documentation file.</p>
+<p>Firstly, make sure you have configured the ROS_DOMAIN_ID environemnt variable</p>
+<pre><code class="language-bash">export ROS_DOMAIN_ID=1
+</code></pre>
+<p>If no ROS2 topic still doesn't show up</p>
+<h3 id="ros2-node-did-not-start-when-starting-container">ROS2 Node did not start when starting container</h3>
+<p>First make sure that only a specific node does not start up, if other nodes have started up but not the one you are looking for you need to look in the launch file that starts up the hardware interface software.</p>
+<p>Make sure it is configured to automatically start by looking in the launch hwi software package <code>autonomous_platform\Hardware_Interface_Low_Level_Computer\ap4_hwi_code\ap4hwi_ws\src\launch_hwi_software_pkg\launch</code></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../TEST_DEBUGGING/" class="btn btn-neutral float-left" title="Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../High_Level_Control_Computer/TEST_DEBUGGING/" class="btn btn-neutral float-right" title="High_Level_Control_Computer">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../TEST_DEBUGGING/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../High_Level_Control_Computer/TEST_DEBUGGING/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Setting up RaspberryPi - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Setting up RaspberryPi";
+        var mkdocs_page_input_path = "Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI.md";
+        var mkdocs_page_url = "/autonomous_platform/Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Setting up RaspberryPi</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Hardware Interface Low Level Computer</li>
+      <li class="breadcrumb-item active">Setting up RaspberryPi</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="setup-hardware-interface-low-level-code-raspberry-pi">Setup Hardware Interface Low Level Code (Raspberry Pi)</h2>
+<p>This document aims to describe how to assemble the hardware of this unit and configure a fresh Raspberry Pi to run the low level software on the autonomous platform. This document contains information about all the individual parts of this unit followed by the assembly of the hardware. It will further on describe how one can install a fresh PI with the required software. Lastly, some reference images and circuit diagram can be found.   </p>
+<p>In theory this unit should already be assembled and the PI should have all of its required software. But, in the cases where one need to replace a piece of hardware or re-install a fresh PI, this document should be helpful. </p>
+<h2 id="list-of-parts">List of parts</h2>
+<p>This is the required hardware to get the hardware interface low level computer up and running from scratch. Items can be found in the <a href="../../REQ_SPEC_BOOM.xlsx">REQ_SPEC_BOOM</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align: center;">Quantity</th>
+<th style="text-align: left;">Description and Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Essential parts</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>Raspberry Pi 4b</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Recommended 4 or 8 GB RAM version.</td>
+</tr>
+<tr>
+<td>LM2596 DC-DC converter</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Convert 12v to 5v</td>
+</tr>
+<tr>
+<td>RS485 CAN hat</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">To send CAN signals</td>
+</tr>
+<tr>
+<td>40x40x10 12v fan</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Cooling</td>
+</tr>
+<tr>
+<td>Raspberry PI 4 heatsink</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Cooling</td>
+</tr>
+<tr>
+<td>XT60 female connector</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">connect to Power supply</td>
+</tr>
+<tr>
+<td>DB9 Female connector</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Transpond signals</td>
+</tr>
+<tr>
+<td>Biltema fuse holder</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>3 A mini fuse</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>USB C cable to slice</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">To power the PI</td>
+</tr>
+<tr>
+<td>Micro SD card</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Micro SD card from reputable brand. Minimum recommended size 32GB. 64 is recommended.</td>
+</tr>
+<tr>
+<td><strong>Non-Essential parts</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>Xbox controller</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Controlling GoKart</td>
+</tr>
+<tr>
+<td>Touch screen</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Interface while debugging</td>
+</tr>
+<tr>
+<td>Keboard and mouse</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">interfacing while debugging</td>
+</tr>
+<tr>
+<td>Wifi router</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">To connect laptop wirelessly</td>
+</tr>
+<tr>
+<td>Mini-HDMI to HDMI M-M cable</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Connect a screen to PI</td>
+</tr>
+<tr>
+<td><strong>Components to 3D print</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>Top</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><a href="../../CAD/RaspberryPi_interface_node/RaspberryPi_AP4_Interface_Top.png">link</a></td>
+</tr>
+<tr>
+<td>Bottom</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><a href="../../CAD/RaspberryPi_interface_node/RaspberryPi_AP4_Interface_Bottom.png">link</a></td>
+</tr>
+<tr>
+<td>XT60 holder</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><a href="../../CAD/Battery_BOX/x60_clamp.stl-thumbnail.png">link</a></td>
+</tr>
+<tr>
+<td><strong>Screws and bolts</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td>1,5 mm copper wire red</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: left;">wiring. For positive charge</td>
+</tr>
+<tr>
+<td>1,5 mm copper wire black</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: left;">wiring. For negative charge</td>
+</tr>
+<tr>
+<td>Jumper wires</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">for can hat to DB9</td>
+</tr>
+<tr>
+<td>M2 nut and bolts</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">For PI box</td>
+</tr>
+<tr>
+<td>M3 nut and bolts</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">For DC-DC converter, fan, and DB9</td>
+</tr>
+<tr>
+<td>M4 nut and bolts</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">For case</td>
+</tr>
+</tbody>
+</table>
+<h2 id="assembling-the-hardware-parts">Assembling the hardware parts.</h2>
+<p>You need access to some workshop in order to solder, crimp wires, and 3D print the three components. You can find images showcasing how it should look, in the last section of this document <a href="#reference-images">Link to images</a> &amp; <a href="../resources/AP4_HWI_interface.png">Link to diagram</a>.</p>
+<p>Some guidelines to assembling the ahrdware according to the diagram is:
+- Make sure the DC-DC converter is set to output 5V or else the PI will be fried.
+  - On the LM2596 DC-DC converter there is a blue tower with a screw that you can adjust to change the voltage output. 
+- We used 3A fuses.
+- Double check with multimeter that the wiring is correctly setup before connecting PI.
+- The PI should receive a voltage of ~5V +- 5% (4.75 - 5.25)</p>
+<p>A computer that can flash a micro sd card is required.</p>
+<h2 id="installing-base-software-on-fresh-raspberry-pi-4b">Installing Base Software on Fresh Raspberry Pi 4b <a name="Installing-Base-Software-on-Fresh-Raspberry-Pi-4b"></a></h2>
+<ul>
+<li>Raspberry Pi 4b, 32 GB micro SD card</li>
+<li>Download Raspberry pi imager v1.7.3 and select Ubuntu 22.04</li>
+<li>Insert micro SD card (recommended minimum size 32gb)</li>
+<li>Connect display cable, mouse, keyboard</li>
+<li>Plug in power - Raspberry Pi should boot up</li>
+<li>Follow the standard linux installation process presented on screen</li>
+<li>Raspberry pi system configuration</li>
+<li>Name: ap4-hardware-interface</li>
+<li>Computer Name ap4-hw-interface-rpi4</li>
+<li>Username: find it in the internal <a href="../INTERNAL/INFOTIV_INTERNAL.md">README.md</a></li>
+<li>Password: find it in the internal <a href="../INTERNAL/INFOTIV_INTERNAL.md">README.md</a></li>
+</ul>
+<p>Now you can install any new software updates</p>
+<pre><code class="language-bash">sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</code></pre>
+<p>Restart Raspberry Pi.</p>
+<p>Set up folders and install git</p>
+<pre><code class="language-bash">sudo apt install git
+cd Desktop
+mkdir GIT
+cd GIT
+</code></pre>
+<p>Clone repository</p>
+<pre><code class="language-bash">git clone --recursive https://GITLAB_USERNAME:PERSONAL_ACCESS_TOKEN@gitlab.infotivlab.se/internal-development/autonomous_platform.git
+</code></pre>
+<p>The canbus communication socket speed can be set using these commands. They need to be runned after every boot but they are automatically done so using the <a href="../testing.bash">startup script</a>. <strong>You do not need to run these two commands</strong>.</p>
+<pre><code class="language-bash">sudo apt install can-utils
+</code></pre>
+<pre><code class="language-bash">sudo ip link set can0 up type can bitrate 1000000
+</code></pre>
+<p>Follow Docker <a href="https://www.ricmedia.com/tutorials/install-docker-on-raspberry-pi-with-ubuntu">installation guide</a>. Install docker-compose afterwards. </p>
+<pre><code class="language-bash">sudo apt install docker-compose
+</code></pre>
+<pre><code class="language-bash">sudo apt-get update &amp;&amp; sudo apt-get upgrade
+</code></pre>
+<h3 id="install-gpio-library-on-raspberry-pi-running-ubuntu">Install GPIO library on raspberry pi running ubuntu</h3>
+<p>If running a ubuntu distribution on raspberry pi, make sure libraries for controlling the gpio are installed.</p>
+<pre><code class="language-bash">sudo apt install python3-lgpio
+</code></pre>
+<h3 id="install-can-utils-library">Install can-utils library</h3>
+<p>In order for linux to be able to handle can messages, install can utils</p>
+<pre><code class="language-bash">sudo apt-get install can-utils
+</code></pre>
+<h3 id="raspberry-pi-4-configuration-to-integrate-with-can-hat">Raspberry pi 4 configuration to integrate with CAN hat.</h3>
+<p>There are some software configurations to do in order to enable a can interface using the mcp2515 board. Once configured, the can0 should show up as an available interface when using the command 'ifconfig'</p>
+<p>Here is a guide we follow in order to do so: https://www.youtube.com/watch?v=fXiOIUZtV10 and here is a different guide in written format https://harrisonsand.com/posts/can-on-the-raspberry-pi/. Below is a step by step guide how we did it.</p>
+<p>The MCP2515 module we have is has a clock of 8 Mhz. This is important because it may vary depending on supplier. (The clock frequency should be printed on the clock module on the mcp2515.)</p>
+<p>Here is the procedure as described more in detail in the above resources:</p>
+<ol>
+<li>Update the system</li>
+</ol>
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+<ol>
+<li>Enable SPI bus and load kernel modules:</li>
+</ol>
+<p>Using nano editor</p>
+<p>With a raspberry pi 4 running on ubuntu 22.04 this file was located at /boot/firmware/config.txt</p>
+<p>hence the command becomes</p>
+<pre><code class="language-bash">sudo nano /boot/firmware/config.txt
+</code></pre>
+<p>In this file, append, where 12000000 is the clock frequency of the RS485 hat</p>
+<pre><code class="language-bash">dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=12000000,interrupt=25 
+dtoverlay=spi-bcm2835-overlay
+</code></pre>
+<ol>
+<li>Reboot raspberry pi</li>
+</ol>
+<p>If everything is setup as it should, running the following command should not throw an error. If it asks, then install net-tools with:
+<code>sudo apt install net-tools</code></p>
+<pre><code class="language-bash">ifconfig can0
+</code></pre>
+<h3 id="setting-the-can-speed">Setting the CAN speed</h3>
+<p>The canbus communication speed can be set using</p>
+<pre><code class="language-bash">sudo ip link set can0 up type can bitrate 125000
+</code></pre>
+<p>Where 125000 is the speed of the connected canbuss</p>
+<h3 id="fixing-problems-with-gpio-pins-on-raspberry-pi">Fixing problems with GPIO pins on raspberry Pi</h3>
+<p>The MCP2515 CAN controller and the TJCxxx tranciever can operate at different voltages. (But are mounted on the same board refered to as MCP2515)</p>
+<p>Raspberry Pi GPIO pins are ONLY 3.3V tolerant, meaning the MCP2515 board had to be modified in order for the logic signals from the card to be understood by the raspberry pi. The CAN tranciever MUST be powered from 5V since the CAN is a 5V network.</p>
+<h3 id="setting-up-automatic-start-of-software-upon-boot-up">Setting up automatic start of software upon boot-up</h3>
+<p>It is very useful for the software running on the raspberry pi 4b to start when booting up.</p>
+<p>This can be done using linux services. The service will call a bash script "testing.bash" located in this directory.</p>
+<p>The full procedure can be read <a href="https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/">here</a>.</p>
+<p>The steps are summarized below.</p>
+<p>in /etc/systemd/system add a new service file. Name it:</p>
+<pre><code class="language-bash">startup_lowlevel.service
+</code></pre>
+<p>With the following contents:</p>
+<pre><code class="language-bash">[Unit]
+Description=description about this service
+After=network.target
+StartLimitIntervalSec=0
+
+ 
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/home/ap4/Desktop/GIT/autonomous_platform/Hardware_Interface_Low_Level_Computer
+ExecStart=/home/ap4/Desktop/GIT/autonomous_platform/Hardware_Interface_Low_Level_Computer/testing.bash
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload linux service file to include the newly created service.</p>
+<pre><code class="language-bash">sudo systemctl daemon-reload
+</code></pre>
+<p>Start the newly created service</p>
+<pre><code class="language-bash">sudo systemctl start startup_lowlevel.service
+</code></pre>
+<p>To enable the service to run on boot, enter</p>
+<pre><code class="language-bash">sudo systemctl enable startup_lowlevel.service
+</code></pre>
+<p>The status of the service can be observed using</p>
+<pre><code class="language-bash">sudo systemctl status startup_lowlevel.service
+</code></pre>
+<p>After this the bash script will execute upon boot-up. And the docker container will always run on startup.</p>
+<h3 id="configuring-a-joystick-optional">Configuring a joystick (Optional).</h3>
+<p>Although not necessary, if you want to configure the xbox controller you can follow <a href="./ap4_hwi_code/ap4hwi_ws/src/xbox_controller_feed_forward_ctrl_pkg/documentation_and_research/README.md">this guide</a>: </p>
+<h3 id="testing-and-debugging-system-level">Testing and debugging (system level)</h3>
+<p>Here is a list of things to test and verify</p>
+<ul>
+<li>Does it receive CAN messages?</li>
+<li>Can the docker container be started</li>
+<li>Does the docker container start automatically on boot-up?</li>
+<li>Can raspberry pi 4 be pinged from a computer on the same network?</li>
+</ul>
+<p>verify that CAN works expected</p>
+<h3 id="testing-and-verifying-basic-functionality">Testing and verifying basic functionality</h3>
+<p>The Raspberry Pi was set up as a CAN sniffer onto the Infotiv CAN lab kit (CAN Education course - Excersise 2). First the kit was setup to run exercise 2 and send temperature over the can bus. The two nodes could send and eceive. Thereafter the raspberry pi was connected onto the CAN bus.\
+Some errors occurred such as:</p>
+<ul>
+<li>Make sure the CAN speed is set up right</li>
+<li>The oscillator frequency is set to 8Mhz (NOT 20!!)</li>
+<li>Common ground over the complete CAN system, (GND was connected from lab kit to rasberry pi)</li>
+</ul>
+<h2 id="reference-images">Reference images</h2>
+<p>The end result of following this document should look something like:</p>
+<p><img alt="Rendered CAD illustration of outside" src="../../Resources/Pictures/CAD/RB4.PNG" /></p>
+<p><img alt="Outside view" src="../Resources/extra_documentation_images/raspberry_pi_hwi_outside.jpg" /></p>
+<p><img alt="Inside view" src="../Resources/extra_documentation_images/raspberry_pi_hwi_inside.jpg" /></p>
+<p><img alt="Diagram" src="../resources/AP4_HWI_interface.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../HOW_TO_EXTEND/" class="btn btn-neutral float-left" title="How to Extend"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../High_Level_Control_Computer/" class="btn btn-neutral float-right" title="High Level Control Computer">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../HOW_TO_EXTEND/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../High_Level_Control_Computer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

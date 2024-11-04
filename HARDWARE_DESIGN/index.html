@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/HARDWARE_DESIGN/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Hardware Design - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Hardware Design";
+        var mkdocs_page_input_path = "HARDWARE_DESIGN.md";
+        var mkdocs_page_url = "/autonomous_platform/HARDWARE_DESIGN/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Hardware Design</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#modular-mounting-of-components">Modular Mounting of Components</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#general-idea">General idea</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mounting-the-aluminum-plates-to-the-frame">Mounting the aluminum plates to the frame</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#component-list">Component list</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level overview</li>
+      <li class="breadcrumb-item active">Hardware Design</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/HARDWARE_DESIGN.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="hardware-design-principles">Hardware Design Principles</h2>
+<p>This document aims to collect the design principles for any new hardware added. Hardware may need to be added for different software layers, hence they can be summarized here.</p>
+<p>See <code>HOW_TO_EXTEND.md</code> for general design principles. These should always be kept in mind.</p>
+<h3 id="modular-mounting-of-components">Modular Mounting of Components</h3>
+<p>This document is supposed to collect our thought about how sensors, hardware and components should be mounted on autonomous platform in order to make it as modular and adaptable as possible for future use.</p>
+<h3 id="general-idea">General idea</h3>
+<p>Use a metal sheet with pre fabricated metal holes as a base for mounting components. Create 3D printed fixtures to connect Hardware Nodes, Raspberry Pi 4 and other major components.</p>
+<p><img alt="Layout" src="../Resources/layout.PNG" /></p>
+<p>Using the prefabricated holes one can then create 3d printed fixtures in a standardized way to mount hardware anywhere along the sheet.</p>
+<p><img alt="Mounting idea" src="../Resources/mounting_idea.PNG" /></p>
+<p><img alt="Component mounting" src="../Resources/component_mounting.PNG" /></p>
+<p>Specific solutions for this needs to be CADed later on.</p>
+<h3 id="mounting-the-aluminum-plates-to-the-frame">Mounting the aluminum plates to the frame</h3>
+<p>One can either use the pre existing mounting holes on the gokart chassis and screw directly into the chassis.</p>
+<p><img alt="Pre existing mounting holes on the gokart chassis" src="../Resources/pre_existing_holes.PNG" /></p>
+<p>Or one can create 3d printed fixtures to mount the plates, I.e:</p>
+<p><img alt="3d printed fixtures" src="../Resources/plate_fixture.PNG" /></p>
+<h3 id="component-list">Component list</h3>
+<ul>
+<li>Aluminum metal sheet with be fabricated holes: Aluminum Lochblech blank 250x500x1.5mm article nr:  148-21-919 OR 4001116378041  https://www.elfa.se/en/aluminium-perforated-plate-round-holes-500x250x1-5mm-alfer-4001116378041/p/14821919 Holes are spaced 15 mm apart, hole diameter 4.5 mm</li>
+</ul>
+<p><img alt="Aluminum sheet" src="../Resources/Aluminium_sheet.PNG" /></p>
+<ul>
+<li>M4 machine screws</li>
+<li>M4 nuts</li>
+</ul>
+<p>One can either use pre existing cable routing hardware as in the image below</p>
+<p><img alt="Pre existing cable routine" src="../Resources/existing_cable_management.PNG" /></p>
+<p>or can 3d print simple cable holders such as this image</p>
+<p><img alt="3d print simple cable holders" src="../Resources/cable_management.PNG" /></p>
+<p><img alt="3d print simple cable holders" src="../Resources/cable_management_above.PNG" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../CHANGELOG/" class="btn btn-neutral float-left" title="Changelog"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SOFTWARE_DESIGN/" class="btn btn-neutral float-right" title="Software Design">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../CHANGELOG/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../SOFTWARE_DESIGN/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

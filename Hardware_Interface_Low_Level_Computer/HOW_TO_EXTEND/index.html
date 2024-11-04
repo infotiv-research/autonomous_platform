@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>How to Extend - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "How to Extend";
+        var mkdocs_page_input_path = "Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND.md";
+        var mkdocs_page_url = "/autonomous_platform/Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">How to Extend</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-add-new-functionality">How to Add New Functionality</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#software-functionality">Software functionality</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sensors">Sensors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usb-based-sensors">USB Based Sensors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#embedded-microcontroller-sensors">Embedded Microcontroller Sensors</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before you begin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#general-procedure">General procedure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-verify-that-can-messages-are-read-and-translates-properly-to-a-ros2-topic">How to verify that CAN messages are read and translates properly to a ROS2 topic</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Hardware Interface Low Level Computer</li>
+      <li class="breadcrumb-item active">How to Extend</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="extend-hardware-interface-and-low-level-software">Extend Hardware Interface and Low Level Software</h2>
+<p>This document aims to describe to process of how to extend the hardware interface and low level software.</p>
+<p>Before starting to develop and adding code to the low level control software you need to first make sure you need to add something here.</p>
+<p>If you;</p>
+<ul>
+<li>Want to add a new sensor to autonomous platform</li>
+<li>Want to process sensor information</li>
+<li>Want to design hardware specific interfaces (I.e specific to the electric gokart)</li>
+</ul>
+<p>Then you are in the right spot!!</p>
+<p>If not, take a look at <code>High_Level_Control_Computer</code> or <code>CAN_Nodes_Microcontroller_Code</code>, maybe you intended to add functionality there!</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>In order to start adding functionality it is recommended to have a basic understanding of:</p>
+<ul>
+<li>C++ OR Python development</li>
+<li>docker containers (How to start, stop, restart and configure)</li>
+<li>Linux - The container software environment is mainly navigated in through a terminal</li>
+<li>Robot Operating System 2</li>
+<li>CAN bus</li>
+</ul>
+<p>Software wise, you need to have the following installed:</p>
+<ul>
+<li>docker</li>
+<li>git</li>
+<li>VSCode (recommended but any IDE may be suitable)</li>
+</ul>
+<p>Hardware wise, it is recommended you have:</p>
+<ul>
+<li>Linux based x86 host computer</li>
+</ul>
+<h3 id="how-to-add-new-functionality">How to Add New Functionality</h3>
+<p>First of all make sure you have read the general design principles document for autonomous platform located at <code>autonomous_platform/HOW_TO_EXTEND.md</code>. This document takes precedence over anything written in this document in order to unify the development process across all software layers.</p>
+<p>This section is split up into two parts;</p>
+<ul>
+<li><a href="">Software Functionality</a></li>
+<li><a href="">Sensors</a></li>
+<li><a href="">USB Based Sensors</a></li>
+<li><a href="">Embedded Microcontroller Sensors</a></li>
+</ul>
+<h3 id="software-functionality">Software functionality</h3>
+<p>If the sensor information already exists and you need to add new software functionality the general implementation steps are:</p>
+<h3 id="sensors">Sensors</h3>
+<p>Sensors can be split up into two groups, sensors with a USB interface and sensors that require an embedded (microcontroller) interface. Integration of sensors that require them to be connected to the embedded ECU. How to add these on the ECU level is described in <code>CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND.md</code>.</p>
+<h3 id="usb-based-sensors">USB Based Sensors</h3>
+<p>If a sensors with a USB interface is to be added to autonomous platform then this can be done solely in <code>Hardware_Interface_Low_Level_Computer</code> without touching the embedded software. The general procedure would be.</p>
+<ol>
+<li>Mount the sensor hardware on platform</li>
+<li>Connect USB to AP4 USB hub.</li>
+<li>Make sure new device is detected</li>
+<li>Find suitable existing ROS2 package that fits the given sensor. (Hint: Google)</li>
+<li>Add ROS2 package installation command into dockerfile</li>
+<li>Manually start the ROS2 package and see if sensor data is outputted as expected (Hint: ros2 run ${package name} ${node name} OR ros2 launch ${package name} ${launch file name}). Look into package document to see what is available.</li>
+<li>Configure parameters. Some packages require software to start with certain parameters, if so create a new ROS2 package and save the configuration parameters in this.</li>
+<li>Configure package dependencies in order to access the downloaded package API</li>
+<li>Create a launch file, in the newly created ROS2 package, add a launch directory and create a launch file to start the required ROS2 nodes for the USB sensor.</li>
+<li>Add a <code>documentation_and_research</code> folder in the ROS2 package. Write down the steps taken and purpose with package. Document what you have done, if it works as expected etc...</li>
+<li>Call the newly created launch file for the USB sensor in the main launch file for hardware platform <code>autonomous_platform\Hardware_Interface_Low_Level_Computer\ap4_hwi_code\ap4hwi_ws\src\launch_hwi_software_pkg\launch\launch_hwi_ros_software.launch.py</code></li>
+<li>Restart platform, everything should start as configured and new sensor information should be available on a topic.</li>
+</ol>
+<h3 id="embedded-microcontroller-sensors">Embedded Microcontroller Sensors</h3>
+<p>Once these sensors have been implemented in the ECUs as embedded code and transmitted over the CAN bus network then some development needs to be done in the <code>Hardware_Interface_Low_Level_Computer</code> code in order to decode the CAN frame and make the sensor information available on a ROS2 topic.</p>
+<p>Once raw CAN bus messages are sent over the CAN bus network and received in the hardware interface low level computer the messages needs to be processed. The general procedure for adding new CAN signals can be seen below:</p>
+<h4 id="before-you-begin">Before you begin</h4>
+<p>Make sure that that the CAN bus message you want to decode is received over the CAN bus from an embedded ECU. On the Raspberry Pi 4b, perform a candump and analyze it. In a new terminal:</p>
+<pre><code class="language-bash">candump can0
+</code></pre>
+<p>The expected output would be similar to:</p>
+<pre><code class="language-bash">  can0  7D0   [8]  00 00 00 00 00 00 00 00
+  can0  7D0   [8]  00 00 00 00 00 00 00 00
+  can0  7D0   [8]  00 00 00 00 00 00 00 00
+  can0  7D0   [8]  00 00 00 00 00 00 00 00
+  can0  7D0   [8]  00 00 00 00 00 00 00 00
+</code></pre>
+<p>How to analyze; The candump is structured as follows. Each row is a separate CAN frame message consisting.</p>
+<pre><code class="language-bash">&lt;can socket id in HEX format&gt; &lt;Frame ID&gt; &lt;length of CAN frame in Bytes&gt; &lt;Value of bytes in HEX&gt;
+</code></pre>
+<p>Meaning;</p>
+<ul>
+<li>can0 : On which CAN socket the CAN bus frame was read from</li>
+<li>7D0 : The Frame ID (specified in the CAN dbc file)</li>
+<li>[8] : Length of CAN frame.</li>
+<li>00 00 00 00 00 00 00 00 : The data sent over CAN bus in HEX</li>
+</ul>
+<p>If you see your frame ID that you just added in the embedded software you can continue. If not, go back and look into your newly developed embedded software. Make sure the data is sent as expected, either periodically or when a certain event is triggered. It is not trivial to read and understand the raw hex data, hence we need to programmatically decode this in order to use the data later on.</p>
+<h4 id="general-procedure">General procedure</h4>
+<p>A unified standard for the CAN Frames sent across the platform makes the flow of information more intuitive, signal names will have the same name in embedded SW as in ROS2 SW.</p>
+<p>When adding a new CAN bus Frame/Message onto AP4 hardware interface there are a few steps to take:</p>
+<p>HE: ???</p>
+<!-- 
+1. **Edit the CAN database file** (.dbc) located at `CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE  
+CAN_DB.dbc` can be opened using kvaser software. Write over the existing file. 
+[Simple explanation of CAN dbc file.](https://www.autopi.io/blog/the-meaning-of-dbc-file/#:~:text=DBC%20files%20are%20basic%20text,(i.e.%2C%20CAN%20IDs).) Push to gitlab.  
+Note: Editing the database with kvaser has only been tested on Windows 10. 
+
+2. **Generate new CAN_DB.c/h files.**
+On a linux host computer, pull down the latest CAN_DB.dbc file. 
+Follow the procedure in `CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE` README file. Run the "create_database_from_dbc_script.sh". in a terminal.  
+Expected output: CAN_DB.c/h in /src/ should be overwritten. (one can delete the existing CAN_DB.h / CAN_DB.c and re run the script to verify that it works)  
+Push changes to gitlab.  
+Note: Frame names / Signal names are generated according to a standard. Keep this in mind when trying to access a specific signal programmatically later on.
+...<Frame_ID>_<Signal_name>...
+
+3. **Create embedded software in ECU.**
+See step by step documentation in `CAN_Nodes_Microcontroller_Code`
+-->
+
+<ol>
+<li><strong>Update CAN HW Signal to ROS2 TOPIC converter</strong> with new signals.\
+   Meaning, update the code in can_msgs_to_ros2_topic_pkg. Located at:\
+   <code>Hardware_Interface_Low_Level_Computer\ap4_hwi_code\ap4hwi_ws\src\can_msgs_to_ros2_topic_pkg\src\can_msgs_translator_interface.cpp</code></li>
+</ol>
+<p>To describe what does software does in short, this package spawns one ROS2 node which listens to / publishes to,  two topics /from_can_bus and /to_can_bus. These two topics come from the ros2_socketcan ROS2 library.</p>
+<p>An illustration for the behavior can be seen in the two figures below:</p>
+<p><img alt="CAN frame to ros2 topic overview" src="../../Resources/Report_sketches/SW/can_frame_to_ros2_topic_overview.png" /></p>
+<p><img alt="../Resources/Report_sketches/SW/can_translator_illustration.png" src="../../Resources/Report_sketches/SW/can_translator_illustration.png" /></p>
+<p>So therefore, for every CAN signal, there has to be a ROS2 publisher and subscriber.</p>
+<p>For every <strong>NEW</strong> CAN signal added in the CAN database file there are five actions which must be taken inside this source file. (can_msgs_translator_interface.cpp)</p>
+<p>NOTE: Signal type is defined in DBC file, choose a suitable type in ROS2. (i.e if Signal in CAN dbc is defined as 8 bit integer, choose Int8 in ROS2). A reference for data type conversion standard between C++ and ROS can be found <a href="https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html">here (2.1.1 Fieldtypes)</a>.</p>
+<p>These ROS2 data types have to be included as message type headers in the top of the file before being able to be used. Example:</p>
+<pre><code class="language-c">#include &quot;std_msgs/msg/string.hpp&quot;
+#include &quot;std_msgs/msg/float64.hpp&quot;
+#include &quot;std_msgs/msg/int8.hpp&quot;
+#include &quot;std_msgs/msg/int16.hpp&quot;
+#include &quot;std_msgs/msg/u_int8.hpp&quot;
+#include &quot;std_msgs/msg/u_int16.hpp&quot;
+...
+</code></pre>
+<p>Below:</p>
+<ul>
+<li>\&lt; FRAME ID &gt; should be replaced with the frame ID specified in Kvaser in base 10.</li>
+<li>\<SIGNAL NAME> should be replaced with the signal name outputted into the DBC file from KVASER</li>
+</ul>
+<p>The five steps are:</p>
+<ol>
+<li>Add publisher and subscriber object definitions. (private variables)</li>
+</ol>
+<p>Define the class object variables, publisher and subscribers, for EVERY new CAN signal added. Frame ID should be the CAN frame ID set in KVASER, and signal name should be the generated name in CAN_DB file.</p>
+<pre><code class="language-c">// Frame ID XXX publisher
+    rclcpp::Publisher&lt;std_msgs::msg::UInt16&gt;::SharedPtr publisher_frame_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;_;
+
+</code></pre>
+<pre><code class="language-c">// Frame ID XXX subscriber
+    rclcpp::Subscription&lt;std_msgs::msg::UInt16&gt;::SharedPtr subscriber_frame_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;_;
+
+</code></pre>
+<ol>
+<li>Init publisher and subscriber objects inside class constructor TranslatorCANtoROS2Node()</li>
+</ol>
+<pre><code class="language-c">// Frame ID XXX publisher 
+        publisher_frame_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;_ = this-&gt;create_publisher&lt;std_msgs::msg::UInt16&gt;(&quot;/GET_&lt;FRAME ID&gt;_&lt;SIGNALA NAME&gt;&quot;, 10);
+</code></pre>
+<p>Each subscriber will have a callback function, when a new ROS2 message is received on a topic and read by the Node, it will call this function to process the message sent over the topic. This definition will come later, as for now, follow the standard and add a callback function according to the naming standard.</p>
+<pre><code class="language-c">// Frame ID XXX subscriber
+        subscriber_frame_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt; = this-&gt;create_subscription&lt;std_msgs::msg::UInt16&gt;(&quot;/SET_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;&quot;, 10, std::bind(&amp;TranslatorCANtoROS2Node::Callback_frame_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;, this, std::placeholders::_1));
+
+</code></pre>
+<ol>
+<li>Add to PublishIncomingDataOnRosTopics()</li>
+</ol>
+<p>The switch case should be appended with a new case for every NEW FRAME added. The general idea is to publish every SIGNAL inside a frame onto a unique ROS2 topic, using the publisher objects created above. See the code for inspiration. The structure is the same for every frame. Remember to do this for every SIGNAL in a FRAME.</p>
+<pre><code class="language-c">  switch(frame_id)
+        {
+            case CAN_ID_REQUEST_HEARTBEAT:
+            {
+                /*
+                publish every can signal contained in frame with id = 100
+                */
+
+                /* 
+                General procedure for each signal in can frame 
+                1: decode data into variable
+                2: publish data
+
+                */    
+                uint64_t temp_data;
+                decode_can_0x064_Sig_Req_Heartbeat(&amp;can_storage_container, &amp;temp_data);
+                std_msgs::msg::Float64 send_data; 
+                send_data.data = temp_data;
+                publisher_frame_100_Req_Heartbeat_-&gt;publish(send_data);
+
+                break;
+            }
+
+            case NEW_FRAME_ID:
+            {
+                ...
+                break;
+            }
+        }
+
+</code></pre>
+<ol>
+<li>Create CALLBACK functions for every ROS2 subscriber.</li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-c">// Callbacks for signals in Frame with ID = 1000
+    void Callback_frame_1000_Act_BreakVoltage(const std_msgs::msg::UInt16 msg)
+    {
+        encode_can_0x3e8_Act_BreakVoltage(&amp;can_storage_container, msg.data);
+        PublishCanFrameToCanNetwork(CAN_ID_SET_SPCU);
+    }
+</code></pre>
+<pre><code class="language-c">// Callbacks for signals in Frame with ID = 1000
+    void Callback_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;(const std_msgs::msg::UInt16 msg)
+    {
+        encode_can_&lt;FRAME ID&gt;_&lt;SIGNAL NAME&gt;(&amp;can_storage_container, msg.data);
+        PublishCanFrameToCanNetwork(&lt;FRAME ID&gt;);
+    }
+</code></pre>
+<p>For every new subscriber created in 1. Create a callback function with the general logic described above.</p>
+<ol>
+<li>Build the ROS2 Software package.</li>
+</ol>
+<p>To check that everything has been setup, try to compile the software. (whilst inside the docker container environment)</p>
+<ul>
+<li>Navigate to ap4hwi_ws directory</li>
+<li>source environment variables</li>
+</ul>
+<pre><code class="language-bash">source /opt/ros/humble/setup.bash
+</code></pre>
+<p>Build the ROS2 package</p>
+<pre><code class="language-bash">colcon build
+</code></pre>
+<p>Expected output; package built successfully, no errors.</p>
+<p>If nothing else has been changed, push changes to git and pull on the Raspberry Pi 4 on the platform. Restart platform and system should be up and running.</p>
+<h4 id="how-to-verify-that-can-messages-are-read-and-translates-properly-to-a-ros2-topic">How to verify that CAN messages are read and translates properly to a ROS2 topic</h4>
+<p>Make sure that the platform has the latest code version and that the packages can be built inside the docker container running on the Raspberry Pi 4b.</p>
+<ol>
+<li>Start up the physical platform</li>
+<li>Wait for system to boot up</li>
+<li>Connect display to Raspberry Pi 4b</li>
+<li>Enter the docker container</li>
+</ol>
+<pre><code class="language-bash">docker exec -it ap4hwi bash
+</code></pre>
+<p>Container NOT started? Look in <code>TEST_DEBUGGING.md</code> for solutions.</p>
+<ol>
+<li>Enter correct directory and source environment variables</li>
+</ol>
+<pre><code class="language-bash">cd ap4hwi_ws
+source install/setup.bash
+ROS_DOMAIN_ID = 1
+</code></pre>
+<ol>
+<li>Look at what ROS2 topics are available</li>
+</ol>
+<pre><code class="language-bash">ros2 topic list
+</code></pre>
+<p>Are there no topics available? Look in <code>TEST_DEBUGGING.md</code> for solutions.</p>
+<p>In the terminal your newly added ROS2 topic should show up (along with many other topics)</p>
+<pre><code class="language-bash">...
+/GET_&lt;FRAME_ID&gt;_&lt;SIGNAL_NAME&gt;
+/SET_&lt;FRAME_ID&gt;_&lt;SIGNAL_NAME&gt;
+...
+</code></pre>
+<p>The information sent over the newly topic can be listen to in the terminal</p>
+<pre><code class="language-bash">ros2 topic echo /GET_&lt;FRAME_ID&gt;_&lt;SIGNAL_NAME&gt;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Hardware Interface Low Level Computer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SETUP_OF_RASPBERRY_PI/" class="btn btn-neutral float-right" title="Setting up RaspberryPi">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../SETUP_OF_RASPBERRY_PI/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/CAN_Nodes_Microcontroller_Code/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>CAN Nodes - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CAN Nodes";
+        var mkdocs_page_input_path = "CAN_Nodes_Microcontroller_Code/README.md";
+        var mkdocs_page_url = "/autonomous_platform/CAN_Nodes_Microcontroller_Code/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">CAN Nodes</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#introduction_1">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#centralized-ee-architecture-principles">Centralized E/E Architecture Principles</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#embedded-ecus">Embedded ECUs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hw_node_spcu-steering-and-propulsion-control-unit">HW_Node_SPCU : Steering and Propulsion Control Unit</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#additional-components">Additional Components</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hw_node_sscu-speed-sensor-control-unit">HW_Node_SSCU : Speed Sensor Control Unit</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#additional-components_1">Additional Components</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generic-ecu-hardware-and-software">Generic ECU Hardware and Software</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generic-ecu-template">Generic ECU Template</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-components-of-generic-ecu">Key Components of Generic ECU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#software-template-and-setup">Software Template and Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bill-of-material-for-generic-ecu">Bill of Material for Generic ECU</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interfacing-with-hardware-interface-and-low-level-software">Interfacing with Hardware Interface and Low Level Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unified-can-database">Unified CAN Database</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">CAN Nodes and Microcontroller</li>
+      <li class="breadcrumb-item active">CAN Nodes</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/CAN_Nodes_Microcontroller_Code/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="embedded-software-and-hardware-can-nodes">Embedded Software and Hardware (CAN nodes)</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This document aims to describe how the embedded software layer is built in software and hardware, what purpose embedded software serves, highlight the design principles and how to extend functionality.</p>
+<p>Keep in mind, this directory contains the software for several different ECUs mounted to autonomous platform generation 4.</p>
+<h3 id="prerequisites">Prerequisites <a name="Prerequisites"></a></h3>
+<p>These are useful topics, skills and softwares to have some understanding of in order to work with the embedded software, hardware and CAN database</p>
+<p>Recommended softwares to have installed:</p>
+<ul>
+<li>PlatformIO VSCode extension + ST-Link v3 Windows drivers</li>
+<li>KVASER CAN database editor</li>
+<li>Fusion360 (If you have to MODIFY existing CAD files)</li>
+</ul>
+<p>Versions used when developing AP4 spring 2023:</p>
+<ul>
+<li>Visual Studio Code, version: 1.79.0 (user setup)</li>
+<li>Platform IO: version core: 6.1.7</li>
+<li>Kvaser Database Editor: version 2.4, <a href="https://kvaser-database-editor.software.informer.com/2.4/">link to download</a></li>
+</ul>
+<h3 id="introduction_1">Introduction <a name="Introduction"></a></h3>
+<p>This directory contains several software components that is run in an embedded environment on ECUs mounted to the autonomous platform. There can be many different ECUs running at the same performing different tasks. All the code is contained in this directory in separate sub directories. This directory also contain the unified CAN database files which describes how data and information is sent between the different ECUs and the Hardware Interface Low Level software running on the Raspberry Pi 4b.</p>
+<p>ECU functionality can be split up in several ways, for example by functionality. Software related to controlling the autonomous platform can be implemented on one ECU. Then on another ECU software for measuring speed can be run. It can also be split up by when certain functionality was added, instead of adding functionality to an existing ECU it can be easier, software wise, to create a new ECU with new software.</p>
+<p>The new generation of Autonomous Platform is designed with the centralized Electrical / Electronic (E/E) architecture in mind.</p>
+<p><code>HOW_TO_EXTEND.md</code>: The process of constructing a new generic ECU base from scratch</p>
+<p><code>HOW_TO_PROGRAM_A_BLUEPILL.md</code> : The flashing procedure (Upload New Software Into ECU)</p>
+<h3 id="centralized-ee-architecture-principles">Centralized E/E Architecture Principles</h3>
+<p>The E/E Architecture of autonomous platform generation 4, developed during a thesis spring 2023 by Erik Magnusson and Fredrik Juthe. Currently (june 2023) only central master computer, CONCU and SPCU are implemented.</p>
+<p>A proposed system architecture can be seen below, where the "Central Master Computer" is consists of the Raspberry Pi 4b and development laptop. Every light blue rounded box would then be a separate ECU split by functionality. The specific ECU nodes are not set in stone and was more of a suggestion long term goal for future work during the spring 2023 thesis. What different ECUs are actually implemented are described further down below.</p>
+<p><img alt="Resources/E_E_architecture_AP4.jpg" src="Resources/E_E_architecture_AP4.jpg" /></p>
+<p><a href="https://semiengineering.com/technical-and-structural-approaches-to-centralize-automotive-e-e-architectures/">Paper on approaches to centralized hardware can be found here.</a>. The main points to keep in mind when developing software and hardware for a centralized E/E architecture are:</p>
+<ul>
+<li>No Heavy computations inside ECUs</li>
+<li>Only serve as an INTERFACE with hardware</li>
+<li>Minimal number of computations and instructions in each ECU to keep the run-time-cycle short and enable real-time capabilities</li>
+<li>Main loop should not exceed 20ms in runtime</li>
+<li>Read actuator commands from central master computer and actuate actuators</li>
+<li>Read sensor data from hardware and send back to central master computer</li>
+<li>Heavy computations are done in Central master computer and its High level algorithms</li>
+<li>Communication between ECUs and Hardware Interface and Low Level Software shall be done through CAN bus protocol</li>
+<li>Due its robustness</li>
+<li>Scalable</li>
+<li>Standards, possible to use 3rd party softwares and tools to analyze behavior</li>
+</ul>
+<h3 id="embedded-ecus">Embedded ECUs</h3>
+<p>This section describes the embedded ECUs present on autonomous platform generation and what function they serve. As of august 2023 there are two ECUs implemented.</p>
+<p>Overview of the cable routing for the SPCU</p>
+<p><img alt="SPCU rendering" src="Resources/SPCU_cable_schema_2024-10-24_image.png" /></p>
+<h3 id="hw_node_spcu-steering-and-propulsion-control-unit">HW_Node_SPCU : Steering and Propulsion Control Unit</h3>
+<p>Developed by Fredrik Juthe and Erik Magnusson spring 2023.</p>
+<p><img alt="SPCU rendering" src="Resources/SPCU.PNG" /></p>
+<p><img alt="SPCU rendering" src="Resources/SPCU_photo.png" /></p>
+<p>This ECU is responsible for actuating the propulsion and steering of autonomous platform generation 4. It also sends measurement of the current stearing angle back to the hardware interface low level software.</p>
+<p>The code is located in <code>HW_Node_SPCU</code> folder.</p>
+<p>Specific CAD and stl files for front and back speed sensors are located in <code>autonomous_platform\CAD\Speed_sensor_holder</code>.</p>
+<p>More about this ECU, development processes and documentation can be found in <code>Propulsion_Steering.md</code>, <code>Shared_HW_Node_Libraries/SteeringMotorInterface/documentation_and_research/README.md</code> and
+<code>Shared_HW_Node_Libraries/PropulsionInterface/documentation_and_research/README.md</code> markdown file located in this directory.</p>
+<h4 id="additional-components">Additional Components</h4>
+<p>Compared to a generic ECU on autonomous platform, the SPCU ECU has some extra components:</p>
+<ul>
+<li>Kangaroo x2 Controller + Sabertooth 2x50 DC motor driver</li>
+<li>MCP4725 DAC converter</li>
+</ul>
+<p>The kangaroo x2 controller board is connected to the sabertooth 2x50A DC motor driver. It is a closed loop controller for the steering wheel motor. The kangaroo card can be controlled through a serial connection from the ECU. The current steering angle can be read from the kangaroo card. A custom library was created in order to control the steering angle.</p>
+<p>To control the propulsion of autonomous platform generation 4, it was decided to send out analog voltages to the gokart pedals to spoof the pedals being pressed. (Throttle + Break). This is done by wiring a Digital to Analog Converter (DAC) to each pedal in parallel. The gokart has an internal controller black box mounted in the front nose, this will interpret the pedal presses and actuate the electric motor driving the platform forward. A brake pedal press will always override a accelerator pedal press due to how the black box works. This is a useful feature, when an operator is sitting on the gokart he or she can always stop the platform by applying the brakes.</p>
+<h3 id="hw_node_sscu-speed-sensor-control-unit">HW_Node_SSCU : Speed Sensor Control Unit</h3>
+<p>Developed by Seamus Taylor and Alexander Rydeval summer 2023.</p>
+<p><img alt="SSCU rendering" src="Resources/SSCU.png" /></p>
+<p>This ECU is responsible for relaying the current velocity of the autonomous platform to the hardware interface and low level software. One speed sensor was mounted to the front right wheel on the hardware platform and it was showed that the velocity could be read from one wheel by measuring how fast the wheel turned.</p>
+<p>There exists CAD files for the remaining three speed sensors (one for every wheel).</p>
+<p>The code is located in <code>HW_Node_SSCU</code> folder.</p>
+<p>Specific CAD and stl files for front and back speed sensors are located in <code>autonomous_platform\CAD\Speed_sensor_holder</code>.</p>
+<p>More about this ECU can be found in <code>Speed_Sensor.md</code> markdown file located in this directory.</p>
+<h4 id="additional-components_1">Additional Components</h4>
+<p>Compared to a generic ECU on autonomous platform, this ECU has some extra components:</p>
+<ul>
+<li>MCP4725 - Speed Sensor</li>
+</ul>
+<h3 id="generic-ecu-hardware-and-software">Generic ECU Hardware and Software</h3>
+<p>The first version of the generic ECU was developed by Fredrik Juthe and Erik Magnusson spring 2023.</p>
+<p>Every ECU present on autonomous platform generation 4 shall be based on the same base hardware and software. Onto this base features specific to the function of a ECU can be added. By having a standardized base ECU it will be easier to understand how previous functionality was added, and it will be easier to add future functionality as much information can be transferred from previous ECUs.</p>
+<p>A problem on autonomous platform generation <strong>3</strong> was that is was unclear how previous functionality was implemented. There were more than three types of microcontroller used on the platform and every solution was custom made. As the people who implemented this left the project it was very unintuitive for new project members to understand how functionality was implemented. Many functions were hardcoded on unknown hardware.</p>
+<p>As an improvement to this, on autonomous platform generation 4 the idea was therefore to standardize how embedded hardware and software implemented. If one chooses a suitable microcontroller with a lot of performance overhead, in theory any embedded sensor or actuator could be connected to it. The hardware for each embedded system could therefore use the same microcontroller. And to simplify things further, the most used components could be constructed as a finished hardware package. The software and connection for a specific function could be configured.</p>
+<p>That was how autonomous platform generation 4 ended up with a <strong>generic ECU base</strong>. A hardware template on which to connect any sensor or actuator to a powerful microcontroller. Any future ECU should follow this standard of implementing functionality on top of a ECU base.</p>
+<h2 id="generic-ecu-template">Generic ECU Template</h2>
+<p>The generic ECU has predefined set of hardware. It was designed with future proofing in mind so that it could be used for future work as well.</p>
+<p>A high level schematic of the components present in the generic ECU base can be seen below. For any new embedded functionality (Input or output), these components would be needed. Therefore it might as well be assembled into a module.</p>
+<p><img alt="Schematic of generic ECU" src="Resources/Generic_ECU.jpg" /></p>
+<p>A rendered illustration of the ECU can be seen below. The top cover is not illustrated.</p>
+<p><img alt="Rendered 3d model of ECU" src="Resources/node.PNG" /></p>
+<h3 id="key-components-of-generic-ecu">Key Components of Generic ECU</h3>
+<ul>
+<li>
+<p><strong>Microcontroller</strong> :
+  The microcontroller was Chosen to be STM32F103C8T6, often referred to as an STM32 bluepill. It has plenty of I/O, a fast processor and there exists very much documentation and resources for this microcontroller.
+  The official documentation can be found for the STM32F103C8T6, can be found <a href="https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html">here</a>.</p>
+</li>
+<li>
+<p><strong>CAN Reciever and Controller</strong>:
+  The ECU needs to be connected to the Hardware Interface and Low Level Software through a CAN bus, therefore the generic ECU needs a CAN bus interface. The MCP2515 / TJA1050 board was choosen as it combines a CAN controller and a CAN tranciever on a single PCB. There exists many arduino libraries for this.
+  The datasheet for MCP2515 / TJA1050 can be found <a href="https://www.electrokit.com/uploads/productfile/41017/MCP2515-Data-Sheet.pdf">here</a> and <a href="https://www.electrokit.com/uploads/productfile/41017/TJA1050-Data-Sheet.pdf">here</a>.</p>
+</li>
+<li>
+<p><strong>DC-DC Converters</strong> :
+  The components inside the generic ECU needs to be powered using 3.3v and 5v. And any additional sensor or actuator may need to be powered as well. Therefore, the generic ECU base has two DC-DC voltage step down converters. The LM2596 DC-DC converter was deemed suitable. It can output a maximum of 3 A of current which is well above what any embedded sensor would use.
+  Datasheet for the LM2596 dc-dc converter can be found <a href="http://tpelectronic.ir/datasheets/20150123144301750.pdf">here</a>.</p>
+</li>
+<li>
+<p><strong>Inputs and Outputs</strong>:
+  The generic ECU node has a predefined set of Input and Outputs. This allows the connection between various ECUs and the Raspberry Pi 4b hardware interface and low level software to be standardized. The CAN communication on AP4 uses a D-Sub 9 pin connector. The generic ECUs can be chained together with D-Sub 9 pin cables to create a CAN bus network. In the same way the power distribution of autonomous platform generation 4 can be standardized, power is supplied to the generic ECU through an XT60 connector. This one can also be chained between nodes, providing 12v input to each generic ECU.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Component</strong></th>
+<th style="text-align: center;"><strong>Purpose</strong></th>
+<th style="text-align: center;"><strong>Documentation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">STM32-F103C8T6 "Bluepill"</td>
+<td style="text-align: center;">Programable processor and GPIO pins</td>
+<td style="text-align: center;"><a href="https://www.alldatasheet.com/datasheet-pdf/pdf/201596/STMICROELECTRONICS/STM32F103C8T6.html">Datasheet</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">Logic converter</td>
+<td style="text-align: center;">To step down voltage to SMT32-F103C8T6 logic levels (3.3 V). Important at the CAN module interfacing with bluepill</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/dubbelriktad-omvandlare-av-logisk-spaenningsniva-sparkfun-electronics-bob-12009/p/30145425">Bought at</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">DC-DC converter</td>
+<td style="text-align: center;">LM2596, possible to manually change voltage levels</td>
+<td style="text-align: center;"><a href="https://www.onsemi.com/pdf/datasheet/lm2596-d.pdf">Datasheet</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">CAN controller and Transeciever</td>
+<td style="text-align: center;">MCP2515, to interface with CAN network, decode and encodes messages</td>
+<td style="text-align: center;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/MCP2515-Stand-Alone-CAN-Controller-with-SPI-20001801J.pdf">Datasheet</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">PC Fan</td>
+<td style="text-align: center;">Fan to cool each component in the ECU</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/axialflaekt-dc-40x40x10mm-12v-13-9m-sunon-ee40101s1-1000u-999/p/30129654?trackQuery=axialfl%c3%a4kt+DC+40&amp;pos=7&amp;origPos=7&amp;origPageSize=50&amp;track=true">Bought at</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">DB9 Male</td>
+<td style="text-align: center;">Outlet for CAN bus communication</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">XT60 Male</td>
+<td style="text-align: center;">Outlet for power supply</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="software-template-and-setup">Software Template and Setup</h3>
+<p>In the same way as the hardware as been standardized, work has been done to standardize the software development and deployment on autonomous generation 4 embedded hardware.</p>
+<p>The idea is that basic software needed for every generic ECU base should already be implemented and setup. A developer should not have to start from scratch and rewrite the basic interfaces has already been used on other generic ECU nodes.</p>
+<p><img alt="Resources/Generic_ecu_software.png" src="Resources/Generic_ecu_software.png" /></p>
+<p>An illustration of what software components are needed for every generic ECU can be seen above.</p>
+<p>When developing a new ECU with new functionality, the developer only has to think about the green and purple code blocks, the main loop code and what libraries to add.</p>
+<p>Therefore, a template ECU code directory has been created, <code>HW_NODE_CODE_TEMPLATE</code>, this is a PlatformIO project that have been configured with the correct path variables to find the custom CAN library or any other custom made library. Microcontroller and other configuration variables have been set in the <code>platformio.ini</code> file. To create software for any new future ECU one simply has to make a copy of this directory to get a basic software running on the ECU node.</p>
+<p>Just as the Arduino IDE, PlatformIO has a library for almost any sensor or actuator. You can search the project library <a href="">here</a>. To include an existing library into a PlatformIO project one simply has to include it under <strong>lip deps</strong> tag in the platformio.ini file.</p>
+<h3 id="bill-of-material-for-generic-ecu">Bill of Material for Generic ECU</h3>
+<p>The complete bill of materials for a generic ECU base can be found below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Component Name</th>
+<th style="text-align: center;">Function</th>
+<th style="text-align: center;">Quantity</th>
+<th style="text-align: center;">Datasheet/ Manual</th>
+<th style="text-align: center;">Product Buy Link</th>
+<th style="text-align: center;">Estimated price (SEK)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">STM32F103C8T6 "Bluepill"</td>
+<td style="text-align: center;">Microcontroller - Runs embedded SW</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><a href="https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html">Link</a></td>
+<td style="text-align: center;"><a href="https://www.amazon.se/AZDelivery-mikrokontroller-STM32F103C8T6-utvecklingskortmodul-M3-processor/dp/B07TSKNWQQ/ref=sr_1_2?crid=1VXZR6SWKM2IQ&amp;keywords=stm32%2Bblue%2Bpill&amp;qid=1683275190&amp;sprefix=stm32%2Bbluepill%2Caps%2C89&amp;sr=8-2&amp;th=1">Link</a></td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr>
+<td style="text-align: center;">MCP2515</td>
+<td style="text-align: center;">CAN controller / transceiver</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/MCP2515-Stand-Alone-CAN-Controller-with-SPI-20001801J.pdf">Link</a></td>
+<td style="text-align: center;"><a href="https://www.amazon.se/ZkeeShop-CAN-bussmodul-mottagare-kompatibel-utvecklingskort/dp/B07SYH9BXS/ref=sr_1_7?crid=21S3Z2NTHVYQX&amp;keywords=mcp2515&amp;qid=1683275295&amp;sprefix=mcp2515%2Caps%2C299&amp;sr=8-7">Link</a></td>
+<td style="text-align: center;">50</td>
+</tr>
+<tr>
+<td style="text-align: center;">Logic Level Converter</td>
+<td style="text-align: center;">Converts MCP2515 5V signals to 3V which makes it compatible with STM32 Bluepill</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/Web/Downloads/_t/ds/BOB-12009_eng_tds.pdf">Link</a></td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/dubbelriktad-omvandlare-av-logisk-spaenningsniva-sparkfun-electronics-bob-12009/p/30145425">Link</a></td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr>
+<td style="text-align: center;">LM2596S</td>
+<td style="text-align: center;">Converts 12V to 5 &amp; 3.3V</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><a href="https://www.makershop.de/download/um_lm2596_d.pdf">Link</a></td>
+<td style="text-align: center;"><a href="https://www.amazon.se/gp/product/B07DP3JX2X/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1">Link</a></td>
+<td style="text-align: center;">50</td>
+</tr>
+<tr>
+<td style="text-align: center;">DB9 Breakout Board</td>
+<td style="text-align: center;">Exposes individual pins on DB9 Connector to Connect wires to</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.amazon.se/SIENOC-RS232-D-SUB-terminalkontakt-signalmodul/dp/B01M8JRDN0/ref=sr_1_29?keywords=DB9+Breakout+Board+DB9+RS232+Serial+Male+to+Terminal+Block+10P+Adapter+5+Pack&amp;qid=1683275078&amp;sr=8-29">Link</a></td>
+<td style="text-align: center;">130</td>
+</tr>
+<tr>
+<td style="text-align: center;">40x40x10 mm 12V Fan</td>
+<td style="text-align: center;">Cool Down Internal Components in ECU base</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/axialflaekt-dc-40x40x10mm-12v-13-9m-sunon-ee40101s1-1000u-999/p/30129654?trackQuery=axialfl%c3%a4kt+DC+40&amp;pos=7&amp;origPos=7&amp;origPageSize=50&amp;track=true">Link</a></td>
+<td style="text-align: center;">52</td>
+</tr>
+<tr>
+<td style="text-align: center;">Breadboard Jumper Wires Pack of 10</td>
+<td style="text-align: center;">Wire Internal Components of ECU</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/en/jumper-wire-female-to-female-pack-of-10-pieces-150-mm-multicoloured-rnd-components-rnd-255-00011/p/30115109?trackQuery=jumper+wire&amp;pos=1&amp;origPos=2&amp;origPageSize=50&amp;track=true">Link</a></td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr>
+<td style="text-align: center;">Biltema Mini Fuse Holder</td>
+<td style="text-align: center;">Internal ECU Fuse holder</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.biltema.se/bil---mc/elsystem/sakringar/sakringshallare-mini-2000016466">Link</a></td>
+<td style="text-align: center;">33</td>
+</tr>
+<tr>
+<td style="text-align: center;">Mini Fuse 3A</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.biltema.se/bil---mc/elsystem/flatstiftssakringar/flatstiftssakring-mini-10-st-2000016468">Link</a></td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr>
+<td style="text-align: center;">XT60 Connector Male</td>
+<td style="text-align: center;">Connect to AP4 12V Power System</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.conrad.se/p/reely-1399717-batterikontakt-xt60-foergylld-20-st-1399717">Link</a></td>
+<td style="text-align: center;">21</td>
+</tr>
+<tr>
+<td style="text-align: center;">(Optional) XT60 Y Splitter</td>
+<td style="text-align: center;">Splits one XT60 Connecting in Y configuration</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.conrad.se/p/adapterkontakt-2x-xt60-1x-xt60-parallellt-ansluten-reely-1373227">Link</a></td>
+<td style="text-align: center;">70</td>
+</tr>
+<tr>
+<td style="text-align: center;">Green LED</td>
+<td style="text-align: center;">@Future work Indicate System Status of ECU</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/led-565nm-groen-mm-kingbright-7113lgd/p/17510192?trackQuery=cat-DNAV_PL_020103&amp;pos=37&amp;origPos=37&amp;origPageSize=50&amp;track=true">Link</a></td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: center;">Red LED</td>
+<td style="text-align: center;">@Future work Indicate Power Status of ECU</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/led-627nm-roed-mm-kingbright-7113lid/p/17501464?trackQuery=cat-DNAV_PL_020103&amp;pos=35&amp;origPos=35&amp;origPageSize=50&amp;track=true">Link</a></td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: center;">M3x10mm Screw</td>
+<td style="text-align: center;">Screw Down Internal Components</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/skruv-uttagskapa-sexkant-mm-m3-10mm-paket-med-100-delar-bossard-bn-610-m3x10mm/p/30071964?queryFromSuggest=true">Link</a></td>
+<td style="text-align: center;">---</td>
+</tr>
+<tr>
+<td style="text-align: center;">M3x10mm Nut</td>
+<td style="text-align: center;">Screw Down Internal Components</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">---</td>
+<td style="text-align: center;"><a href="https://www.elfa.se/sv/hex-nut-m3-m3-4mm-foerzinkat-stal-bossard-m6m-m3/p/14800070?trackQuery=cat-DNAV_PL_170102&amp;pos=5&amp;origPos=17&amp;origPageSize=50&amp;filterapplied=filter_G%c3%a4ngstorlek%3dM3&amp;track=true">Link</a></td>
+<td style="text-align: center;">--</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interfacing-with-hardware-interface-and-low-level-software">Interfacing with Hardware Interface and Low Level Software</h3>
+<p>The embedded software can interface with the hardware interface and low level software. Physically, this is done through a CAN bus network (D-Sub 9 connector between nodes). Software wise, a custom encoding and decoding CAN library has been implemented in C language. Onto this custom library, two software libraries have been created for autonomous platform generation 4.</p>
+<p>The data sent over the CAN bus needs to be available on ROS2 topics in order for ROS2 nodes to be able to use the data in computations in the hardware interface and low level software. In the same way, actuator commands sent from ROS2 nodes on ROS2 topics need to be sent to the ECUs over CAN.</p>
+<p>The CAN frames sent over the CAN network must be encoded and decoded correctly and in the same way on both the hardware interface and embedded ECUs. Therefore a unified CAN database file has been constructed for autonomous platform generation 4. A helper library is used to convert the CAN database file into a set of C-style data structs.</p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/dbc_to_c_illustration.png" /></p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/can_db_dependency_graph.png" /></p>
+<p>Two custom made libraries have then been implemented, one in the embedded software and one in ROS2 in hardware interface and low level software.</p>
+<p>How to extend this functionality with new CAN frames and signals is explained in detail in <code>Hardware_Interface_Low_Level_Computer\HOW_TO_EXTEND.md</code>. (The parts that are relevant to change in hardware interface and low level software is documented here). How to extended the software for the embedded ECUs is described in <code>CAN_Nodes_Microcontroller_Code\HOW_TO_EXTEND.md</code>.</p>
+<h3 id="unified-can-database">Unified CAN Database</h3>
+<p>A unified CAN database has been created for autonomous platform generation 4. It uses the standardized .dbc file format and can be read/written to using commonly available softwares. I.e <a href="https://kvaser-database-editor.software.informer.com/2.4/">Kvaser DBC editor</a>.</p>
+<p>The CAN library database file is located in <code>\CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE\CAN_DB.dbc</code>.</p>
+<p>Every CAN bus frame and signal present on autonomous platform is defined in this file. This means when adding a new signal to the platform, it only has to be defined in one single file.</p>
+<p>With an external library (added as a git submodule to this repository) standardized C code can be automatically generated. A simplified interface to encode and decode CAN frames and signals is created. The library used can be found <a href="https://github.com/howerj/dbcc">here</a>. How to use it is described in <code>\CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE\README.md</code></p>
+<p>This CAN_DB.dbc (and autogenerated code from this file) can then be linked to various software components on autonomous platform generation 4. This is illustrated below.</p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/can_sw_com_detailed.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../HOW_TO_EXTEND/" class="btn btn-neutral float-left" title="How to Extend"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="Propulsion_Steering/" class="btn btn-neutral float-right" title="Propulsion Steering">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../HOW_TO_EXTEND/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="Propulsion_Steering/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

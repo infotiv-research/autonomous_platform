@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/Power_Unit/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Power Unit - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Power Unit";
+        var mkdocs_page_input_path = "Power_Unit/README.md";
+        var mkdocs_page_url = "/autonomous_platform/Power_Unit/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Power Unit</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#battery-and-charger">Battery and Charger</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-interface">User interface</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Power Unit</li>
+      <li class="breadcrumb-item active">Power Unit</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/Power_Unit/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="power-module">Power Module</h1>
+<p>The power consumption of the implemented AP4's hardware has been calculated in  the table below. The values have been derived from each component's product manual, which can easily be found on the internet. The values are based on the nominal values in order to define overall power consumption. Some components have been neglected such as the losses in cables, wires and switches. The power calculation follows the well-known electrical direct current power formula: <code>P = U . I [W]</code> where <code>U</code> is the voltage and <code>I</code> is the current.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Voltage</th>
+<th>Current  A</th>
+<th>Quantity</th>
+<th>Power W</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raspberry Pi 4b</td>
+<td>5</td>
+<td>1.01</td>
+<td>1</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>DC-Motor EMG49</td>
+<td>24</td>
+<td>2.1</td>
+<td>1</td>
+<td>50.4</td>
+</tr>
+<tr>
+<td>Cooling Fan</td>
+<td>12</td>
+<td>0,095</td>
+<td>2</td>
+<td>2.28</td>
+</tr>
+<tr>
+<td>Bluepill</td>
+<td>5</td>
+<td>0.035</td>
+<td>1</td>
+<td>0.175</td>
+</tr>
+<tr>
+<td>MCP2515, CAN module</td>
+<td>5</td>
+<td>0,05</td>
+<td>1</td>
+<td>0,25</td>
+</tr>
+<tr>
+<td>MCP4725, DAC</td>
+<td>5</td>
+<td>0,05</td>
+<td>2</td>
+<td>0,05</td>
+</tr>
+<tr>
+<td>Router</td>
+<td>12</td>
+<td>1</td>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Camera, Logitech c920</td>
+<td>5</td>
+<td>0.5</td>
+<td>1</td>
+<td>2.5</td>
+</tr>
+<tr>
+<td></td>
+<td>Total Power Consumption:</td>
+<td>73.2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The power module consists of three components, a battery, a battery charger and a power supply unit (PSU). Furthermore, there is a user interface including a power switch, emergency kill switch and outlets that select which power source that should be used for the autonomous platform. Also, there are voltage- and current measurement units mounted, but they are not implemented in software or physically connected to an ECU. The complete electrical circuit of the power module and a rendered illustration of the CAD files for the power module can be seen in here:</p>
+<p><img alt="Power in to AP4 out flow described in a electrical circuit. Including voltage sensor, current sensor, switches for power on and emergency stop killing all the power in AP4." src="Resources/Circuit-In-Out.png" /></p>
+<p><img alt="Battery supply to the outlet Battery out flow described in a electrical circuit. Including voltage sensor, current sensor, fuse and emergency stop killing all the power in AP4." src="Resources/Circuit-Power_Module-Battery.png" /></p>
+<p><img alt="Rendered illustration of the Power module. The main component is the battery holder (red) to which the remaining components are mounted to. The battery holder holds the lead acid battery. The battery charger (yellow) is mounted onto the side. A PSU module (green) is mounted to the side. The power module interface (green) is mounted on top of the battery holder, providing an interface to the power module. An emergency stop, on switch and power connectors." src="Resources/powr_module.png" /></p>
+<h3 id="battery-and-charger">Battery and Charger</h3>
+<p>The battery chosen is a 12 V lead acid battery from Biltema. The battery is typically used for lawnmowers and similar machines. The corresponding battery charger selection is based on compatibility with the battery, also from Biltema. The battery capacity is 30 Ah and weighs about 8kg. Thus from the derived system current consumption the theoretically run-time of the system will be:
+<code>t = 30/8.33 = 3.6 hours</code></p>
+<p>Having a power supply unit (PSU) connected to the electrical grid will enable the use of AP4 in a controlled environment. This can be done inside of a lab with the AP4 raised, so no wheel contact on the surface. Thus enabling the testing of higher levels of algorithms without the movement and unnecessary use of the battery that will shorten its lifespan.</p>
+<h3 id="user-interface">User interface</h3>
+<p>The electrical circuit for the user interface and connected sensors and the schematic of the power module can be seen in the images below. The user interface includes three different outlets in order to select which power source that should be used. These outlets are called,  battery out,  power in,  AP4 out.  Battery out is directly connected to the battery terminals, with the kill switch in series.</p>
+<p><img alt="Illustration of the power module top interface. Showing the three different power connectors, AP4 OUT, POWER IN and BATTERY OUT. The Emergency kill switch and power switch is also illustrated. The PSU and battery charger and their respective power connector is shown in the bottom om the figure." src="Resources/Schematic_Power_Module.png" /></p>
+<p>Power in outlet will power the whole platform. The  power in is connected to the kill switch, power switch and fuses, then passed out to  AP4 out that is connected to the rest of AP4. The selection of power source is based on which source either PSU or battery is connected to the  power in outlet. For example, the PSU could power the platform whilst the battery is charged at the same time.</p>
+<p><img alt="Side view of power module component. A Power Supply Unit (PSU) is mounted to the side. It enables the platform to be powered through a wall socket." src="Resources/power_module_side.jpg" /></p>
+<p><img alt="Top view of the power module component. On the top a user can configure how the platform should be powered. An E-stop and flip switch in wired in series allows users to turn on and off the platform. " src="Resources/power_module_ipa2.jpg" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/" class="btn btn-neutral float-left" title="Digital Twins in ROS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ISSUES_AND_FUTURE_WORK/" class="btn btn-neutral float-right" title="Issues and Future work">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ISSUES_AND_FUTURE_WORK/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

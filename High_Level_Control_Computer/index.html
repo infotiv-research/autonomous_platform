@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/High_Level_Control_Computer/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>High Level Control Computer - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "High Level Control Computer";
+        var mkdocs_page_input_path = "High_Level_Control_Computer/README.md";
+        var mkdocs_page_url = "/autonomous_platform/High_Level_Control_Computer/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">High Level Control Computer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#high-level-control-hardware-requirements">High-Level Control Hardware Requirements</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-start">How To Start</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#simulation-for-imitation-learning">Simulation for imitation learning</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#collecting-data-from-simulation">Collecting data from simulation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-collection-and-autonomous-driving">Data collection and autonomous driving</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#twist_stamper">Twist_stamper</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#twist_mux">Twist_mux</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#extend-high-level-software">Extend High Level Software</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#add-a-new-functionality">Add a New Functionality</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level Control Computer</li>
+      <li class="breadcrumb-item active">High Level Control Computer</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/High_Level_Control_Computer/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="high-level-control-software">High-Level Control Software</h1>
+<p>This directory contains the high level control software which is responsible for sending high level control commands to the low level control software.</p>
+<h2 id="high-level-control-hardware-requirements">High-Level Control Hardware Requirements <a name="High-Level-Control-Hardware-Requirements"></a></h2>
+<p>To run the high-level control software it is preferable to run it on Linux. (Tested on Ubuntu 22.04). The processor should of x86 type. It is preferable to have a dedicated graphics card if one has to run a lot of digital twin simulations.</p>
+<p>See physics simulator Gazebo Simulator hardware requirements <a href="https://se.mathworks.com/help/robotics/ug/gazebo-simulation-requirements.html">here.</a></p>
+<p>To run high-level control on windows the docker graphics passthrough methodology needs to be modified. Currently it has only been setup for Linux. There will also be a greater performance loss when running a linux based docker container on windows compared to linux.</p>
+<p>The high level software is the highest level software layer, it is supposed to be hardware agnostic. It should not care what specific hardware is implemented on the physical autonomous platform.</p>
+<p>The high level control software is supposed to tell the autonomous platform WHAT to do, whilst the low level control software is supposed to tell the platform HOW it should do it. This means that the algorithms developed / used in high level control software can be transferred to any physical platform as long as there exists an interface for it.</p>
+<p>As an example: A high level software component wants the platform to move forward. It relays this on a generic ROS2 topic (i.e /cmd_vel) to the low level software, the low level software then processes it and sends commands specific to the physical platform to the embedded software layer. The low level software would then output hardware specific commands over the CAN bus network.</p>
+<p><img alt="High level overview" src="../Resources/Report_sketches/SW/high_level_overview.png" /></p>
+<p>Above is a schematic diagram of how the software in high level control software should be designed. As of August 2023 only a simple digital twin is implemented so far.</p>
+<h3 id="how-to-start">How To Start</h3>
+<p><a name="How-To-Start"></a></p>
+<p>The high level software container should be started on the development laptop. NOT on the Raspberry Pi since it can not render the 3D gazebo simulation.</p>
+<p>If any error occurs, <code>TEST_DEBUGING.md</code>, for troubleshooting.</p>
+<p>Note: As of August 2023 it starts the digital twin software on ROS_DOMAIN_ID = 0 meaning it will not be able to interact with the physical platform even if the computers are located on the same wifi network. Hardware platform ROS2 network has ROS_DOMAIN_ID = 1.</p>
+<p>Note: The host computer needs to be configured to pass graphical elements to the container. (before starting the container)</p>
+<p>(Make sure your terminal path is located in this directory)</p>
+<pre><code class="language-bash">xhost +local:*
+</code></pre>
+<p>First, rebuild the container using</p>
+<pre><code class="language-bash">docker-compose build
+</code></pre>
+<p>The high level software container, with the configurations, can be started using</p>
+<pre><code class="language-bash">docker-compose up
+</code></pre>
+<p>The expected terminal output is:</p>
+<p><img alt="Expected terminal output when starting the HLC docker container" src="Resources/container_start.png" /></p>
+<p>Two new windows should open up, Gazebo and Rviz, and will look something like this:</p>
+<p><img alt="Expected graphical output when starting the HLC docker container" src="Resources/container_start_graphics.png" /></p>
+<p>The digital twin can be controlled (drive around manually) using the keyboard in a new terminal window.</p>
+<p>Enter the running container</p>
+<pre><code class="language-bash">docker exec -it ap4hlc bash
+</code></pre>
+<p>Navigate to workspace, source environment variables</p>
+<pre><code class="language-bash">cd ap4hlc_ws
+source install/setup.bash
+</code></pre>
+<p>Start tele-operation twist keyboard:</p>
+<pre><code class="language-bash">ros2 run teleop_twist_keyboard teleop_twist_keyboard
+</code></pre>
+<p>By using 'i', 'j', 'l', 'k' and ',' one can now control the digital twin.
+See expected terminal output below.</p>
+<p><img alt="Manual keyboard control of platform" src="Resources/container_start_teleop_twist_keyboard.png" /></p>
+<p>A running container can be stopped by either 'Ctrl+C' in the terminal in which 'docker-compose up' was run. OR in a new terminal:</p>
+<pre><code class="language-bash">docker stop ap4hlc
+</code></pre>
+<h2 id="simulation-for-imitation-learning">Simulation for imitation learning</h2>
+<p>The simulation used for imitation learning is a donkey car simulator and the setup can be seen in DONKEY_CAR_SETUP.md.</p>
+<h3 id="collecting-data-from-simulation">Collecting data from simulation</h3>
+<p>Collecting data from the simulation can be done in the following way.</p>
+<pre><code class="language-bash">cd Imitation_Learning/simulation_donkeycar
+conda activate donkey
+python manage.py drive --js
+</code></pre>
+<p>the --js flag is for using the xbox controller, otherwise the car can be controlled from local host at: http://localhost:8887/drive</p>
+<p>The simulation used for imitation learning is a donkey car simulator and the setup can be seen in <code>DONKEY_CAR_SETUP.md</code>.
+The collected data is placed in <code>/simulation_donkeycar/data</code>.</p>
+<p>See "training phase" to learn how to train the model using this data.</p>
+<h2 id="data-collection-and-autonomous-driving">Data collection and autonomous driving</h2>
+<p>The data collection is recording all the necessary data from ROS by subscribing to the topics. The current information being saved are the imu, color image, depth camera, steering angle and throttle signal. The data is saved with both ROS bag and with the script called <code>data_collection.py in /High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/high_level_control</code>. ROS bag is recording all the data the topics receives while <code>data_collection.py</code> is synching the messages together. ROS bag can be used as a backup if the data is lost, how to replay the data and save it can be read in <code>Autonomous_Platform/README.md</code>.</p>
+<p>The framework for autonomous drive is implemented in high level control. To get started, a model has to be trained for the gokart based on recorded data in <code>/High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/imitation_learning/train_DAgger.py</code>, this can be done for both simulation and for real world tests. When a model is created it is saved to both <code>/High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/imitation_learning/simulation_donkeycar</code> for testing in simulation and to <code>High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/imitation_learning/models</code> for testing in real world environment with the gokart. The name of the model will depend on what inputs are selected in <code>train_dagger.py</code>.</p>
+<p>To start the autonomous drive for the gokart or to collect more data for DAgger, start the high level docker, open a new terminal in <code>High_Level_Control_Computer</code> and run:</p>
+<pre><code class="language-bash">source start_data_collection.sh --param &lt;param&gt;
+</code></pre>
+<p>The params can either be:</p>
+<ul>
+<li>default - Collect data from driving the AP4, storing all actions and observations for training</li>
+<li>validation - Collect data from driving the AP4, storing all actions and observations for validation</li>
+<li>color - Starting high level model, setting the inputs to be color camera and imu and saving human interactions for training color HG-DAgger model</li>
+<li>depth - Starting high level model, setting the inputs to be color camera, depth camera and imu and saving human interactions for training depth HG-DAgger model</li>
+<li>orb - Starting high level model, setting the inputs to be color camera, orbs and imu and saving human interactions for training orb HG-DAgger model</li>
+</ul>
+<p>This script starts the following in different terminals:</p>
+<ul>
+<li>Camera docker - starts to publishing information from the imu, depth camera and color camera to ROS.</li>
+<li>ROS bag - starts to record the information in ROS bag</li>
+<li>Data Collection - Recording and synching the data and then saving as a pickle file.</li>
+<li>Test script - Starts a test script to check the communication between RPi and laptop, checks for missing topics and nodes etc.</li>
+<li>High Level Model - Starts on (color, depth and orb), taking inputs from the sensors and predicting the actions.</li>
+</ul>
+<p>When no more data should be collected it is important to close data_collection and ROS bag with CTRL+C for the data to be saved correctly!</p>
+<p>The model will now start to publish the predicted actions to the topic /camera_cmd_vel in ros and the gokart will start to drive. The control of the gokart can always be overtaken by the user by using the Xbox controller. When the Xbox controller is used <code>data_collection.py</code> will start to record the data and save it in <code>/High_Level_Control_Computer/ap4_hlc_code/recorded_data/(orb, depth or color)</code> depending on the param chosen when the script was started. This is done to be able to update the policy of the model where it made bad predictions.</p>
+<h3 id="twist_stamper">Twist_stamper</h3>
+<p>The joystick_cmd_vel data published by the Hardware_Interface_Low_Level_Computer is of the message type twist and not twist_stamped. As this means the data does not contain a time stamp which is necessary for data_collection.py this is solved by the package twist stamper https://github.com/joshnewans/twist_stamper. Twist stamper offers two nodes: one for adding a timestamp and another for re-
+moving a timestamp from a twist message. The timestamp addition node subscribes
+to a topic, timestamps the received message, and publishes the stamped message to
+a new topic. The twist_stamper not is automatically started via the hlc_startup.bash in the HLC. As in:</p>
+<pre><code class="language-bash">ros2 run twist_stamper twist_stamper --ros-args -r cmd_vel_in:=joystick_cmd_vel -r cmd_vel_out:=cmd_vel_stamped
+</code></pre>
+<h3 id="twist_mux">Twist_mux</h3>
+<p>To be able to take over the control manually twist_mux is used. Twist_mux takes in n number of twist messages, prioritize them and sends the highest prioritized message to <code>/cmd_vel</code>. Twist_mux is started automatically in hwi_startup.bash but can also be manually started in the high level control docker by running:</p>
+<pre><code class="language-bash">ros2 run twist_mux twist_mux --ros-args --params-file ./model/twist_mux_topics.yaml -r cmd_vel_out:=cmd_vel
+</code></pre>
+<p>Twist_mux takes in two topics for now which is /joystick_cmd_vel (commands from the Xbox controller) and /camera_cmd_vel (commands from model). Topics can be changed or added in <code>twist_mux_topics.yaml</code> in <code>../High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/autonomous_platform_robot_description_pkg/high_level_control</code> (if twist_mux is started in high level docker) and in <code>../Hardware_Interface_Low_Level_Computer/ap4_hwi_code</code> for automatic start up.</p>
+<p>The Xbox controller has the highest priority which means that the control from the model can be overridden at all times.</p>
+<p><img alt="twist_mux" src="../Resources/extra_documentation_images/twist_mux.png" /></p>
+<p>More information about twist_mux can be read here: <a href="https://wiki.ros.org/twist_mux">Link official twist_mux documentation.</a></p>
+<h2 id="extend-high-level-software">Extend High Level Software</h2>
+<p>This document aims to describe to process of how to extend the high level control software.</p>
+<p>Before starting to develop and adding code to the high level control software you need to first make sure you need to add something here.</p>
+<p>If you;</p>
+<ul>
+<li>Want to do something with the digital twin</li>
+<li>Work on high level hardware agnostic autonomous drive algorithms</li>
+<li>Evaluate autonomous drive algorithms</li>
+<li>Are NOT adding new hardware</li>
+<li>Are NOT interfacing with the physical platform</li>
+</ul>
+<p>Then you are in the right spot!!</p>
+<p>If not, take a look at <code>Hardware_Interface_Low_Level_Computer</code> or <code>CAN_Nodes_Microcontroller_Code</code>, maybe you intended to add functionality there!</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>In order to start adding functionality it is recommended to have a basic understanding of:</p>
+<ul>
+<li>C++ OR Python development</li>
+<li>docker containers (How to start, stop, restart and configure)</li>
+<li>Linux - The container software environment is mainly navigated in through a terminal</li>
+<li>Robot Operating System 2 (how to create packages and start new nodes)</li>
+</ul>
+<p>Software wise, you need to have the following installed:</p>
+<ul>
+<li>docker</li>
+<li>git</li>
+<li>VSCode (recommended but any IDE may be suitable)</li>
+</ul>
+<p>Hardware wise, it is recommended you have:</p>
+<ul>
+<li>Linux based x86 host computer, preferably with dedicated graphics (not a must)</li>
+</ul>
+<h3 id="add-a-new-functionality">Add a New Functionality</h3>
+<p>First of all make sure you have read the general design principles document for autonomous platform located at <code>autonomous_platform/HOW_TO_EXTEND.md</code>. This document takes precedence over anything written in this document in order to unify the development process across all software layers.</p>
+<p>Software functionality is created inside ROS2 packages. These can be seen as code libraries that are configured to run and perform a specific task within a ROS2 network.</p>
+<h1 id="training-phase">Training Phase</h1>
+<h2 id="installing-imitation-learning-library">Installing imitation learning library</h2>
+<p>Make sure that you are in the conda environment:</p>
+<p>TODO : hopefully with docker commands and requirements.txt</p>
+<pre><code class="language-bash">pip install imitation
+</code></pre>
+<p>You might need to install stable baselines3 as well.</p>
+<pre><code class="language-bash">pip stable-baselines3
+</code></pre>
+<h2 id="training-imitation-learning">Training imitation learning</h2>
+<h3 id="simulation-data">Simulation data</h3>
+<p>In the case of data from simulation the data is stored in <code>simulation_donkeycar/data</code>.
+To test a trained model in simulation, place the trained model file in simulation_donkeycar and run the following commands.
+collecting data from the simulation can be done in the following way.</p>
+<pre><code class="language-bash">python3 test_scripts/ppo_train.py --sim ~/projects/DonkeySimLinux/donkey_sim.x86_64 --test
+</code></pre>
+<p>The training can then be started by running <code>python train_DAgger.py simulation</code> .</p>
+<h3 id="real-world">Real world</h3>
+<p>To train the imitation learning models from the data collected via <code>source data_collection.sh</code>, start the high-level docker by standing in High_Level_Control_Computer and running <code>docker-compose up</code> then in a new terminal run: </p>
+<pre><code class="language-bash">source start_training --param &lt;param&gt;
+</code></pre>
+<p>The params can either be:</p>
+<ul>
+<li>color - Setting the inputs to be color camera and imu</li>
+<li>depth - Setting the inputs to be color camera, depth camera and imu</li>
+<li>orb - Setting the inputs to be color camera, orbs and imu</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/" class="btn btn-neutral float-left" title="Setting up RaspberryPi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="IMITATION_LEARNING/" class="btn btn-neutral float-right" title="Imitation Learning">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="IMITATION_LEARNING/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

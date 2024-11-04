@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>How to Extend - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "How to Extend";
+        var mkdocs_page_input_path = "CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND.md";
+        var mkdocs_page_url = "/autonomous_platform/CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">How to Extend</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#add-new-functionalities">Add New Functionalities</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#standard-base-ecu">Standard base ECU</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#build-a-new-ecu">build a new ECU</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#extend-with-new-function-specific-ecus">Extend with new function specific ECUs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#unified-can-database-and-how-to-modify">Unified CAN database and how to modify</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#adding-new-can-frames-and-signals">Adding New CAN Frames And Signals</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">CAN Nodes and Microcontroller</li>
+      <li class="breadcrumb-item active">How to Extend</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="how-to-extend-embedded-software">How to extend Embedded Software</h2>
+<p>This document aims to describe to process of how to extend the hardware interface and low level software.</p>
+<p>Before starting to develop and adding code to the embedded software you need to first make sure you need to add something here.</p>
+<p>If you;</p>
+<ul>
+<li>Want to add an embedded sensor / actuator</li>
+<li>Need to add a new CAN signal or frame to existing sensor / actuator</li>
+</ul>
+<p>Then you are in the right spot!!  If not, take a look at <code>Hardware_Interface_Low_Level_Computer</code> or <code>High_Level_Control_Computer</code>, maybe you intended to add functionality there!</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>In order to start adding functionality it is recommended to have a basic understanding of:</p>
+<ul>
+<li>C++ OR Python development</li>
+<li>Embedded Development</li>
+<li>CAN bus</li>
+<li>docker containers (How to start, stop, restart and configure)</li>
+<li>Basic Linux - The container software environment is mainly navigated in through a terminal</li>
+</ul>
+<p>Software wise, you need to have the following installed:</p>
+<ul>
+<li>docker</li>
+<li>git</li>
+<li>VSCode (recommended but any IDE may be suitable)</li>
+<li>PlatformIO extension</li>
+</ul>
+<p>Hardware wise, it is recommended you have:</p>
+<ul>
+<li>Linux based x86 host computer</li>
+</ul>
+<h3 id="add-new-functionalities">Add New Functionalities</h3>
+<p>First of all make sure you have read the general design principles document for autonomous platform generation 4 located at <code>autonomous_platform/HOW_TO_EXTEND.md</code>. This document takes precedence over anything written in this document in order to unify the development process across all software layers.</p>
+<h3 id="standard-base-ecu">Standard base ECU</h3>
+<p>Autonomous platform generation 4 uses a standard base ECU (Electronic Control Unit) meaning every embedded software should use the same hardware. The ECU or node box has a standardized Input and Output. ECUs are connected together in a CAN bus network, this network contains the Hardware Interface hardware, the Raspberry Pi 4b, which links the network with higher level software. Onto the base ECU specific hardware for a specific function can be added. For example, for the SPCU (Steering Propulsion Control Unit) there are DACs and Motor Controller hardware connected to the ECU.</p>
+<p>Inputs:</p>
+<ul>
+<li>CAN bus passthrough (Through DB 9 connector)</li>
+<li>12v Power (Through XT60 connector)</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+<li>CAN bus passthrough (Through DB 9 connector)</li>
+<li>5v Power</li>
+<li>3.3v Power</li>
+<li>GPIO pins</li>
+</ul>
+<p>It is preferred to build a new ECU node when adding functionality to autonomous platform to prevent breaking existing functionality. ECUs should preferably</p>
+<p>If new functionality cannot be implemented on an existing ECU node, a new hardware node must be built. See <a href="#how-to-build-a-new-ecu">How to Build new ECU</a>.</p>
+<h3 id="build-a-new-ecu">build a new ECU</h3>
+<ol>
+<li>Start 3D printing generic ECU components (top, bottom, internal component holders)
+   Please check <code>CAD</code> folder for the list of components that need to be printed.</li>
+</ol>
+<p>The estimated material consumption (with reasonable slicer settings) is around 200 grams. And total print time is around 16-18 hours. Grab some coffee and leave it printing overnight! Make sure the first layers stick properly to the printing bed before leaving.</p>
+<p>Note: Make sure you add supports manually for the print-in-place XT60 connector clampdowns. Any other support is not strictly necessary. These are circled in red below.</p>
+<p><img alt="Slicer supports" src="../Resources/slicing_preperarations_supports.png" />{ width=70% }</p>
+<ol>
+<li>Make sure all components are working individually before mounting them inside the node.
+   I.e flashing the bluepill, measuring output from dc-dc converters, making sure the MCP2515 can bus board is working</li>
+</ol>
+<p>A schematic illustration of the components inside the generic ECU can be seen below.</p>
+<p><img alt="ECU - speed sensor block diagram" src="../Shared_HW_Node_Libraries/SpeedSensorInterface/documentation_and_research/diagrams/ECU-speed_sensor_wiring_overlay.drawio.png" />{ width=70% }</p>
+<ol>
+<li>Once 3D print is complete, remove added support material for the XT60 clampdowns</li>
+</ol>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/1.jpg" />{ width=70% }</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/2.jpg" />{ width=70% }</p>
+<ol>
+<li>Insert 12 M3 nuts in the hex shaped holes on the underside</li>
+</ol>
+<p>Note: The hole circled in blue shall also have a m3 nut.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/3.jpg" />{ width=70% }</p>
+<ol>
+<li>Assemble power distribution and mount inside HW node.</li>
+</ol>
+<p>A schematic for the power distribution inside the HW node can be found below.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/4.jpg" />{ width=70% }</p>
+<ol>
+<li>Mount power distribution inside node.</li>
+</ol>
+<p>The XT60 contacts are inserted into the 3D printed clamp. The DC-DC converters are screwed in with 2 M3x10mm screws respectively.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/5.jpg" />{ width=70% }</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/6.jpg" />{ width=70% }</p>
+<ol>
+<li>Assemble CAN module and D-Sub 9 connectors.
+   A wiring diagram can be found below.</li>
+</ol>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/7.jpg" />{ width=70% }</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/8.jpg" />{ width=70% }</p>
+<ol>
+<li>Mount CAN module and D-Sub 9 connectors inside HW node.</li>
+</ol>
+<p>D-Sub 9 connectors are screwed in from outside. The MCP2515 card is screwed in with two M3x10mm screws.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/9.jpg" />{ width=70% }</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/10.jpg" />{ width=70% }</p>
+<ol>
+<li>Insert 4 M3 nuts inside  STM32 hold down pillars. Make sure the hole in the pillars align with the inserted nuts.</li>
+</ol>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/13.jpg" />{ width=70% }</p>
+<ol>
+<li>Wire programming pins for STM32 Bluepill</li>
+</ol>
+<p>The programming wires shall have the following colours:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>STM32F103C8T6 Bluepill Pin</strong></th>
+<th style="text-align: center;"><strong>Wire  Colour</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">3.3v</td>
+<td style="text-align: center;">Red</td>
+</tr>
+<tr>
+<td style="text-align: center;">IO</td>
+<td style="text-align: center;">Brown</td>
+</tr>
+<tr>
+<td style="text-align: center;">SCLK</td>
+<td style="text-align: center;">White</td>
+</tr>
+<tr>
+<td style="text-align: center;">GND</td>
+<td style="text-align: center;">Black</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/14.jpg" />{ width=70% }</p>
+<ol>
+<li>Using 4 STM32 bluepill clampdown (3D printed) tabs, clamp down the STM32 bluepill microcontroller.</li>
+</ol>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/15.jpg" />{ width=70% }</p>
+<p>The four wiring cables shall be passed through to the side of the HW node.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/16.jpg" />{ width=70% }</p>
+<p>Cramp JST SM 2.54 female connectors on the outgoing programming wires. Insert a heat shrink cable over the cables.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/16.1.jpg" />{ width=70% }</p>
+<p>Insert the female JST SM 2.54 crimped connectors into a male JS connector as seen below, it is important that the colour and placement are the same between ECU nodes.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/16.2.jpg" />{ width=70% }</p>
+<ol>
+<li>Screw down the outgoing cable hold-down (3D printed component). Use two M3x16mm screws.</li>
+</ol>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/17.jpg" />{ width=70% }</p>
+<ol>
+<li>Installing 12v dc fan for cooling. A cooling fan should be screwed into the top cover of the ECU using 4 M3 screws and nuts.</li>
+</ol>
+<p>First, cut the fan cable in two pieces.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/18.jpg" />{ width=70% }</p>
+<p>Connect the two cables together using JST SM 2.54 2 pin connector. This is to make the top cover completely removable if desired.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/19.jpg" />{ width=70% }</p>
+<p>Solder the fan +12v and GND to the power in. (After the fuse). This can be done by connecting the wires to the dc-dc converters in terminals.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/20.jpg" />{ width=70% }</p>
+<p>The fan shall then be mounted to the top cover as illustrated below. Using 4 M3x16mm screws and 4 M3 nuts.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/20.1.jpg" />{ width=70% }</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/20.2.jpg" />{ width=70% }</p>
+<ol>
+<li>Power up module</li>
+</ol>
+<p>To verify that the previous steps have been done correctly, connect 12v to the XT60 12v in plug on the front.</p>
+<p>The expected result would be that the fan turns on and the dc-dc converters light up with a led shining.</p>
+<p>The center dc-dc converter should output 3.3v and the dc-dc converter closest to the wall should output 5v.</p>
+<p>If it does not power up correctly;</p>
+<ul>
+<li>Make sure you have inserted a 2A, 3A or 5A fuse into the fuse holder</li>
+<li>Check soldering connections using a multimeter</li>
+</ul>
+<p>If dc-dc converter out voltage is not correct, adjust the blue potentiometers with a screwdriver until desired voltage is reached.g</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/21.jpg" />{ width=70% }</p>
+<ol>
+<li>Internal wiring of standard components. This can be done with either jumper wires or soldering new wires between internal components.</li>
+</ol>
+<p>Here is the wiring diagram for a generic ECU HW node.</p>
+<p>The internal wiring of a ECU can be seen bellow. This has to be setup in order to run software on the bluepill microcontroller and communicate over CAN bus.</p>
+<p><img alt="Internal wiring schematic of generic ECU" src="../Resources/EasyEDA/Schematic_generic_ecu_diagram_image.png" />{ width=70% }</p>
+<ol>
+<li>Mount top cover onto ECU node.</li>
+</ol>
+<p>The top cover can be mounted as pictured below using 4 M4x10mm screws and 4 M4 nuts.</p>
+<p><img alt="Slicer supports" src="Resources/assembling_new_ecu/22.jpg" />{ width=70% }</p>
+<ol>
+<li>Connect any needed embedded sensor(s)</li>
+</ol>
+<p>Note done the extra wiring required and how you connected it and add to the node specific documentation.</p>
+<ol>
+<li>Flash new software</li>
+</ol>
+<p>How to flash new software to the STM32 bluepill can be found in the <code>HOW_TO_PROGRAM_A_BLUEPILL.md</code> document.</p>
+<h3 id="extend-with-new-function-specific-ecus">Extend with new function specific ECUs</h3>
+<p>These are the general guidelines and tips when adding a new function (or sensor) to a generic ECU base.</p>
+<p>Questions to ask yourself;</p>
+<ul>
+<li>How can the sensor be connected to a microcontroller? Does it require any communication protocol or can you use a digital or analog pin?</li>
+<li>What power requirements does it have? High power or low power? If the sensor/actuator requires more power (and or different voltage) from what the generic ECU can supply you need to take this into consideration</li>
+<li>Am I adding new functionality to an existing ECU or am I adding completely new functionality? Maybe it is not necessary to build a new ECU node from scratch</li>
+<li>What parts do I have in inventory?</li>
+<li>What parts do I have to buy?</li>
+</ul>
+<p>Very briefly explained, here are the steps you should take to implement new functionality with embedded sensors or actuators.</p>
+<ul>
+<li>
+<p>Add specific hardware modules</p>
+</li>
+<li>
+<p>Built a small test-rig with a microcontroller &amp; breadboard to verify functionalities and software libraries needed.</p>
+</li>
+<li>
+<p>Build, solder and connect a generic ECU base (see SPCU). Interface the specific hardware module.</p>
+</li>
+<li>
+<p>Create a CAD model of the new sensor and how it should be mounted to the platform. (Make sure it fits the standardized hole pattern if it should be mounted to an ECU or aluminum sheet)</p>
+</li>
+<li>
+<p>If needed, update the CAN protocol by editing the dbc file and autogenerate new database in c-format.</p>
+</li>
+<li>
+<p>Copy the Template code for ECUs.</p>
+</li>
+<li>
+<p>Flash both the ECU and central master computer (update the CAN to ROS2 topic converter) with the latest CAN protocol. See <code>HOW_TO_EXTEND.md</code> in <code>Hardware_Interface_Low_Level_Computer</code> directory</p>
+</li>
+<li>
+<p>Add generic ECU code in the embedded software, follow the structure of the SPCU.</p>
+</li>
+<li>
+<p>When the embedded software of the ECU is verified, connect the to the rest of AP4 using a db9 Female-Female cable and a xt60 outlet to supply.</p>
+</li>
+</ul>
+<h3 id="unified-can-database-and-how-to-modify">Unified CAN database and how to modify</h3>
+<p>The CAN database follows dbc format, <a href="https://www.csselectronics.com/pages/can-dbc-file-database-intro">CAN and dbc guide</a>. The dbc file can be edited using a dbc-editor an example of this is the <a href="https://kvaser-database-editor.software.informer.com/2.4/">KVASER-DATABASE-EDITOR</a>. When opening the dbc file for AP4 in kvaser, it will look like the figure below:</p>
+<p><img alt="Resources/kvaser.png" src="../Resources/kvaser.png" /></p>
+<ol>
+<li><strong>Message Name</strong> in the database. This is the frames defined for a CAN message. What id, Data length (bytes) etc.</li>
+<li><strong>Signals</strong> in each message. User defined regarding name, placement in the data-field, offsets, factor and so on.</li>
+<li><strong>Graphical Illustration of datafield</strong> for the selected message/frame in the database.</li>
+</ol>
+<p>In order to make sense of the dbc files, the embedded software needs the information of the dbc file in a c format. Thus AP4 converts dbc file into c-functions and data types, in order to simply encode and decode. Using <a href="https://github.com/howerj/dbcc">howerj dbcc repo</a> to convert.</p>
+<p><img alt="Resources/dbc_to_c_illustration.png" src="../Resources/dbc_to_c_illustration.png" /></p>
+<p>When the dbc is edited and saved, run the following command in a <strong>Linux Machine</strong> whilst located in path: <code>CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE</code></p>
+<pre><code class="language-bash">. create_database_from_dbc_script.sh
+</code></pre>
+<p>Down below is a simple flowchart of the way of working with the CAN protocols auto generation and dbc editing.</p>
+<p><img alt="Resources/CAN.png" src="../Resources/CAN.png" /></p>
+<p>Down below can be seen how all the Software components refers to the same database meaning that a change in the CAN protocol at a single place will affect the whole system.</p>
+<p><img alt="Resources/can_sw_com_detailed.png" src="../Resources/can_sw_com_detailed.png" /></p>
+<p>Also can be seen above how the central master computer, converts CAN messages to ROS2 topics to be later used in higher level algorithms. The <em>CAN signals To ROS2 Topic Converter</em> is illustrated in the figure below, implemented on the Raspberry Pi4b that acts as an interface in the central unit. The converter also converts topics to CAN frames that are then transmitted onto the CAN network.</p>
+<p><img alt="Resources/can_translator_illustration.png" src="../Resources/can_translator_illustration.png" /></p>
+<h3 id="adding-new-can-frames-and-signals">Adding New CAN Frames And Signals</h3>
+<p>When adding new CAN frames and signals, changes have to be made in the "CAN_DB.dbc" file, new C code has to generated as described in <code>CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE\README.md</code>. Lastly, the software in hardware interface and low level software has to be adjusted for the newly added frames. This is described in <code>Hardware_Interface_Low_Level_Computer\HOW_TO_EXTEND.md</code>.</p>
+<p>When adding new CAN frames it is recommended to add new frames and signals instead of changing existing frames/signals. IF EXISTING CAN FRAMES/SIGNALS ARE CHANGED, EXISTING ECUS MUST BE REFLASHED WITH NEW SOFTWARE. If one appends new signals and frames to the database it not strictly necessary to re-flash existing ECUs.</p>
+<p>Adding new CAN frames and or signals is described in detail in <code>CAN_Nodes_Microcontroller_Code\HOW_TO_EXTEND.md</code></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Speed_Sensor/" class="btn btn-neutral float-left" title="Speed Sensor"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../CAN_LIBRARY_DATABASE/" class="btn btn-neutral float-right" title="CAN library">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Speed_Sensor/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../CAN_LIBRARY_DATABASE/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

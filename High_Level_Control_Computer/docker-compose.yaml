@@ -1,0 +1,17 @@
+version: '3'
+services:
+  ros2:
+    container_name: ap4hlc
+    build: .
+    #command: tail -f /dev/null #used to start container and keep it running without launching nodes
+    command: /bin/bash -c "./hlc_startup.bash"
+    environment:
+    - DISPLAY=${DISPLAY}
+    volumes: 
+      - ./ap4_hlc_code:/root/ap4_hlc_docker_dir:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/dri:/dev/dri
+      - /dev/snd:/dev/snd
+      - /dev:/dev # pass all usb units through to container
+    network_mode: host
+    privileged: true

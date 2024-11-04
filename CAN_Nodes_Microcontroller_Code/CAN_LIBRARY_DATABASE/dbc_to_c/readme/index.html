@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/readme/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>dbcc - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "dbcc";
+        var mkdocs_page_input_path = "CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/readme.md";
+        var mkdocs_page_url = "/autonomous_platform/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/readme/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">dbcc</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/readme.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="dbcc">dbcc</h1>
+<h2 id="dbc-convertercompiler">DBC converter/compiler</h2>
+<p>This program turns a <a href="http://vector.com/vi_candb_en.html">DBC</a> file into a number of different formats.</p>
+<p><strong>CAN-FD IS CURRENTLY NOT SUPPORTED</strong>.</p>
+<p>As you can see by the big note above, CAN-FD is currently not supported,
+and likely will not (for a while). The problem is that CAN-FD allows for
+messages above 64-bits in length and this project and the code generated
+from it makes the assumption that 8-bits is all that the Lord (or Satan if
+your project is dealing with AUTOSAR) intended a CAN message to have in it.</p>
+<h2 id="introduction">Introduction</h2>
+<p><strong>dbcc</strong> is a program for converting a <a href="http://vector.com/vi_candb_en.html">DBC</a> file primarily into into <a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>
+code that can serialize and deserialize <a href="https://en.wikipedia.org/wiki/CAN_bus">CAN</a> messages into structures that
+represent those messages and signals. It is also possible to print out the
+information contained in a structure.</p>
+<h2 id="building-licenses-and-dependencies">Building, Licenses and Dependencies</h2>
+<p>See the <a href="../LICENSE">license</a> file for details of the license for <em>this</em> program, it is
+released under the <a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a> license. Dependencies, if linked against, may have
+their own license and their own set of restrictions if built against.</p>
+<p>The sources file <a href="../mpc.c">mpc.c</a> and <a href="../mpc.h">mpc.h</a> originate from a parser combinator
+written in <a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">C</a> called <a href="https://github.com/orangeduck/mpc">MPC</a> and are licensed under the <a href="https://en.wikipedia.org/wiki/BSD_licenses">3 Clause BSD</a> 
+license.</p>
+<p>To build, you only need a C (C99) compiler and Make (probably GNU make, I make no
+effort to support other Make implementations). The dbcc program itself it
+written in what should be portable C with the only external dependency being
+your platforms C library.</p>
+<p>You should be able to type:</p>
+<pre><code>make
+</code></pre>
+<p>To build, an executable called 'dbcc' is produced. To test run the tests, 
+<a href="http://xmlsoft.org/xmllint.html">xmllint</a> is required. </p>
+<h2 id="c-coding-standards">C Coding Standards</h2>
+<ul>
+<li>When in doubt, format with <a href="https://www.gnu.org/software/indent/">indent</a> with the "-linux" option. </li>
+<li>Use tabs, not spaces for formatting</li>
+<li>Use assertions where possible (not for error checking, for checking pre/post
+conditions and invariants).</li>
+<li>The tool should run on Windows and Linux with no modification. The project is
+written in pure <a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>.</li>
+<li>No external dependencies should brought into the project.</li>
+</ul>
+<h2 id="notes-on-generated-code">Notes on generated code</h2>
+<ul>
+<li>If you want a specific format in the generated code, integrate <a href="https://www.gnu.org/software/indent/">indent</a>
+into you toolchain instead of trying to change the code generator.</li>
+<li>The output of the generated code is generally not stable, it may change from commit to
+commit, download and maintain a specific version if you want stability.</li>
+<li>That said, the <code>-n</code> option can be used to specify the output version which might give you access
+  to previous behaviour if backwards compatibility has been implemented.</li>
+</ul>
+<h2 id="generated-output-versions">Generated output versions</h2>
+<p>You can specify the version to use on a command line with the <code>-n</code> option.
+The latest version will be used by default.</p>
+<p><strong>Version 1:</strong></p>
+<p>Legacy/original behaviour. Note that this still won't provide a stable output, but will have
+a better chance of not having breaking changes.</p>
+<p><strong>Version 2:</strong></p>
+<ul>
+<li>
+<p>Latest version</p>
+</li>
+<li>
+<p>Enum names are qualified with the CAN message name</p>
+</li>
+<li>encode/decode function names are also qualified with the message name</li>
+</ul>
+<h2 id="how-to-use-the-generated-code">How to use the generated code</h2>
+<p>The code generator can make code to unpack a message (turn some bytes into a
+data structure), decode a message (apply a scaling/offset minimum and maximum
+values to the values in a data structure), and the inverse can be done
+(pack/encode).</p>
+<p>You can look at the code generated from the DBC files within the project to get
+an understanding of how it should work. </p>
+<p>If you want to process a CAN message that you have received you will need to
+call the 'unpack_message'. The code generate is agnostic to the CPUs byte
+order, it takes a 'uint64_t' value containing a single CAN packet (along with
+the CAN ID and the DLC for the that packet) and unpacks that into a structure
+it generates. The first byte of the CAN packet should be put in the least
+significant byte of the 'uint64_t'.</p>
+<p>You can use the following functions to convert to/from a CAN message:</p>
+<pre><code>static uint64_t u64_from_can_msg(const uint8_t m[8]) {
+    return ((uint64_t)m[7] &lt;&lt; 56) | ((uint64_t)m[6] &lt;&lt; 48) | ((uint64_t)m[5] &lt;&lt; 40) | ((uint64_t)m[4] &lt;&lt; 32) 
+        | ((uint64_t)m[3] &lt;&lt; 24) | ((uint64_t)m[2] &lt;&lt; 16) | ((uint64_t)m[1] &lt;&lt; 8) | ((uint64_t)m[0] &lt;&lt; 0);
+}
+
+static void u64_to_can_msg(const uint64_t u, uint8_t m[8]) {
+    m[7] = u &gt;&gt; 56;
+    m[6] = u &gt;&gt; 48;
+    m[5] = u &gt;&gt; 40;
+    m[4] = u &gt;&gt; 32;
+    m[3] = u &gt;&gt; 24;
+    m[2] = u &gt;&gt; 16;
+    m[1] = u &gt;&gt;  8;
+    m[0] = u &gt;&gt;  0;
+}
+</code></pre>
+<p>The code generator will make a structure based on the file name of the DBC
+file, so for the example DBC file 'ex1.dbc' a data structure called
+'can_obj_ex1_h_t' is made. This structure contains all of the CAN message
+structures, which in turn contain all of the signals. Having all of the
+messages/signals in one structure has advantages and disadvantages, one of the
+things it makes easier is defining the data structures needed.</p>
+<pre><code>/* reminder of the 'unpack_message' prototype */
+int unpack_message(can_obj_ex1_h_t *o, const unsigned long id, uint64_t data, uint8_t dlc);
+
+static can_obj_ex1_h_t ex1;
+
+uint8_t can_message_raw[8];
+unsigned long id = 0;
+uint8_t dlc = 0;
+your_function_to_receive_a_can_message(can_message_raw, &amp;id, &amp;dlc);
+if (unpack_message(&amp;ex1, id, can_message_u64, dlc) &lt; 0) {
+    // Error Condition; something went wrong
+    return -1;
+}
+</code></pre>
+<p>'unpack_message' calls the correct unpack function for that ID, as an example
+for ID '0x020':</p>
+<pre><code>case 0x020: return unpack_can_0x020_MagicCanNode1RBootloaderAddress(&amp;o-&gt;can_0x020_MagicCanNode1RBootloaderAddress, data, dlc);
+</code></pre>
+<p>The unpack function populates the message object in the 'can_obj_ex1_h_t'
+structure for that ID. The individual signals can then be decoded with the
+appropriate functions for that signal. For example:</p>
+<pre><code>uint16_t b = 0;
+if (decode_can_0x020_MagicNode1R_BLAddy(o, &amp;b)) {
+    /* error */
+}
+</code></pre>
+<p>To transmit a message, each signal has to be encoded, then the pack function
+will return a packed message. </p>
+<p>Some other notes:</p>
+<ul>
+<li>Asserts can be disabled with a command line option</li>
+<li>An option to force the encode/decode function to only use the double width
+floating point type has been added, so different function types do not have to be
+dealt with by the programmer.</li>
+<li>You can remove the message number from the functions and values generated,
+which is useful if your message numbers are changing a lot, however the names
+for each message and signal must then be unique.</li>
+</ul>
+<h2 id="dbc-file-specification">DBC file specification</h2>
+<p>For a specification, as I understand it, of the DBC file format, see <a href="../dbc/">dbc.md</a>. 
+This is a work in progress.</p>
+<h2 id="dbc-vim-syntax-file">DBC VIM syntax file</h2>
+<p>There is a <a href="http://www.vim.org/download.php">Vim</a> syntax file for DBC files in the project, called <a href="../dbc.vim">dbc.vim</a></p>
+<h2 id="xml-generation">XML Generation</h2>
+<p>As well as <a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">C</a>, <a href="https://en.wikipedia.org/wiki/XML">XML</a> can be generated, the project contains an <a href="../dbcc.xsd">XSD</a> and
+<a href="../dbcc.xslt">XSLT</a> file for the generated XML.</p>
+<h2 id="bsm-bestorm-module-generation">BSM (beSTORM Module) Generation</h2>
+<p>An XML based file that can be imported into Beyond Security's beSTORM and used to test CAN BUS infrastructure.</p>
+<ul>
+<li>Note: May be replaced with an <a href="../dbcc.xslt">XSLT</a> in the future, deriving from the
+<a href="https://en.wikipedia.org/wiki/XML">XML</a> output. The BSM output is itself and XML file.</li>
+</ul>
+<h2 id="csv-generation">CSV Generation</h2>
+<p>A flat CSV file can be generated, which is easier to import into Excel.</p>
+<h2 id="json-generation">JSON Generation</h2>
+<p>A JSON file can be generated, which is what all the cool kids use nowadays.</p>
+<h2 id="operation">Operation</h2>
+<p>Consult the <a href="dbcc.1">manual page</a> for more information about the precise operation of the
+program.</p>
+<h2 id="bugs-to-do">Bugs / To Do</h2>
+<ul>
+<li>Generated manual page from this markdown "readme.md" file.</li>
+<li>For versions going forward, especially versions that break the generated C
+code, it might be nice to have an option to generate previous versions of the
+code.</li>
+<li>Support CAN-FD (big task).</li>
+<li>Make definitions for message-ids and Data-Length-Codes so the user
+does not have to make them as either an enumeration or a define.</li>
+<li>Make the bit-fields more useful</li>
+<li>The floating point conversion routines assume your platform is using
+<a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE-754</a> floats. If it does not, then tough.</li>
+<li>A lot of the DBC file format is not dealt with:</li>
+<li>Special values</li>
+<li>Timeouts </li>
+<li>Error frames</li>
+<li>...</li>
+<li>The generated code is not <a href="https://misra.org.uk/">MISRA C</a> compliant.</li>
+<li>Integers that cannot be represented in a double width floating point number
+should be packed/unpacked correctly, however the encode/decode and printing
+functions will not as they use doubles for calculations (pack/unpack do not).
+This affects numbers larger than 2^53. </li>
+<li>FYI AUTOSAR sucks. See this message for a perfect description as to why:
+ <a href="https://old.reddit.com/r/embedded/comments/leq366/how_much_of_a_modern_carbuilt_from_the_year_2000/gmiq6d0/">https://old.reddit.com/r/embedded/comments/leq366/how_much_of_a_modern_carbuilt_from_the_year_2000/gmiq6d0/</a>,
+ I wish I had wrote it. </li>
+<li>There are two pieces of information that are useful to any CAN stack for
+received messages; the time stamp of the received message, and the status
+(error CRC/timeout, message okay, or message never set). This information could
+be included in the generated C code.</li>
+<li>Enumeration values could be checked for and only correct values should
+be decoded, and encoded. There is more stuff that can be done with the
+enumeration values, along with command line options to enumeration generation.</li>
+<li>A mechanism for callbacks for custom code for floating point encoding and
+decoding, and other callbacks in general, could be added. Packing and unpacking
+floats is done in what should be a portable, but not fast, way.</li>
+<li>A mechanism and system for error handling should be added, that is, a simple
+communications manager that does the following:</li>
+<li>Each signal should have three values associated with it; Unknown (the
+    signal has never been set), Valid, and Error (for <em>any</em> error).</li>
+<li>If the time out for a message goes out, or a CRC check fails, then
+    all of the messages child messages should get invalidated and set the
+    error state.</li>
+<li>If the signal contains an invalid value, it gets set to an Error state.</li>
+<li>All signal access functions should check the Unknown/Error value, returning
+    success only on a Valid signal.
+There are a few other details that would need to be sorted out, like how
+CRC and time outs could be calculated.</li>
+<li>The code generator makes code for packing/encoding and unpacking/decoding,
+this could be done in one step to simplify the code and data structures, it
+means decoded/encoded values do not need to recalculated.</li>
+</ul>
+<p>It would be possible to generate nice (ASCII ART) images that show how a message is
+structured, which helps in understanding the message in question, and is useful
+for documentation purposes, for example, something like:</p>
+<pre><code>Message Name: Example-1
+Message ID: 0x10, 16
+DLC: 1 (8-bits)
++-----+-----.-----.-----.-----+-----.-----+-----+
+|     |                       |           |     |
+|     |                       |           |     |
++-----+-----.-----.-----.-----+-----.-----+-----+
+   0     1     2     3     4     5     6     7
+Bit     0: Signal-Name-1, 1 bit signal, scalar 1.0, offset 0
+Bits  1-2: Signal-Name-2, 4 bit signal, signed, Motorola, ...
+... etcetera ...
+</code></pre>
+<p>Or something similar. This would be another output module.</p>
+<style type="text/css">
+    body {
+        margin:40px auto;max-width:850px;line-height:1.6;font-size:16px;color:#444;padding:0 10px
+    }
+    h1,h2,h3 {
+        line-height:1.2
+    }
+</style>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

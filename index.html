@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Autonomous Platform Generation 4 - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Autonomous Platform Generation 4";
+        var mkdocs_page_input_path = "README.md";
+        var mkdocs_page_url = "/autonomous_platform/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href=".">Autonomous Platform Generation 4</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#features-and-capabilities">Features and Capabilities</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#drive-by-wireless-controller">Drive by wireless controller</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remote-access-to-platform-software">Remote access to platform &amp; software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#accelerating-brake-steering">Accelerating, Brake &amp; Steering</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scalability">Scalability</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#power-module">Power Module</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#digital-twin">Digital Twin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#imitation-learning">Imitation Learning</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#system-architecture">System Architecture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#high-level-control">High-level control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#low-level-control">Low-level control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#embedded-control">Embedded control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#autonomous-driving">Autonomous Driving</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#training-data">Training Data</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#start-ap4">Start AP4</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connect-wireless-and-start-ap-software-stack">Connect (wireless) and start AP software stack</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#repository-overview">Repository overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#thanks">Thanks</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level overview</li>
+      <li class="breadcrumb-item active">Autonomous Platform Generation 4</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="autonomous-platform-gen4">Autonomous Platform (Gen4)</h1>
+<p><a href="https://github.com/infotiv-research/autonomous_platform"><img alt="Source code" src="Resources/gh.png" /></a></p>
+<p><a href="https://github.com/infotiv-research/autonomous_platform"> Link to the github repo</a></p>
+<pre><code class="language-bash">$ git clone --recurse-submodules http://gitlab.infotivlab.se/internal-development/autonomous_platform.git # Internally
+$ git clone --recurse-submodules https://github.com/infotiv-research/autonomous_platform
+</code></pre>
+<p>This is the repository for Autonomous Platform at Infotiv Technology Development. 
+- The beginning of the fourth generation of Autonomous Platform was created by <strong>Fredrik Juthe</strong> and <strong>Erik Magnusson</strong> as part of a master thesis at Chalmers University of technology spring 2023 under supervision of <strong>Hamid Ebadi</strong>. The master thesis designed the system E/E architecture and implemented a base on which future functionality could be added to. A published version of the thesis with the title of <strong>"Design of a modular centralized E/E and software architecture for a small-scale automotive platform"</strong> is accessible in <a href="Master_Thesis2023.pdf">in this link <img alt="PDF" src="Resources/PDF_file_icon.svg.png" /> </a>.</p>
+<ul>
+<li>The implementation of software pipeline for Imitation Learning for achieving autonomous driving using both behavioral cloning (BC) and Human Gated Dataset Aggregation (HG-DAgger) is done by <strong>Arvid Petersén</strong> and <strong>Johan Wellander</strong>  under supervision of <strong>Hamid Ebadi</strong> as a part of a master thesis with the title of <strong>Autonomous Driving via Imitation Learning in a Small-Scale Automotive Platform - a Comparison Between BC, HG-DAgger, and the use of Various Inputs</strong>  that is accessible <a href="Master_Thesis2024.pdf">in this link <img alt="PDF" src="Resources/PDF_file_icon.svg.png" /> </a>.</li>
+</ul>
+<p><a href="Master_Thesis2024.pdf"><img alt="Design of a modular centralized E/E and software architecture for a small-scale automotive platform" src="Resources/Spring_2024/thesis.png" /></a>
+<a href="Master_Thesis2023.pdf"><img alt="Design of a modular centralized E/E and software architecture for a small-scale automotive platform" src="Resources/thesis.png" /></a></p>
+<p><a href="https://www.youtube.com/watch?v=8izLmmYHW0s">Video Demo</a> (<a href="https://www.youtube.com/watch?v=A2l_nDKsU7g">raw footage</a>):</p>
+<p><a href="https://www.youtube.com/watch?v=8izLmmYHW0s"><img alt="AP4 Autonomous Driving" src="https://img.youtube.com/vi/8izLmmYHW0s/0.jpg" /></a></p>
+<ul>
+<li>The <strong>latest public</strong> version of documentation and source code for Autonomous Platform (AP) project is available in the following address: <a href="https://infotiv-research.github.io">https://infotiv-research.github.io</a> and <a href="https://github.com/infotiv-research">https://github.com/infotiv-research</a>.</li>
+<li>The printer friendly version of this document is <a href="AutonomousPlatform.pdf">available in this link <img alt="PDF" src="Resources/PDF_file_icon.svg.png" /></a>.</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Autonomous Platform (generation 4) project is a platform on which internal and external research projects can be tested on. (i.e Autonomous Drive algorithms) and to expand the knowledgeable in different aspects of software and hardware system development. The purpose of this repository is to collect all the software components in one mono-repository, meaning all software (&amp; hardware design) for the different components is placed in a single repository. Any future work on autonomous platform should be integrated into one of the repositories sub directories. This means that any future development or research can always refer back to previous work, making it a viable long term project at Infotiv AB.</p>
+<p><img alt="Front view of platform after Master's thesis spring 2023" src="Resources/Pictures/front_view_transparent.png" /></p>
+<h2 id="features-and-capabilities">Features and Capabilities <a name="Features-Capabilities"></a></h2>
+<p>Below, the capabilities and functions of autonomous platform generation 4 are summarized.</p>
+<h3 id="drive-by-wireless-controller">Drive by wireless controller</h3>
+<p>AP4 is capable to be remotely controlled using an xbox 360 controller.  The xbox wireless adapter should be connected to the Raspberry Pi 4b usb port.</p>
+<h3 id="remote-access-to-platform-software">Remote access to platform &amp; software</h3>
+<p>A wifi router is mounted on the back plate, this allows developers to connect to the software whilst it is running to monitor internal states. High-level software can stream commands to the low-level software remotely.</p>
+<h3 id="accelerating-brake-steering">Accelerating, Brake &amp; Steering</h3>
+<p>The platform can be driven forwards, backwards and can be steered. This is done programmatically, meaning "Drive by Wire". Joysticks commands from the xbox controller can therefore be configured to control the platform. In the same way it is trivial to take commands from Autonomous Drive algorithms to control the platform.</p>
+<p>The steering signals and throttle signals are currently being without the turbo option in teleop_twist_joy, meaning the signal may be sent at 70% of the maximum value from the xbox controller to the AP4. This could be explored and maybe changed change, however that would maybe mean that there will be a need to retrain the imitation learning models from scratch to be abel to handle the increased speed.</p>
+<h3 id="scalability">Scalability</h3>
+<p>The idea with autonomous platform generation 4 is that it should be a scalable base platform on with future functionality should be added onto. Scalability and modularity is therefore a key concept for the platform.</p>
+<p>Hardware wise, every component can be mounted where it is deemed appropriate using a pre defined hole pattern. It is possible to move existing hardware as time goes on. New hardware can be added as long as it uses the pre defined hole pattern present on the metal sheets.</p>
+<p>Embedded sensors can be added using ECUs following a set template. These can then be added to the existing system without breaking backwards compatibility using a defined CAN bus network. High data throughput sensors can be added to the platform using USB connection.</p>
+<p>The software is built to be scalable and modular. The software structure is described in detail below. The software is deployed inside docker containers, making it easily deployable and scalable. The controlling software is written using the Robot Operating System 2 (ROS2) Framework. This allows developers to easily add onto existing software.</p>
+<h3 id="power-module">Power Module</h3>
+<p>Consists of a led acid battery and a power supply unit, both can be connected to power the autonomous platform. Meaning the platform can be powered whilst driving around from battery. Whilst in a lab environment power can be supplied to the platform through a wall socket.</p>
+<h3 id="digital-twin">Digital Twin <a name="Digital-Twin"></a></h3>
+<p>The digital twin is implemented in the high-level software. It is described in detail in <code>High_Level_Control_Computer/README.md</code>. It is automatically started when the high-level docker container is started.</p>
+<h3 id="imitation-learning">Imitation Learning</h3>
+<p>Imitation learning is used to learn driving in an environment by observing an expert and by imitating its behavior</p>
+<h2 id="system-architecture">System Architecture <a name="System-Architecture"></a></h2>
+<p>The autonomous platform has three different software components:</p>
+<ul>
+<li>High-level control</li>
+<li>Low-level control</li>
+<li>Embedded control</li>
+</ul>
+<p>High-level is supposed to be run on a high performance computer and can be run without being connected to the rest of the system. Low-level control is run on the Raspberry Pi 4b mounted on the hardware platform. The embedded control is run on the ECU nodes mounted to the platform. Software in high-level and low-level are communicating using the Robot Operating System (ROS2) framework. Software in the embedded control is written using the Arduino framework.</p>
+<p><img alt="System architecture and software layers illustrated" src="Resources/Report_sketches/SW/software_architecture_detailed_overview.png" /></p>
+<p>The three software components are connected through hardware and software links. High-level and low-level software is connected using an ethernet interface, meaning the two softwares should be run whilst connected to the same network. The low-level control is connected to the embedded control through a CAN bus network. A custom CAN library and interface has been created to link the embedded control with the low-level control.</p>
+<p><img alt="View of the backplate where the wifi router and Raspberry Pi is mounted" src="Resources/Pictures/implemented_functionalities/back_view2.jpg" /></p>
+<h3 id="high-level-control">High-level control</h3>
+<p>The high-level software consists of three components, an autonomous driving algorithm and a digital twin interface with the Gazebo physics simulator and a switch which sends commands to either the digital twin or the physical platform. As of June 2023 only a simple digital twin is implemented in this software layer. Starting up the high-level control container will start up Gazebo and Rviz. See <code>FUTURE_WORK.md</code> for what could be implemented.</p>
+<p><img alt="high level overview" src="Resources/Report_sketches/SW/high_level_overview.png" />
+In the illustration above, three components can be seen. Autonomous driving stack, digital switch and gazebo physics simulator. These components should be implemented as a set of ROS2 computational nodes. Note: This is the intended structure but has not been implemented yet.</p>
+<ul>
+<li><strong>Autonomous Drving Stack</strong> is the proposed set of algorithms which takes in sensor information and responds with suitable actuator control commands.</li>
+<li><strong>Digital Twin Switch</strong> is the proposed software switch that is supposed to re-route AD commands to either the physical platform or the digital twin. In the same way, sensory data should be routed from the physical platform or digital twin. The same actuator commands and sensor data type should be used on the digital twin as the physical platform. This ensures that proposed AD algorithms can first be tested on the digital twin and then seamlessly be tested on the physical platform.</li>
+<li><strong>Gazebo Physics Simulator</strong> Is the proposed digital twin simulation environment. It integrates seamlessly with the ROS2 framework. The physical dimensions and driving dynamics can be configured in xml format. Different simulation environments can be setup and saved as world files. Meaning different AD scenarios can be tested easily.</li>
+</ul>
+<p>The high level control folder, <code>High_Level_Control_Computer</code> consist of a docker container and a folder with software. The software can start a simple digital twin of Autonomous platform Generation 4. The folder contains a <code>docker-compose</code> file which starts a docker container and mounts the <code>ap4_hlc_code</code> folder in the container. A ROS2 launch file is then run which starts up the digital twin. The container can be started on any device supporting graphics, i.e a laptop.</p>
+<h3 id="low-level-control">Low-level control</h3>
+<p>The low-level software is responsible for taking platform commands sent from higher-level software and convert it into commands which are sent to the actuators. It is implemented on a Raspberry Pi 4b. A simple vehicle control converts commands sent on <code>\cmd_vel</code> ROS2 topic into ROS2 topics which gets relayed to the embedded control. In the same way the low-level software is responsible for taking any sensor input and passing it forwards to higher-level software. A custom package to convert ROS2 topics into CAN bus has been created, making it simple to interface high-level software with the embedded control software.</p>
+<p>The hardware interface folder, <code>Hardware_Interface_Low_level_pc</code> , contains a <code>docker-compose</code> file which starts a docker container and mounts the <code>ap4_hwi_code</code> folder in the container. A ROS2 launch file is then run which starts up software that interfaces with hardware. This software is specific for the hardware mounted on autonomous platform, therefore it can only be started properly on the Raspberry Pi 4b mounted onto the platform.</p>
+<p><img alt="low level overview" src="Resources/Report_sketches/SW/low_level_overview.png" /></p>
+<h3 id="embedded-control">Embedded control</h3>
+<p>The embedded software is implemented on the ECUs placed on the platform. This firmware acts as an interface between hardware (actuators or sensors) and pass data to and from the low-level software.
+Currently a single embedded software is implemented, Steering and Propulsion Control Unit (SPCU).</p>
+<p><img alt="Embedded control" src="Resources/Report_sketches/SW/Generic_ecu_software.png" /></p>
+<p><code>CAN_Nodes_Microcontroller_Code</code> folder contain PlatformIO projects for each ECU, that is the embedded software running on the generic ECUs. An example of ECU is the SPCU (Steering, Propulsion Control Unit).Furthermore here is the CAN database and the corresponding CAN-library located.</p>
+<h3 id="autonomous-driving">Autonomous Driving</h3>
+<p>The autonomous driving (AD) is implemented using the <a href="https://imitation.readthedocs.io/en/latest/">Imitation library</a> where the structure for Behavioral Cloning (BC) and Human Gated Dataset Aggregation (HG-DAgger) are developed for this project. All of the AD is handled by the high-level docker and the overall structure of the implementation can be seen below.</p>
+<p><img alt="low level overview" src="Resources/extra_documentation_images/start_dagger.png" /></p>
+<h3 id="training-data">Training Data</h3>
+<p>To collect data from training and test drive rosbag2 can be found in <a href="High_Level_Control_Computer/IMITATION_LEARNING/">High_Level_Control_Computer/IMITATION_LEARNING.md</a>
+To collect data from training and test drive rosbag2 is used. The data collection is done in the High Level Planner Docker and specifically in the folder bagfiles_2024, within source. With the High Level Control Docker running, the directory is accessed as follows.</p>
+<p>Attention: To download and train <a href="https://huggingface.co/datasets/hamidebadi/autonomous_platform_gokartcentrallen_imitation_learning_dataset">data and the model</a> either follow <a href="https://huggingface.co/docs/hub/repositories-getting-started">huggingface instruction</a> or after adding your SSH public key to your user settings  , request for permission and clone the repo as a <a href="/.gitmodules">submodule</a> by adding <code>--recurse-submodules</code> when you clone the repository. All recorded data used for training and validation in the project can be found <a href="https://huggingface.co/datasets/hamidebadi/autonomous_platform_gokartcentrallen_imitation_learning_dataset">here.</a></p>
+<p>Examples of the data can be seen below:
+- Orb positions overlay on color image
+- View from depth camera</p>
+<p><img alt="Orb positions overlay on color image" src="Resources/Spring_2024/ORBs.png" />
+<img alt="View from depth camera" src="Resources/Spring_2024/Depth_image.png" /></p>
+<h2 id="start-ap4">Start AP4 <a name="How-to-start-Autonomous-Platform-Generation-4"></a></h2>
+<p>Below follows a quick guide on how to start autonomous platform generation 4 and control it using an xbox 360 controller.</p>
+<ul>
+<li>Connect xbox wireless adapter to Raspberry Pi 4b</li>
+<li>Connect Power source: (Battery or PSU) to POWER IN plug.</li>
+<li>Release Emergency stop</li>
+<li>Flip start switch</li>
+<li>Turn on Nine-bot segway (on backside of platform) Segway will beep once.</li>
+</ul>
+<p>System will now boot up. The wheels will move back and forth.</p>
+<ul>
+<li>Wait 60 seconds (hardcoded in the SPCU ECU unit)</li>
+</ul>
+<p>The platform should beep again after waiting 60 seconds and turn right to left, meaning it is ready to use.</p>
+<p>The platform should be controllable using the xbox controller. By holding down the right bumper button and moving the left joystick the front wheels should move and back wheels turn forwards.</p>
+<ul>
+<li>Turn of the AP4 through flipping back the start switch</li>
+</ul>
+<h2 id="connect-wireless-and-start-ap-software-stack">Connect (wireless) and start AP software stack</h2>
+<p>To check that the software is up and running as expected one can connect to the platform wirelessly and monitor the ROS2 network. On an external computer (dev-laptop or other linux computer) start the high-level software container. Make sure the computer is connected to the wifi network of autonomous platform.</p>
+<p>NOTE: User credentials are available only in the infotiv internal gitlab repository.</p>
+<p>NOTE: high-level software automatically starts the digital twin simulation environment, the RVIZ and gazebo windows can be ignored.</p>
+<p>In a new terminal, start the docker container:</p>
+<pre><code class="language-bash">cd High_Level_Control_Computer
+docker-compose build
+docker-compose up
+</code></pre>
+<p>In a new terminal, enter the docker container</p>
+<pre><code class="language-bash">docker exec -it ap4hlc bash
+</code></pre>
+<p>Source environment variables and export configuration environment variables</p>
+<pre><code class="language-bash">cd ap4hlc_ws
+source install/setup.bash
+export ROS_DOMAIN_ID=1
+</code></pre>
+<p>The low-level software components should be visible to the high level software components. This can be checked with</p>
+<pre><code class="language-bash">ros2 node list
+</code></pre>
+<p>The expected output will be something like this:</p>
+<p><img alt="ROS active nodes" src="Resources/extra_documentation_images/hwi_ros_active_nodes.png" /></p>
+<p>Information sent between nodes (such as sensor data or CAN bus traffic) can be monitored using</p>
+<pre><code class="language-bash">ros2 topic echo &lt;topic_name&gt;
+</code></pre>
+<p>For a list of active ROS2 topics, the following command can be used.</p>
+<pre><code class="language-bash">ros2 topic list
+</code></pre>
+<p>If the topics and nodes show up, the system has started correctly and can be controlled by either an xbox control or any future high-level software control.</p>
+<h2 id="repository-overview">Repository overview</h2>
+<p>The repository consists of three directories containing software (with a few subdirectories each):</p>
+<ul>
+<li><a href="CAN_Nodes_Microcontroller_Code/"><code>CAN_Nodes_Microcontroller_Code</code></a></li>
+<li><a href="Hardware_Interface_Low_Level_Computer/"><code>Hardware_Interface_Low_Level_Computer</code></a></li>
+<li><a href="High_Level_Control_Computer/"><code>High_Level_Control_Computer</code></a></li>
+</ul>
+<p>Within these directories, there exists useful documentation regarding each software component and sub components.</p>
+<ul>
+<li><a href="CAN_Nodes_Microcontroller_Code/"><code>CAN_Nodes_Microcontroller_Code/README.md</code></a></li>
+<li><a href="CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/"><code>CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/README.md</code></a></li>
+<li><a href="Hardware_Interface_Low_Level_Computer/"><code>Hardware_Interface_Low_Level_Computer/README.md</code></a></li>
+<li><a href="High_Level_Control_Computer/"><code>High_Level_Control_Computer/README.md</code></a></li>
+<li><a href="High_Level_Control_Computer/IMITATION_LEARNING/"><code>High_Level_Control_Computer/IMITATION_LEARNING.md</code></a></li>
+<li><a href="High_Level_Control_Computer/DONKEY_CAR_SETUP/"><code>High_Level_Control_Computer/DONKEY_CAR_SETUP.md</code></a></li>
+</ul>
+<p>The documentation is split up into smaller parts to keep information manageable and separated according to what can be relevant at a given time. The major documentation files located in the root directory of the repository are:</p>
+<ul>
+<li><a href="./"><code>README.md</code></a> : The documentation you first see when you open the gitlab, this document.</li>
+<li><a href="SOFTWARE_DESIGN/"><code>SOFTWARE_DESIGN.md</code></a> : A quick introduction to important software and frameworks used on AP4 and how to install the required software. In illustration of how the network of hardware is connected is also can be found there.</li>
+<li><a href="HARDWARE_DESIGN/"><code>HARDWARE_DESIGN.md</code></a> : An introduction to hardware that is used on AP4 and how to add a new one.</li>
+<li><a href="HOW_TO_EXTEND/"><code>HOW_TO_EXTEND.md</code></a> : Are you a new team member? Look at this file for a quick introduction to the project and how to get going. It also has a general design principles for the project to keep in mind when adding new functionality.</li>
+<li><a href="TEST_DEBUGGING/"><code>TEST_DEBUGGING.md</code></a> : Contains a list of known errors when working with AP4 and how to solve them</li>
+<li><a href="ISSUES_AND_FUTURE_WORK/"><code>ISSUES_AND_FUTURE_WORK.md</code></a> : A Comprehensive list of known bugs &amp; issues and possible future work to be done on the platform.</li>
+<li><a href="REQ_SPEC_BOOM.xlsx"><code>REQ_SPEC_BOOM.xlsx</code></a> contains a list of decided upon requirements and specifications which the autonomous platform should follow. A complete bill of materials (hardware components) can be found in this file. It contains items, what purpose they serve, where they can be bought and a total estimated cost.
+  As of <em>June 2023</em> the total cost is 16500 SEK to build the base platform and have spare parts over.</li>
+</ul>
+<h2 id="thanks">Thanks</h2>
+<p><a href="https://www.infotiv.se"><img alt="INFOTIV logo" src="Resources/infotiv-logo.png" /></a>
+<a href="https://www.chalmers.se"><img alt="Chalmers logo" src="Resources/chalmers.png" /></a>
+<a href="https://gokartcentralen.se/"><img alt="GokartCentrallen logo" src="Resources/gokartcentrallen.png" /></a></p>
+<p>We would like to extend thanks <a href="https://gokartcentralen.se/kungalv/">Gokartcentralen in Kungälv</a> 
+for generously allowing us to drive, test, and validate our go-kart at their track.
+Without <a href="https://gokartcentralen.se/">Gokartcentralen</a> and the helpful individuals working there, this project
+would not have turned out as it did.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="CHANGELOG/" class="btn btn-neutral float-right" title="Changelog">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="CHANGELOG/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

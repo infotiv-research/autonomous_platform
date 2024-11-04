@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/dbc/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>dbc.md - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "dbc.md";
+        var mkdocs_page_input_path = "CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/dbc.md";
+        var mkdocs_page_url = "/autonomous_platform/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/dbc/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">dbc.md</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/dbc_to_c/dbc.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="dbcmd">dbc.md</h1>
+<h2 id="dbc-file-specification">DBC file specification</h2>
+<h2 id="parser-grammar">Parser Grammar</h2>
+<p>The current grammar for the DBC parser is as follows:</p>
+<pre><code> s         : /[ \t]/ ;
+ n         : /\r?\n/ ;
+ sign      : '+' | '-' ;
+ float     : /[-+]?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?/ ;
+ ident     : /[a-zA-Z_][a-zA-Z0-9_]*/ ;
+ integer   : &lt;sign&gt;? /[0-9]+/ ;
+ factor    : &lt;float&gt; | &lt;integer&gt; ;
+ offset    : &lt;float&gt; | &lt;integer&gt; ;
+ length    : /[0-9]+/ ;
+ range     : '[' ( &lt;float&gt; | &lt;integer&gt; ) '|' ( &lt;float&gt; | &lt;integer&gt; ) ']' ;
+ node      : &lt;ident&gt; ;
+ nodes     : &lt;node&gt; &lt;s&gt;* ( ',' &lt;s&gt;* &lt;node&gt;)* ;
+ string    : '"' /[^"]*/ '"' ;  
+ unit      : &lt;string&gt; ;
+ startbit  : &lt;integer&gt; ;
+ endianess : '0' | '1' ;
+ y_mx_c    : '(' &lt;factor&gt; ',' &lt;offset&gt; ')' ;
+ name      : &lt;ident&gt; ;
+ ecu       : &lt;ident&gt; ;
+ dlc       : &lt;integer&gt; ;
+ id        : &lt;integer&gt; ;
+ multiplexor : 'M' | 'm' &lt;s&gt;* &lt;integer&gt; ;
+ signal    : &lt;s&gt;* "SG_" &lt;s&gt;+ &lt;name&gt; &lt;s&gt;* &lt;multiplexor&gt;? &lt;s&gt;* ':' &lt;s&gt;* &lt;startbit&gt; &lt;s&gt;* '|' &lt;s&gt;*
+         &lt;length&gt; &lt;s&gt;* '@' &lt;s&gt;* &lt;endianess&gt; &lt;s&gt;* &lt;sign&gt; &lt;s&gt;* &lt;y_mx_c&gt; &lt;s&gt;*
+         &lt;range&gt; &lt;s&gt;* &lt;unit&gt; &lt;s&gt;* &lt;nodes&gt; &lt;s&gt;* &lt;n&gt; ;
+ message   : "BO_" &lt;s&gt;+ &lt;id&gt; &lt;s&gt;+ &lt;name&gt;  &lt;s&gt;* ':' &lt;s&gt;* &lt;dlc&gt; &lt;s&gt;+ &lt;ecu&gt; &lt;s&gt;* &lt;n&gt; &lt;signal&gt;* ;
+ messages  : (&lt;message&gt; &lt;n&gt;+)* ;
+ version   : "VERSION" &lt;s&gt; &lt;string&gt; &lt;n&gt;+ ;
+ ecus      : "BU_" &lt;s&gt;* ':' (&lt;ident&gt;|&lt;s&gt;)* &lt;n&gt; ;
+ symbols   : "NS_" &lt;s&gt;* ':' &lt;s&gt;* &lt;n&gt; (' ' &lt;ident&gt; &lt;n&gt;)* &lt;n&gt; ;
+ sigtype   : &lt;integer&gt;  ;
+ sigval    : &lt;s&gt;* "SIG_VALTYPE_" &lt;s&gt;+ &lt;id&gt; &lt;s&gt;+ &lt;name&gt; &lt;s&gt;* ":" &lt;s&gt;* &lt;sigtype&gt; &lt;s&gt;* ';' &lt;n&gt;* ;
+ whatever  : (&lt;ident&gt;|&lt;string&gt;|&lt;integer&gt;|&lt;float&gt;) ;
+ bs        : "BS_" &lt;s&gt;* ':' &lt;n&gt;+ ;  types     : &lt;s&gt;* &lt;ident&gt; (&lt;whatever&gt;|&lt;s&gt;)+ ';' (&lt;n&gt;*|/$/) ;
+ values    : "VAL_TABLE_" (&lt;whatever&gt;|&lt;s&gt;)* ';' &lt;n&gt; ;
+ dbc       : &lt;version&gt; &lt;symbols&gt; &lt;bs&gt; &lt;ecus&gt; &lt;values&gt;* &lt;n&gt;* &lt;messages&gt; (&lt;sigval&gt;|&lt;types&gt;)*  ;
+</code></pre>
+<p>The file format contains significant whitespace, so the parsers grammar has to
+be made to be more complex than it should be, alternatively a parser could be
+made that accepts <strong>ident</strong> tags only if they are not keywords (which would be
+<em>much</em> better).</p>
+<p>The two most important things in the <a href="http://vector.com/vi_candb_en.html">DBC</a> file are messages and signals. You
+can resolve</p>
+<h2 id="maximum-character-length">Maximum Character Length</h2>
+<p>The identifiers are limited to 128 characters in length.</p>
+<h2 id="keywords">Keywords</h2>
+<ul>
+<li>"BO_" Message Object</li>
+<li>"EV_" Environment Variable</li>
+<li>"SG_" Signal </li>
+<li>"BU_" Network Node</li>
+</ul>
+<h2 id="messages">Messages</h2>
+<h3 id="signals">Signals</h3>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/ISSUES_AND_FUTURE_WORK/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Issues and Future work - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Issues and Future work";
+        var mkdocs_page_input_path = "ISSUES_AND_FUTURE_WORK.md";
+        var mkdocs_page_url = "/autonomous_platform/ISSUES_AND_FUTURE_WORK/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Issues and Future work</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#priority-fix-known-bugs-issues">Priority : Fix known Bugs / Issues</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Issues and Future work</li>
+      <li class="breadcrumb-item active">Issues and Future work</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/ISSUES_AND_FUTURE_WORK.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="known-issues">Known issues</h2>
+<h3 id="priority-fix-known-bugs-issues">Priority : Fix known Bugs / Issues <a name="Known-Bugs-/-Issues"></a></h3>
+<p>There are some known bugs and issues and should have priority</p>
+<ul>
+<li>Battery voltage drops during load and steering control is lost</li>
+<li>Lost wifi connection during test day @ gokartcentralen</li>
+<li>Raspberry Pi 4b SD card gets filled with junk files and breaks hardware interface software.</li>
+</ul>
+<p>It is a known problem that the raspberry pi 4b fills up with junk files and slows down the raspberry pi and eventually break things. Docker caches also grow in size over time. Possible solution get a bigger SD card? Find how to periodically remove junk files?</p>
+<ul>
+<li>Raspberry Pi 4b corrupted files</li>
+</ul>
+<p>Over time files on the SD card gets corrupted and affects behavior.
+Common problems are that the docker container cannot be built. A cause for this may be the shutdown procedure of the raspberry pi. Unplugging it to power down may not be optimal. Need to find a solution for properly safely powering down the raspberry pi. Terminal output below.</p>
+<p><img alt="Raspberry Pi 4b corrupted files" src="../Resources/extra_documentation_images/raspberry_pi_corrupted_repository.png" /></p>
+<p>See TEST_DEBUGGING.md to see how it is currently resolved.</p>
+<ul>
+<li>Low voltage input to the raspberry pi makes it slow and unresponsive</li>
+</ul>
+<p>Needs to be resolved properly. Could become a problem once more data is sent to and from the hardware interface code.</p>
+<ul>
+<li>PlatformIO build fails when repository is cloned to a path containing a whitespace</li>
+</ul>
+<p>Opening the embedded ECU software in platformIO and trying to build it fails when repository filepath has whitespace in it. See error output below. This was when trying to build firmware for SPCU.</p>
+<p>Filepath to SPCU was <code>C:\Users\erimag\OneDrive - Infotiv AB\Skrivbordet\git\autonomous_platform\CAN_Nodes_Microcontroller_Code\SPCU</code></p>
+<pre><code class="language-bash">Linking .pio\build\bluepill_f103c8\firmware.elf
+arm-none-eabi-g++: error: Infotiv: No such file or directory
+arm-none-eabi-g++: error: AB/Skrivbordet/git/autonomous_platform/CAN_Nodes_Microcontroller_Code/SPCU/.pio/build/bluepill_f103c8/firmware.map: No such file or directory
+
+[.pio\build\bluepill_f103c8\firmware.elf] Error 1
+</code></pre>
+<p>I tried the solution presented in this <a href="https://community.platformio.org/t/spaces-in-path-still-cause-problems-with-g/18214">forum post</a> but could still not get it to work. Temporary solution, clone the repository to a filepath without whitespace?</p>
+<p>If there is any error related to long path, open shell as administrator, configure git to use long path names, or else some files will be missed when cloning the repository</p>
+<pre><code class="language-bash">git config --system core.longpaths true
+</code></pre>
+<h2 id="future-work">Future work <a name="Future-Work"></a></h2>
+<p>As the thesis of 2023 concluded there several functionalities that could not be implemented due to time restrictions. Therefore for future work we suggest:</p>
+<h3 id="improving-generic-ecu-nodes-with-pcb">Improving Generic ECU nodes with PCB</h3>
+<p>The generic ECU base hardware should be looked over and iterated over. The I/O proposed should be kept the same to keep compatibility with the rest of the system.</p>
+<p>Many loose / Unlabeled Wires coming out from the back of ECU. Hard to follow existing implementation. Cables can be shock loosed by accident very easily.</p>
+<ul>
+<li>Possible solution: Add a 'Phoenix' style connector to the back of the ECU. Standardized connector type and easily available to buy. Would allow for ECU to be easily removed. A specific phoenix connector which fits into the existing size constraints of the ECU needs to be found. Existing CAD model of ECU HW Node needs to be adjusted accordingly. Existing nodes should be upgrades first. Tommy at Infotiv has a product manual with different types of Phoenix Connectors which can be ordered by Infotiv.</li>
+</ul>
+<p><img alt="Phoenix connector" src="../Resources/extra_documentation_images/phoenix_connector.png" /></p>
+<h3 id="power-module">Power module</h3>
+<p>By Power Module it is referring to the battery and Power Supply Unit (PSU).</p>
+<p>The power module created during the thesis is sufficient for testing AP4 without anyone sitting in the gokart. During the test day at gokartcentralen (Spring 2023) it was found that the friction of the road surface made the power module insufficient when sitting in the gokart and running from battery power. The power spiked and blew a fuse. On a more slippery surface, such as in the office one could sit in the gokart and drive around without problem.</p>
+<p>The voltage from the battery is not regulated, meaning that when the battery depletes the voltage to all the components decreases. Ideally the voltage to the system should remain at a constant 12v.</p>
+<p>Current issues with Power Module:</p>
+<p>Voltage to the AP4 components drops as battery SoC drops. Could be a cause to unexplained behavior during test day. I.e wifi router stopped working after 3 hours.</p>
+<ul>
+<li>Possible solution: Install a voltage regulator coming out from the battery such that the output voltage from the power module is at a constant 12v regardless of the SoC of battery.</li>
+</ul>
+<p>Monitoring power drain during runtime of platform.</p>
+<ul>
+<li>Possible solution: Connect the Voltage sensors and Current Sensor to a ECU and send information to the Central Computer. The hardware for this is installed to battery inside the power module box but has not been connected. By reading voltage and current consumption continuously it could provide useful information to the tests performed and send an alarm when the voltage of the battery gets too low.</li>
+</ul>
+<p>Analysis of power consumption of platform is insufficient. Platform blew a fuse unexpectedly whilst sitting in the gokart on a rough surface and turning the steering. The existing analysis (22/8-23) can be found in the thesis report in the 'Images' folder.</p>
+<ul>
+<li>Possible solution: Do a new power requirement analysis of the platform. Taking current spikes into account. Implement changes to the platform to avoid future problems.</li>
+</ul>
+<h3 id="high-level-control-software">High Level Control Software</h3>
+<p>The high level control software is very much unfinished. So far a docker container has been setup with the correct environment and software installed.</p>
+<p>For future work regarding the digital twin, see <strong>Digital Twin</strong> section below.</p>
+<h3 id="digital-twin">Digital Twin</h3>
+<p>The digital twin implemented in spring 2023 is a simple twin created in Gazebo and not very well tuned. The movement dynamics do not behave as the physical AP4 platform does. This needs to be tuned. The dynamics of the physical platform should be investigated, noted down and transferred to the digital twin.</p>
+<p>Investigating integration of AP4 into CARLA or other simulations could also be done. As long as the simulation software can integrate with Robot Operating System 2 it should work.</p>
+<p>Infotiv already has experience using CARLA for vehicle scenario simulation. Therefore to ease future development of digital twin it could be interesting to transfer the digital twin to the CARLA simulator instead of Gazebo.</p>
+<ul>
+<li>Possible solution:  <a href="https://carla.readthedocs.io/projects/ros-bridge/en/latest/ros_installation_ros2/">ROS bridge installation for ROS2 - Carla Documentation</a> Note: This is for a previous version of ROS2, AP4 builds on ROS2 Humble so a fix for this needs to be found.</li>
+</ul>
+<h3 id="mounting-high-performance-computer-on-ap4">Mounting High Performance Computer on AP4</h3>
+<p>During spring 2023, the high performance computer was specified as the development laptop. It was sufficient for testing and connecting wirelessly to the hardware interface (Raspberry Pi 4b). When future AD/ADAS algorithms gets implemented it would be beneficial to have this computing unit mounted permanently onto the platform. This would remove any latency / range issues caused by the platform being controlled over wifi.</p>
+<p>Find a suitable Intel NUC mini PC and mount onto the back of Autonomous Platform Generation 4. Install the software currently running on the development laptop onto it.</p>
+<h3 id="sensor-measurements">Sensor Measurements <a name="Sensor-Measurements"></a></h3>
+<p>Any Autonomous Drive (AD) or Advanced Driver Assistance System (ADAS) needs sensory input in order to understand its environment and make decision on. As of (22/8-23) the platform does not have such functionality</p>
+<h4 id="velocity">Velocity</h4>
+<p>A crucial component of any autonomous vehicle is knowing its own state, its velocity is one of such states. During July 2023 Seamus and Alexander started to work on measuring the velocity.</p>
+<h3 id="camera">Camera</h3>
+<p>A camera sensor can be used to identify obstacles around AP4.</p>
+<p>A USB camera (logitech c920) has been bought and mounted to the front of the platform but has not been connected. Some investigation on how to connect is has been done during spring 2023.</p>
+<p>The USB hub needs to be connected to the Raspberry Pi 4b (Hardware interface) and onto it the camera needs to be connected. Software wise, a suitable ROS2 camera package should be installed into the low level container. It needs to be configured (through ROS2 launch scripts) to start when the ROS2 software starts up.</p>
+<p>Possible suitable ROS2 Camera packages:  https://index.ros.org/r/v4l2_camera/</p>
+<p>The output from the camera package software would then be a video stream on a known ROS2 topic. This would then need to be processed through some Machine Learning stack to extract useful information (Detected objects, depths, distance, position on road). A ROS2 package would have to be created which listens to the video stream topic and does the computing. Providing the output from the machine learning algorithm on a new ROS2 topic.</p>
+<h3 id="imu">IMU</h3>
+<p>An Inertial Measurement Unit (IMU) provides information such as linear acceleration and rotation. This information can be useful to determine the orientation and acceleration of the autonomous platform.</p>
+<p>This requires an IMU sensor to be integrated onto the platform. See <code>HOW_TO_EXTEND.md</code> for general procedure of connecting a new functionality.</p>
+<h3 id="sensor-fusion">Sensor Fusion</h3>
+<p>Sensor fusion is the process of combining multiple sensor values in order to get a better approximation of the vehicle state. The information from the sensors above, Camera, Velocity, Lidar and Radar can be combined using sensor fusion algorithms in order to get a better overview of the environment around the autonomous platform.</p>
+<p>This can be suitable as a thesis project as it is an advanced topic.</p>
+<h3 id="testing-out-existing-autonomous-drive-algorithms">Testing out existing Autonomous Drive algorithms</h3>
+<p>When sensors have been integrated onto the platform and sensor data has been processed it can then be used in AD/ADAS algorithms to control the vehicle given its current state.</p>
+<p>There exists ready solutions such as OpenPilot.</p>
+<p>Software wise, sensor information on topics needs to be routed to the decision making software. Hamid has great knowledge on how to use OpenPilot.</p>
+<p>This was investigated somewhat during the 2023 spring thesis, it was found that OpenPilot ran on Ubuntu 20.04 whilst the software for AP4 runs on ubuntu 22.04. Therefore ROS2 Humble could not be installed in the same container as Openpilot and communication between the decision making software and AP software could not be established.</p>
+<ul>
+<li>Possible solution:
+  Due to time constraints this could not be investigated further during the masters thesis spring 2023. Possible solutions to the problem presented could be to install ROS2 from source in the OpenPilot docker container, or installing OpenPilot from source in a new docker container running ubuntu 22.04. This has to be investigated further before ruling OpenPilot out as a unsuitable AD software for AP4.</li>
+</ul>
+<p>Other alternatives to OpenPilot should be investigated, else it could be interesting to develop an simplified autonomous drive stack in-house at Infotiv.</p>
+<h3 id="integrating-sensors-used-in-the-automotive-industry">Integrating sensors used in the automotive industry</h3>
+<p>See <code>HOW_TO_EXTEND.md</code> on how to integrate sensors which needs to be connected using microcontroller.</p>
+<p>For a list of sensors to possibly integrate see <a href="#sensor-measurements">above</a> in 'Sensor Measurements'.</p>
+<p>Important note added: Once embedded sensors have been implemented according to <code>HOW_TO_EXTEND.md</code> information will be available on topic /GET_<FRAME ID>_\<SIGNAL_NAME>. This information will then need to be transferred to known standard name topics to make the information flow compatible with the information sent from the digital twin.</p>
+<p>I.e velocity commands to the platform should be sent on /cmd_vel {x, y, z, Rx, Ry, Rz} and needs to be converted into commands which can are sent to the platform. I.e "/SET_0x3e8_Act_SteeringPosition", "/SET_0x3e8_Act_ThrottleVoltage" and  "/SET_0x3e8_Act_BreakVoltage". This is performed inside "xbox_controller_feed_forward_ctrl_pkg" (NOTE this package should probably be renamed). Given information on /cmd_vel topic, it is processed and used to control a P-Control, which in turn outputs information on the three topics that are sent to the actuators on the CAN bus.</p>
+<p>In a similar way, future sensor information on "/GET_\<FRAME ID>_\<SIG NAME>" should be processed to output the sensor information on according to naming conventions. This would be done by creating a new package which creates a node. The node would listen to <code>/GET_\&lt;FRAME ID&gt;\_\&lt;SIG NAME&gt;</code>, process it (scale, offset, etc) and output the new information on topic <code>/imu</code> for example. The output topic should be structured according to how common sensor packages in ROS2 does it, to keep compatibility.</p>
+<p>And for velocity specifically, a new ROS2 package should be created, which starts a ROS2 node. It would listen to information on <code>/SET_0x5dc_Get_Velocity</code> and output onto <code>\odom</code> topic. The output should be on the <code>\odom</code> topic using <a href="https://docs.ros2.org/foxy/api/nav_msgs/msg/Odometry.html">nav_msgs/msg/Odometry</a> type message.</p>
+<!-- Note: This should probably be moved to a more appropriate spot in documentation and not future work -->
+
+<h3 id="naming-of-sensor-messages-convention-sensor-interfaces">Naming of sensor messages convention (sensor interfaces)</h3>
+<p><a href="https://navigation.ros.org/setup_guides/sensors/setup_sensors.html">See article link here</a> under "Sensor Introduction"</p>
+<p>There exists a few common packages which specify how sensor messages should be mapped:</p>
+<p><a href="https://github.com/ros2/common_interfaces">Full list of ROS2 interfaces can be found here</a></p>
+<ul>
+<li><a href="https://github.com/ros2/common_interfaces/tree/rolling/sensor_msgs">sensor_msgs</a> Examples: Imu, Camera, Joystick, LaserScan, etc</li>
+<li><a href="http://wiki.ros.org/radar_msgs">radar_msgs</a></li>
+<li><a href="http://wiki.ros.org/vision_msgs">vision_msgs</a></li>
+</ul>
+<h3 id="naming-of-navigational-messages-convention-interface">Naming of navigational messages convention (interface)</h3>
+<p>There exists corresponding interfaces (a given standard) for information sent over the ROS2 network regarding navigation.</p>
+<p>Some navigational interfaces are:</p>
+<ul>
+<li><a href="https://github.com/ros2/common_interfaces/tree/rolling/nav_msgs">nav_msgs</a> Example: Odometer interface which represents a current Pose (Position+Orientation) and Velocity</li>
+</ul>
+<!-- -->
+
+<p>The goal is to have sensor information from the physical platform have the same data structure and format as the digital twin. And by following a provided standard it allows for easier cross compatibility between created software packages and existing software packages.</p>
+<p>See IMU sensor ROS2 topic format <a href="https://subscription.packtpub.com/book/iot-and-hardware/9781783554713/10/ch10lvl2sec100/simulating-imu-on-gazebo">here.</a></p>
+<p>Sensors which require more data throughput, such as cameras/lidars are often bought as existing solutions and provide USB interface. These can be integrated with AP4 by connecting the sensors to the hardware interface using USB. Software wise there exists ROS2 packages for the commonly used automotive sensors which needs to be installed and configured.</p>
+<h3 id="automatic-and-dynamic-generation-of-ros2-package-can_msgs_to_ros2_topic_pkg">Automatic and dynamic generation of ROS2 package 'can_msgs_to_ros2_topic_pkg'</h3>
+<p>This is the ROS2 software package responsible for translating incoming CAN bus data on the Raspberry Pi 4b Hardware_Interface_Low_Level_Computer Linux SocketCAN into useful data on ROS2 topics. Currently it is written by hand and has to be updated every time a new frame or signal is added into the CAN_DB.dbc file for information to flow through the software layers from embedded to low level software. This is a tedious process and can cause a lot of headache if one is not familiar with C++ or the ROS framework.</p>
+<p>Future work could therefore be to write a parser (in python?) to automatically generate this package (mainly C++ main.cpp code) using the information stored in the CAN_DB.dbc file.</p>
+<p>The current work process is described in <code>Hardware_Interface_Low_Level_Computer</code> README file.</p>
+<p>One possible issue/problem is how to select what ROS2 common datatype to use. Maybe look into https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html - Look at Field types. I.e a double in C++ should be defined as a float64 in a ROS2 message.</p>
+<p>Autogenerating this code could save a lot of time and headache (Once it has been tested and verified properly). It would also be easier for future AP4 members to add functionality. Messages would only need to be defined in the CAN_DB.dbc file and everything from the embedded structures to the ROS2 interface would be generated automatically.</p>
+<h3 id="configure-docker-containers-to-run-on-windows">Configure docker containers to run on Windows</h3>
+<p>As of August 2023 the docker containers for autonomous platform are configured to be started on a linux host machine. This is how they are currently configured.</p>
+<ul>
+<li>
+<p><code>High_Level_Control_Computer</code> container : Starts a graphical simulation of the digital twin. Is meant to run on any linux computer with 3D graphics capability. Is meant to be portable and be started by any member wanting to develop higher level algorithms with the option to run it without being connected to the physical platform.</p>
+</li>
+<li>
+<p><code>Hardware_Interface_Low_Level_Computer</code> : Starts the software responsible for interfacing with and controlling the hardware platform. Is meant to be run on a Raspberry Pi 4b connected to the platform.</p>
+</li>
+</ul>
+<!-- -->
+
+<p>To make future development of AD/ADAS algorithms more streamline and more accessible it would be useful to start the high level software container on Windows host machines as well.</p>
+<p>A new configuration of the docker-compose file located at <code>High_Level_Control_Computer</code> would need to be added. Passing graphical elements out from the container works a bit different on Windows than on a linux host machine. One suggestion would be to use X11 server to display the container desktop GUI inside a web browser. See https://medium.com/geekculture/run-a-gui-software-inside-a-docker-container-dce61771f9 for instructions regarding this option.</p>
+<h3 id="remote-flashing-of-ecu-software-over-can-bus">Remote flashing of ECU software over CAN bus</h3>
+<p>Suggested by Hamid during a meeting, noted down by Erik.</p>
+<p>It is quite a bit of a headache to flash the ECUs with new software. If multiple ECUs would have to be re-flashed for some reason it can take quite some time and lead to user errors when moving cables around. When flashing using the ST-Link v3 internal power cables have to be plugged out temporary. This is cumbersome and may lead to user error.</p>
+<p>An interesting future work would therefore be to look into flashing the ECUs over the existing CAN bus network remotely.</p>
+<p>By flashing over CAN bus, all ECUs can be upgraded automatically when a change have to be pushed. This could in the long term save a lot of time and make the development process pipeline easier to use.</p>
+<p>A project with good potential for this functionality can be found <a href="https://github.com/crycode-de/mcp-can-boot">here</a>. It is a software that installs a custom boot-loader onto the embedded microcontroller. This needs to be investigated further to see if it is possible to flash an STM32 bluepill STM32F103C8T6 microcontroller or if can be only be done on other specific hardware.</p>
+<p>ECUs on the CAN network could then potentially be flashed by using the sister-repository linked <a href="https://github.com/crycode-de/mcp-can-boot-flash-app">here</a>. This would ideally be run on the Raspberry Pi 4b hardware interface computer</p>
+<p>The AP4 CAN bus library used for communication may have to be changed out for the one proposed on the github page mentioned above.</p>
+<p>Here is a list of other similar projects, none specifically for the STM32F103xx though.</p>
+<ul>
+<li><a href="https://github.com/marcinbor85/can-prog">marcinbor85/can-prog</a>  - should be looked into</li>
+<li><a href="https://github.com/Hoernchen20/st-can-flash">Hoernchen20/st-can-flash</a>.</li>
+<li><a href="https://github.com/effenco/stm32-can-bootloader">effenco/stm32-can-bootloader</a></li>
+<li><a href="https://github.com/matejx/stm32f1-CAN-bootloader">matejx/stm32f1-CAN-bootloader</a></li>
+<li><a href="https://stackoverflow.com/questions/61243660/stm32103-custom-bootloader-jump-to-main-firmware-issue">Someone successfully implemented STM32103xx bootloader - blogpost</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Power_Unit/" class="btn btn-neutral float-left" title="Power Unit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../CAD/" class="btn btn-neutral float-right" title="Images">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Power_Unit/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../CAD/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

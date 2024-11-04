@@ -1,0 +1,112 @@
+VERSION "HIPBNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY/4/%%%/4/'%**4YYY///"
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+
+BS_:
+
+BU_: SPCU CMCU
+
+
+BO_ 500 Error_SPCU: 1 SPCU
+ SG_ Heartbeat : 0|1@1+ (1,0) [0|1] "Bool" Vector__XXX
+ SG_ Propulsion_Error : 1|1@1+ (1,0) [0|1] "Bool" Vector__XXX
+ SG_ Steering_Error : 2|1@1+ (1,0) [0|1] "Bool" Vector__XXX
+
+BO_ 1000 Set_SPCU: 8 CMCU
+ SG_ Act_ThrottleVoltage : 33|13@1+ (1,0) [850|5100] "mV" Vector__XXX
+ SG_ Act_BreakVoltage : 0|13@1+ (1,0) [850|5100] "mV" Vector__XXX
+ SG_ Act_SteeringPosition : 17|8@1- (1,0) [-180|180] "Degree" Vector__XXX
+ SG_ Act_Reverse : 16|1@1+ (1,0) [0|1] "Bool" Vector__XXX
+ SG_ Act_SteeringVelocity : 25|8@1+ (1,0) [0|0] "units/s" Vector__XXX
+
+BO_ 2000 Get_SPCU: 8 SPCU
+ SG_ Get_SteeringAngle : 0|9@1- (1,0) [-180|180] "Degree" Vector__XXX
+ SG_ Get_ReverseMode : 9|1@1+ (1,0) [0|1] "Bool" Vector__XXX
+
+BO_ 100 Request_Heartbeat: 8 CMCU
+ SG_ Sig_Req_Heartbeat : 0|64@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 101 Response_Heartbeat_SPCU: 8 SPCU
+ SG_ Response_Heartbeat_sig : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 102 Response_Heartbeat_XXX: 8 Vector__XXX
+
+BO_ 1500 Get_Speed_Sensor: 8 SPCU
+ SG_ Get_Velocity : 0|8@1+ (100,0) [0|1000] "cm/s" Vector__XXX
+
+
+CM_ BO_ 500 "Error Handler frame";
+CM_ SG_ 500 Heartbeat "heartbeat to detect that the ecu is still active";
+CM_ SG_ 500 Propulsion_Error "Boolean to detect if some error has occrued in propulsion control";
+CM_ SG_ 500 Steering_Error "Boolean to detect if some error has occured in Steering Control";
+CM_ BO_ 1000 "Set values";
+CM_ SG_ 1000 Act_ThrottleVoltage "";
+CM_ BO_ 2000 "Get sensor reading";
+CM_ BO_ 100 "To see if the node is still running";
+CM_ SG_ 100 Sig_Req_Heartbeat "Request heartbeat signal from HW nodes";
+CM_ BO_ 101 "Responds to a request heartbeat frame";
+CM_ SG_ 101 Response_Heartbeat_sig "Sends a value of 1 to respond to a heartbeat request";
+CM_ BO_ 1500 "Get speed sensor reading";
+BA_DEF_ SG_  "SPN" INT 0 524287;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_  "DatabaseVersion" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_  "DatabaseCompiler" STRING ;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclic","spontaneous";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 2 50000;
+BA_DEF_ BO_  "GenMsgAutoGenSnd" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgAutoGenDsp" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigAutoGenSnd" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigAutoGenDsp" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigEnvVarType" ENUM  "int","float","undef";
+BA_DEF_ SG_  "GenSigEVName" STRING ;
+BA_DEF_ BU_  "GenNodAutoGenSnd" ENUM  "No","Yes";
+BA_DEF_ BU_  "GenNodAutoGenDsp" ENUM  "No","Yes";
+BA_DEF_  "GenEnvVarEndingDsp" STRING ;
+BA_DEF_  "GenEnvVarEndingSnd" STRING ;
+BA_DEF_  "GenEnvVarPrefix" STRING ;
+BA_DEF_DEF_  "SPN" 0;
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_DEF_DEF_  "DatabaseVersion" "DEMO PLUS";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "ProtocolType" "";
+BA_DEF_DEF_  "DatabaseCompiler" "";
+BA_DEF_DEF_  "GenMsgSendType" "spontaneous";
+BA_DEF_DEF_  "GenMsgCycleTime" 100;
+BA_DEF_DEF_  "GenMsgAutoGenSnd" "Yes";
+BA_DEF_DEF_  "GenMsgAutoGenDsp" "Yes";
+BA_DEF_DEF_  "GenSigAutoGenSnd" "";
+BA_DEF_DEF_  "GenSigAutoGenDsp" "";
+BA_DEF_DEF_  "GenSigEnvVarType" "undef";
+BA_DEF_DEF_  "GenSigEVName" "";
+BA_DEF_DEF_  "GenNodAutoGenSnd" "Yes";
+BA_DEF_DEF_  "GenNodAutoGenDsp" "Yes";
+BA_DEF_DEF_  "GenEnvVarEndingDsp" "Dsp";
+BA_DEF_DEF_  "GenEnvVarEndingSnd" "Snd";
+BA_DEF_DEF_  "GenEnvVarPrefix" "Env";
+BA_ "ProtocolType" "J1939";
+BA_ "BusType" "CAN";
+BA_ "DatabaseCompiler" "CSS ELECTRONICS (WWW.CSSELECTRONICS.COM)";
+BA_ "DatabaseVersion" "1.0.0";

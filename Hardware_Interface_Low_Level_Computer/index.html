@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/Hardware_Interface_Low_Level_Computer/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Hardware Interface Low Level Computer - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Hardware Interface Low Level Computer";
+        var mkdocs_page_input_path = "Hardware_Interface_Low_Level_Computer/README.md";
+        var mkdocs_page_url = "/autonomous_platform/Hardware_Interface_Low_Level_Computer/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Hardware Interface Low Level Computer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#can-signals-to-ros2-topic-converter">CAN Signals To ROS2 Topic Converter</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#vehicle-control">Vehicle Control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#joystick-manual-control">Joystick Manual Control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#convert-data-format-to-ros2-standard">Convert Data Format To ROS2 Standard</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#low-level-control-hardware-interface-software-hardware-requirements">Low-Level Control &amp; Hardware Interface - Software / Hardware Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usb-devices-connected">USB Devices Connected</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interfacing-with-embedded-ecus">Interfacing With Embedded ECUs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interfacing-with-high-level-control-software">Interfacing with High Level Control Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-new-functionalities">Adding New Functionalities</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#automatic-startup-of-software">Automatic Startup of Software</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-base-software-on-fresh-raspberry-pi-4b">Installing Base Software on Fresh Raspberry Pi 4b</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wiring">Wiring</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Hardware Interface Low Level Computer</li>
+      <li class="breadcrumb-item active">Hardware Interface Low Level Computer</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/Hardware_Interface_Low_Level_Computer/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="low-level-control-hardware">Low-level Control &amp; Hardware</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This directory contains the software stack running on the Raspberry Pi 4b mounted to the hardware platform. It also aims to describe how each software component is designed / implemented.</p>
+<p>In summary, the Low-level Control &amp; Hardware Interface SW &amp; HW is Hardware specific. It shall be run on the platform, connected to the embedded SW, CAN busses etc. It works as a bridge between high-level control software and the embedded ECU code which controls actuators / reads sensor data.</p>
+<p>Below an illustration of the low level and hardware interfacing software can be seen.</p>
+<p><img alt="Low level overview" src="../Resources/Report_sketches/SW/low_level_overview.png" /></p>
+<p>The software itself is implemented using the ROS2 framework, this software is then run inside a docker container. It is only meant to run on the Raspberry Pi 4b mounted onto autonomous platform and is very hardware specific.</p>
+<p>In the diagram above, four ROS2 packages are illustrated as rounded rectangles. These are;</p>
+<h2 id="can-signals-to-ros2-topic-converter">CAN Signals To ROS2 Topic Converter</h2>
+<p>This is a custom made ROS2 package made spring 2023. The purpose of it is to be a software translation of the CAN bus data from the embedded software layer to useful information available on ROS2 topics.</p>
+<p>This abstracts the transfer of information between low level software and embedded software running on ECUs in the CAN network.</p>
+<p>It uses the unified CAN bus database file (.dbc) for autonomous platform in order to decode the information sent on the CAN network. This database file is located at <code>autonomous_platform\CAN_Nodes_Microcontroller_Code\CAN_LIBRARY_DATABASE\CAN_DB.dbc</code>. A custom application is then written that maps a specific CAN signal onto a specific ROS2 topic. This means that every data signal sent over the CAN network can be used in algorithms located in the hardware interface and low level software. In the same way, ROS2 topics can be used to set the value of certain signals, meaning commands can be sent from the hardware interface and low level software to the various ECUs mounted onto autonomous platform.</p>
+<h3 id="vehicle-control">Vehicle Control</h3>
+<p>This is a custom made ROS2 package to control the steering angle and velocity of the hardware on a low level. It receives a desired velocity and steering angle on the <code>/cmd_vel</code> ROS2 topic and uses a controller gain to scale the values. The values have to be processed and rescaled in order for the embedded ECUs to actuate correctly.</p>
+<p>I.e to control the velocity, the embedded software in the SPCU expects a desired voltage to be sent on the CAN bus. Therefore the desired velocity needs to be converted into a desired voltage that should be applied on the accelerator pedal.</p>
+<p><strong>More advanced control behavior can be implemented later on, I.e some sort of feedback from the velocity sensors. As of now it is open loop controlled</strong></p>
+<h3 id="joystick-manual-control">Joystick Manual Control</h3>
+<p>This is a set of ROS2 packages which enables a joystick to be connected to autonomous platform. The output will be in the form of a velocity commands on the <code>/cmd_vel</code> ROS2 topic. This output can then be read in vehicle control to control the gokart.</p>
+<h3 id="convert-data-format-to-ros2-standard">Convert Data Format To ROS2 Standard</h3>
+<p><strong>This is not implemented yet for every data input</strong></p>
+<p>The software layer connected to the hardware interfacing software layer expects input and output to be on specific ROS2 topics and uses standard ROS2 interfaces. I.e velocity commands to the platform will come to the hardware interfacing and low level software on the topic <code>/cmd_vel</code>, it is then up to this ROS2 package to convert it to a format which the lower level algorithms can use.</p>
+<p>This can be as an abstraction layer.</p>
+<p>The rectangular squares in the diagram above can be seen as input and outputs to the hardware interface and low level software layer. Higher level commands to the platform will come from the high level software. In the same way, this software layer will interface with the CAN network and USB peripherals for input and output.</p>
+<h3 id="low-level-control-hardware-interface-software-hardware-requirements">Low-Level Control &amp; Hardware Interface - Software / Hardware Requirements <a name="Low-Level-Control-Hardware-Interface-Software-Hardware-Requirements"></a></h3>
+<p>In terms of hardware, the low-level control software and hardware interfacing software is run on a Raspberry Pi 4b 4Gb. A RS485 CAN hat has been installed onto the GPIO pins. Power (5V,3A) is supplied from the platform using an LM2596 DC-DC converter to step down the platforms 12V power supply to 5V. A 32GB micro SD card is all the storage available. The hardware should be connected to the CAN network on Autonomous Platform Generation 4 (DB9 Connector) and to the wifi router/switch through an ethernet cable.</p>
+<ul>
+<li><a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/">Raspberry Pi 4b Specifications</a></li>
+<li><a href="https://www.waveshare.com/w/upload/2/29/RS485-CAN-HAT-user-manuakl-en.pdf">RS485 CAN HAT Specifications</a></li>
+<li><a href="https://www.ti.com/lit/ds/symlink/lm2596.pdf">LM2596 Specifications</a></li>
+</ul>
+<p>Software wise, it uses a base installation of Ubuntu 22.04. A detailed guide on how to setup the software on a new fresh Raspberry Pi 4b can be found <a href="#Installing-Base-Software-on-Fresh-Raspberry-Pi-4b">here</a>.</p>
+<p>When developing code for the low-level software it is possible to open the low-level software docker container on any linux based computer. It can be useful to have access to a proper IDE and not have to write code in notepad. Note: the CAN bus interfacing libraries will throw errors due to not being connected hardware wise. But once software compiles changes can be pushed and then pulled to the raspberry pi 4b.</p>
+<h3 id="usb-devices-connected">USB Devices Connected</h3>
+<p>There exists a USB hub mounted to the autonomous platform. This is connected to the Raspberry Pi 4b.</p>
+<p>The following devices are connected</p>
+<ul>
+<li>Wireless keyboard and mouse</li>
+<li>Xbox Wireless Adapter</li>
+</ul>
+<p><strong>Currently the USB hub is not mounted</strong></p>
+<h3 id="interfacing-with-embedded-ecus">Interfacing With Embedded ECUs <a name="Interfacing-with-Embedded-ECUs"></a></h3>
+<p>The hardware interface and low level software can communicate with the embedded ECUs. Physically this is done through a Controller Area Network (CAN) bus with a D-Sub 9 connector. Software wise, a custom solution has been implemented for autonomous platform. The data sent over the CAN bus needs to be available on ROS2 topics in order for ROS2 nodes to be able to use the data in computations. In the same way, actuator commands sent from ROS2 nodes on ROS2 topics need to be sent to the ECUs over CAN.</p>
+<p>The CAN frames sent over the CAN network must be encoded and decoded correctly and in the same way on both the hardware interface and embedded ECUs. Therefore a unified CAN database file has been constructed for autonomous platform . A helper library is used to convert the CAN database file into a set of C-style data structures.</p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/dbc_to_c_illustration.png" /></p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/can_db_dependency_graph.png" /></p>
+<p>Two custom made libraries have then been implemented, one in the embedded software and one in ROS2 in hardware interface and low level software.</p>
+<p>How to extend this functionality with new CAN frames and signals is explained in detail in <code>Hardware_Interface_Low_Level_Computer\HOW_TO_EXTEND.md</code>. (The parts that are relevant to change in hardware interface and low level software is documented here). How to extended the software for the embedded ECUs is described in <code>CAN_Nodes_Microcontroller_Code\HOW_TO_EXTEND.md</code>.</p>
+<p><img alt="CAN communication information transportation illustration." src="../Resources/Report_sketches/SW/can_sw_com_detailed.png" /></p>
+<h3 id="interfacing-with-high-level-control-software">Interfacing with High Level Control Software <a name="Interfacing-with-High-Level-Control-Software"></a></h3>
+<p>The hardware interface and low level software can communicate with the high level control software running on an external computer. (I.e linux laptop- or intel NUC) This is done through an ethernet communication. A Wifi router is mounted to autonomous platform which means this can be done wirelessly.</p>
+<p>Once an ethernet connection has been established, the two distinct ROS2 software networks (one on raspberry pi and one one on laptop) will be able to detect each other. This means that the two smaller ROS2 networks of nodes will become one large network with distributed computing power.</p>
+<p>Network SSID and password is noted down in main <code>README.md</code> file of repository.</p>
+<p>An important note, the ROS_DOMAIN_ID has to be configured to the value of 1 on both ROS2 networks.</p>
+<h3 id="adding-new-functionalities">Adding New Functionalities <a name="Adding-New-Functionalities"></a></h3>
+<p>How to add new functionality to the hardware interfacing software and low level algorithms is explained in <code>Hardware_Interface_Low_Level_Computer\HOW_TO_EXTEND.md</code>.</p>
+<h3 id="automatic-startup-of-software">Automatic Startup of Software <a name="Automatic-Startup-of-Software"></a></h3>
+<p>Once the Raspberry Pi 4b boots up it will automatically start the hardware interfacing and low level algorithm software. This is done using linux services that run on boot-up which in turn call the script "testing.bash".</p>
+<p>If you need to change what is done during boot-up, edit the <code>testing.bash</code> script.</p>
+<p>If the software does not automatically start, see <strong>Software container not started?</strong> in  <code>TEST_DEBUGGING.md</code> located in this directory.</p>
+<h3 id="installing-base-software-on-fresh-raspberry-pi-4b">Installing Base Software on Fresh Raspberry Pi 4b <a name="Installing-Base-Software-on-Fresh-Raspberry-Pi-4b"></a></h3>
+<p>See section in <code>SETUP_OF_RASPBERRY_PI.md</code></p>
+<h2 id="wiring">Wiring</h2>
+<p>The ECU controlling the steering consists of a lot of loose cables connected with Dupont connectors. These cables should be extended since they now are very short and connected in a better way to avoid loosing the control over the gokart while driving. If the cables would come loose they have been marked with a number between 1-5 for the upper ones and 2.1-2.2 for the lower ones which can be seen in the following figures.</p>
+<p><img alt="Illustration of cables to steering ECU." src="../Resources/extra_documentation_images/loose_cables_1.png" /></p>
+<p><img alt="Illustration of cables to steering ECU." src="../Resources/extra_documentation_images/loose_cables_2.png" /></p>
+<p><img alt="Illustration of cables to steering ECU." src="../Resources/extra_documentation_images/loose_cables_3.png" /></p>
+<p><img alt="Illustration of cables to steering ECU." src="../Resources/extra_documentation_images/loose_cables_4.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/" class="btn btn-neutral float-left" title="CAN library"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="HOW_TO_EXTEND/" class="btn btn-neutral float-right" title="How to Extend">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="HOW_TO_EXTEND/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

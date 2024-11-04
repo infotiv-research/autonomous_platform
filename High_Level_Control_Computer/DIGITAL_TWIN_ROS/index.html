@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/High_Level_Control_Computer/DIGITAL_TWIN_ROS/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Digital Twins in ROS - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Digital Twins in ROS";
+        var mkdocs_page_input_path = "High_Level_Control_Computer/DIGITAL_TWIN_ROS.md";
+        var mkdocs_page_url = "/autonomous_platform/High_Level_Control_Computer/DIGITAL_TWIN_ROS/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Digital Twins in ROS</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level Control Computer</li>
+      <li class="breadcrumb-item active">Digital Twins in ROS</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/High_Level_Control_Computer/DIGITAL_TWIN_ROS.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="digital-twin">Digital Twin</h3>
+<p><a name="Digital-Twin"></a>
+A simplified digital twin has been implemented as of August 2023.</p>
+<p>An important part of the high level software control is the digital twin. It is a completely different component then the autonomous driving stack and should be agnostic to what AD stack is used. This means that any AD stack should be able to be tested on the digital twin. This is accomplished by using standard ROS2 topics as interfaces as briefly described in the previous section. Inputs to the digital twin would be sent over the <code>/cmd_vel</code> ROS2 topic, in the same way outputs (vehicle state and sensor readings) would be sent from the digital twin simulation over standard ROS2 topics. I.e "/odom" for vehicle state.</p>
+<p>As of August 2023 the digital twin is run using the Gazebo Physics Simulator. <a href="https://gazebosim.org/docs">Link official gazebo documentation.</a> It is a software that integrates seamlessly with ROS2 and has been used for a long time to simulate robots in complex environments.</p>
+<p>The code structure for the digital twin is as follows:
+A ROS2 package has been created, autonomous_platform_robot_description_pkg, which contains the digital twin.</p>
+<pre><code> ┣  High_Level_Control_Computer
+ ┃ ┣  ap4_hlc_code
+ ┃ ┃ ┗  ap4hlc_ws
+ ┃ ┃   ┗  src
+ ┃ ┃      ┗  autonomous_platform_robot_description_pkg
+ ┃ ┃         ┣  launch
+ ┃ ┃         ┣  rviz
+ ┃ ┃         ┣  src
+ ┃ ┃         ┃  ┗ description
+ ┃ ┃         ┃     ┣  ap4_robot_description.urdf
+ ┃ ┃         ┃     ┣  gazebo_control.xacro
+ ┃ ┃         ┃     ┣  gokart_chassi.urdf.xacro
+ ┃ ┃         ┃     ┗  inertia_macros.xacro
+ ┃ ┃         ┗  worlds
+ ┃ ┃
+ ┃ ┣   Dockerfile
+ ┃ ┣   docker-compose.yaml
+ ┃ ┗   README.md &lt;-- You Are Here !!!
+</code></pre>
+<h3 id="design-of-digital-twin">Design Of Digital Twin</h3>
+<p>The digital twin of autonomous platform is created using Universal Robot Description Files (URDF) and xacro files. The digital twin is described in an xml type format and are located in <code>autonomous_platform\High_Level_Control_Computer\ap4_hlc_code\ap4hlc_ws\src\autonomous_platform_robot_description_pkg\src\description\</code>.</p>
+<p>These files describe everything from the physical platform properties to what sensors are simulated. How the platform is controlled can also be configured. The end result can be seen below, a simplified gokart platform with wheels that can be controlled.</p>
+<p><img alt="RVIZ" src="../../Resources/Report_sketches/digital_twin/rviz_without_axis_names.png" /></p>
+<h3 id="sensor-plugins">Sensor plugins</h3>
+<p>An important aspect of using Gazebo is the concept of plugins. Plugins allows for new functionality to be added to the digital twin. For example different vehicle movement controllers or virtual sensors.</p>
+<p>As of August 2023 no sensors have yet to be added. Future sensors to add could be:</p>
+<ul>
+<li><a href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Camera</a></li>
+<li><a href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Lidar</a></li>
+<li><a href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Radar</a></li>
+<li><a href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">IMU</a></li>
+<li><a href="https://classic.gazebosim.org/tutorials?tut=ros_gzplugins">Ultrasonic short range sensor</a></li>
+</ul>
+<h3 id="gazebo-worlds">Gazebo worlds</h3>
+<p>In the same way as the digital twin could be configured, the simulated environment itself can be configured. This allows a developer to create interesting scenarios in which to place the autonomous platform.</p>
+<p>Worlds can be created using the Gazebo graphical application and saved into the <code>worlds</code> directory. The digital twin can be configured to start in a specific world by configuring the launch file located in <code>launch</code> directory.</p>
+<p>Gazebo has access to an exentsive library of 3D models which can be used to crate interesting environments.</p>
+<p><img alt="Example Gazebo world top view" src="../../Resources/Report_sketches/digital_twin/gazebo_world2.png" /></p>
+<p><img alt="Example Gazebo world 3D view" src="../../Resources/Report_sketches/digital_twin/gazebo_world1.png" /></p>
+<h3 id="software-control-switch">Software Control Switch</h3>
+<p><a name="Software-Control-Switch"></a></p>
+<p>This has not been implemented as of August 2023.</p>
+<p>The idea of having a software control switch is for the autonomous driving stack algorithms to EITHER control the physical platform or the digital twin. And be able to switch seamlessly between them. The autonomous driving stacks could be quickly tested on a digital twin to make development faster and when the algorithms are in a mature state they could be tested on the physical platform.</p>
+<p>It is therefore very important that the digital twin and physical platform have the same output (sensor readings / vehicle state). I.e on the same ROS2 topics. In the same way, the digital twin and the physical platform should be controlled in the same way in the high control software on <code>/cmd_vel</code> topic.</p>
+<p>For future reference this switching of control could be actualized using <a href="https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Using-ROS2-Launch-For-Large-Projects.html#namespaces">namespaces</a> or configuring different <a href="https://docs.ros.org/en/foxy/Concepts/About-Domain-ID.html">ROS2 domain IDs</a>. By setting the ROS2 DOMAIN ID for the AD nodes to the same ID as the physical platform commands would be forwarded to the low level software control. And by setting a different domain one could ensure that the commands are only sent between the digital twin and AD algorithms. ROS_DOMAIN_ID is specifically developed to prevent cross talk between different domains.</p>
+<h3 id="digital-twin-software-package-structure">Digital Twin Software Package Structure</h3>
+<p>The software for the digital twin is located in <code>autonomous_platform_robot_description_pkg</code>. Below follows a quick guide on what each subdirectory contains:</p>
+<ul>
+<li>launch - Contains launch files</li>
+<li>rviz - contains a parameter file which can be inserted into Rviz to show useful information upon startup</li>
+<li>worlds - save gazebo simulation environments (worlds) to be run later.</li>
+<li>/src/description: Contains the xacro and urdf files which describes how the digital twin is built up.</li>
+</ul>
+<p>The launch file launch_digital_twin_simulation.launch.py launches the following nodes</p>
+<ul>
+<li>robot_state_publisher</li>
+<li>Rviz</li>
+<li>gazebo_node</li>
+<li>spawn_entity_node</li>
+</ul>
+<p>The robot state publisher node, takes the robot description files and broadcasts them over the ROS2 network. The Gazebo physics simulator is then launched with a corresponding ROS2 node. Lastly, a spawn entity node is created, which spawns the digital twin inside the gazebo simulation using the information on the robot state publisher information topic. As the digital twin is inserted into the simulation, it spawns further nodes which makes it possible to control the digital twin using the /cmd_vel topic.</p>
+<p>The digital twin is defined inside the description folder, it is built in modules with the ap4_robot_description.urdf as a base. Onto this base. The gokart_chassi.urdf.xacro describes the kinematics and dynamics of AP4. gazebo_controls.xacro describes how an ackermann drive plugin is used to control the joints of AP4.</p>
+<p>Future sensors, such as cameras, should be added as xacro modules and included in the ap4_robot_description.urdf file.</p>
+<h3 id="how-to-connect-to-physical-platform">How to Connect to Physical Platform</h3>
+<p><a name="How-to-Connect-to-Physical-Platform"></a></p>
+<p>The high-level control software is meant to be run in two modes; connected to the autonomous platform and completely detached.</p>
+<p>The long term goal is that the high level control software should be able to interface with the low level control software running on the Raspberry Pi 4b. This is done through an ethernet connection, meaning it could be done both wirelessly and by wire. The two docker containers for high level software and low level software should therefore be started from devices located on the same network.</p>
+<p>As of August 2023 this is NOT needed yet, since no Autonomous Driving algorithms have been implemented yet. But for future reference:</p>
+<ul>
+<li>Connect the development laptop to the AP4-ROUTER_2.4Ghz network. ssid and pw credentials can be found in root directory README file.</li>
+<li>Make sure the two docker containers are started</li>
+<li>Make sure high level software is running on ROS_DOMAIN_ID=1</li>
+</ul>
+<p>This should be sufficient for the underlying ROS2 Data Distribution Service (DDS) to find ROS2 nodes available on the same network and same ROS_DOMAIN_ID.</p>
+<h3 id="how-to-verify">How to verify</h3>
+<p>If any error occurs, <code>TEST_DEBUGGING.md</code>, for troubleshooting.</p>
+<h3 id="high-level-control-underlying-software-components">High Level Control Underlying Software Components <a name="High-Level-Control-Underlying-Software-Components"></a></h3>
+<p>This section will describe what software components are used to construct the high level software and how they are used.</p>
+<h3 id="containerization">Containerization <a name="Containerization]"></a></h3>
+<p>An overview of containerization and how it works is explained in <code>SOFTWARE_DESIGN.md</code> located in root directory.</p>
+<p>Note: Docker can be run on Windows, but certain commands/parameters used on AP4 are linux specific. I.e passing graphics to and from the container. It is has therefore only been tested and guaranteed to work on linux host computers.</p>
+<p>Docker enables software to be collected and run from a virtual environment, similar to a virtual machine but with much less performance overhead compared to a virtual machine. Docker allows the virtual environment to be configured, i.e what operating system should be run and what software should be installed.</p>
+<p>The environment in which the high level software is run in is described inside the <code>Dockerfile</code> located in this directory. In this file the virtual environment is configured as a base version of Ubuntu 22.04 with relevant linux packages installed. Robot Operating System 2 - Humble is installed.</p>
+<p>The container is started using a set of configuration parameters, these are located in <code>docker-compose.yaml</code> in this directory. Configuration parameters can be for example to pass through graphical elements from the container to the host computer desktop.</p>
+<h3 id="robot-operating-system-2-ros2">Robot Operating System 2 (ROS2) <a name="Robot-Operating-System-2-(ROS2)"></a></h3>
+<p>Robot Operating System 2 (ROS2) is a framework / middleware developed to create very complex robotic software. This framework is used to split up computations into separate executions using "nodes".</p>
+<p>For an in depth explanation of Robot Operating System 2 (ROS2) and how it works see <code>SOFTWARE_DESIGN.md</code> in root directory.</p>
+<p>The following subsection will describe how the high level software control is designed using the Robot Operating System Framework.</p>
+<p>The idea with using ROS2 framework is that computational applications can be split up into smaller components that perform very specific tasks. I.e software related to taking a joystick input and outputting a desired velocity should have the minimum amount of dependencies as possible and not break any other dependencies for other software applications.</p>
+<p>ROS2 package has to be created for this functionality. A package collects all the resources and dependency configurations for a specific function. I.e the package for the digital twin <code>autonomous_platform_robot_description_pkg</code> should be as standalone as possible. When adding future functionality, the digital twin package should be left as is, and instead a new package for the new specific functionality should be added.</p>
+<h3 id="add-python-librarys-to-ros">Add python librarys to ROS</h3>
+<p>To add a new python library to ROS the file <code>package.xml</code> needs to be changed.</p>
+<ol>
+<li>
+<p>Find the rosdep keys for the library you want in (https://github.com/ros/rosdistro/blob/master/rosdep/python.yaml) or look at (https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html) for more options.</p>
+</li>
+<li>
+<p>Add the key to <code>package.xml</code></p>
+</li>
+<li>
+<p>Start the docker container and enter ap4hlc_ws folder (Follow How To Start)</p>
+</li>
+<li>
+<p>If this is the first time using rosdep, it must be initialized via:</p>
+</li>
+</ol>
+<pre><code class="language-bash">sudo rosdep init
+rosdep update
+</code></pre>
+<p>This will initialize rosdep and update will update the locally cached rosdistro index. It is a good idea to update rosdep on occasion to get the latest index.</p>
+<ol>
+<li>Update the repository:</li>
+</ol>
+<pre><code class="language-bash">sudo apt-get update
+</code></pre>
+<ol>
+<li>Finally, we can run <code>rosdep install</code> to install dependencies. Typically, this is run over a workspace with many packages in a single call to install all dependencies. A call for that would appear as the following, if in the root of the workspace with directory src containing source code.</li>
+</ol>
+<pre><code class="language-bash">rosdep install --from-paths src -y --ignore-src
+</code></pre>
+<p><code>--from-paths src</code> specifies the path to check for <code>package.xml</code> files to resolve keys for. In our case for High level control:</p>
+<pre><code class="language-bash">rosdep install --from-paths src/autonomous_platform_robot_description_pkg -y --ignore-src
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../DONKEY_CAR_SETUP/" class="btn btn-neutral float-left" title="DonkeyCar simulator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Power_Unit/" class="btn btn-neutral float-right" title="Power Unit">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../DONKEY_CAR_SETUP/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../Power_Unit/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

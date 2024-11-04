@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/SOFTWARE_DESIGN/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Software Design - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Software Design";
+        var mkdocs_page_input_path = "SOFTWARE_DESIGN.md";
+        var mkdocs_page_url = "/autonomous_platform/SOFTWARE_DESIGN/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Software Design</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#information-and-background">Information and Background</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ide">IDE</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#linux-ubuntu-2204">Linux Ubuntu 22.04</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#git">Git</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#containerization">Containerization</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installation-of-docker">Installation of Docker</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#containers">Containers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#robot-operating-system-2-ros2">Robot Operating System 2 (ROS2)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ros2-useful-commands-quick-reference">ROS2 Useful commands quick reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#commonly-used-commands-to-debug">Commonly used commands to debug</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#saving-data-sent-on-topics">Saving data sent on topics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-ros2-resources">Available ROS2 Resources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ros2-concepts">ROS2 Concepts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#node">Node</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#topic">Topic</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#services">Services</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#actions">Actions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launch-files">Launch files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-ros2-software-package">Creating a ROS2 software package</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#structure-of-a-ros2-package">Structure of a ROS2 package</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-ros2-package">Creating a ROS2 package</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#platformio-vscode">PlatformIO &amp; VSCode</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level overview</li>
+      <li class="breadcrumb-item active">Software Design</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/SOFTWARE_DESIGN.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="software-components">Software Components</h2>
+<p>The procedure of installing some software will be mentioned in this section.
+You need:</p>
+<ul>
+<li>Preferably have a linux based computer if you want to run code.</li>
+<li>If you only want to read through the documentation, staying in the browser is sufficient.</li>
+<li>OR if you only want to download and look through the repository a Windows host computer is sufficient.</li>
+</ul>
+<h3 id="information-and-background">Information and Background</h3>
+<p>This README file is meant to collect information about all the software components used to construct Autonomous Platform Generation 4 or any tools used in this project. A lot of Software is used both in <code>Hardware_Interface_Low_Level_Computer</code> and <code>High_Level_Control_Computer</code>, and instead of explaining the same thing twice it can be collected here. It will also give new members of the project a structured document to read through.</p>
+<p>This is meant to give new members a quick overview and explain the most important concepts related to the autonomous platform project.</p>
+<p>The software and components that will be described in detail in this document are</p>
+<ul>
+<li><a href="#VSCode">VSCode</a> IDE</li>
+<li><a href="#linux-ubuntu-2204">Linux Ubuntu 22.04</a></li>
+<li><a href="#Git">Git</a></li>
+<li><a href="#Containerization">Containerization</a></li>
+<li><a href="#Robot-Operating-System-2-(ROS2)">Robot Operating System 2 (ROS2)</a></li>
+<li><a href="">PlatformIO &amp; VSCode</a></li>
+<li><a href="">Jenkins</a></li>
+</ul>
+<h3 id="ide">IDE <a name="VSCode"></a></h3>
+<p>The recommended Integrated Development Environment (IDE) is Visual Studio Code (VSCode). It is a free versatile IDE with many useful plugins. The built in file explorer makes navigation of the AP4 repository very easy.</p>
+<p>See installation guide <a href="https://code.visualstudio.com/">here</a> for Windows / Linux.</p>
+<p>Visual Studio Code supports the use of plugins, referred to as extensions. These can be installed simply inside VSCode by navigation to the extensions tab. (Tab with four small squares to the left)</p>
+<p>The recommended list of extensions are:</p>
+<ul>
+<li>C/C++</li>
+<li>Python</li>
+<li>PlatformIO</li>
+</ul>
+<h3 id="linux-ubuntu-2204">Linux Ubuntu 22.04 <a name="Linux-Ubuntu-2204"></a></h3>
+<p>The project software is meant to be run on Linux Ubuntu 22.04, therefore it is good to have basic understanding on how to use linux. (Good ability to google linux commands and copy paste commands is recommended!)</p>
+<p>A linux for beginners guide related to development using Robot Operating System Framework can be found <a href="https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/linux-for-robotics/">here</a>. It is an online interactive tutorial suitable for a project member which has NEVER worked in linux before. If you know how to navigate using the linux terminal and copy paste commands, skip this!</p>
+<h3 id="git">Git <a name="Git"></a></h3>
+<p>Autonomous Platform Generation 4 uses the "MonoRepo" mantra. Everything related to AP4 is collected inside ONE repository called <code>autonomous_Platform_Generation_4</code>. If you manage to clone this onto a computer you have everything you need to get started.</p>
+<p>Installing Git through command line is preferred. See the official guide <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a> and choose appropriate operating system. Running the code has not been tested on Windows machines but it is still possible to read through the documentation and inspect files on  a Windows device.</p>
+<h3 id="containerization">Containerization <a name="Containerization"></a></h3>
+<p>The High level and low level software runs inside a docker containers (on the Development laptop and Raspberry Pi 4b). <a href="https://docs.docker.com/get-started/overview/">Official Docker Page</a>. It is similar to a Virtual Machine, in that it can run software in a separate compartment from the host computer software. It does not take up as much resources as a VM and is much faster to spin up (start). Docker containers uses the following components to create containers.</p>
+<p><img alt="Docker file" src="../Resources/extra_documentation_images/dockerfile.PNG" /></p>
+<p>Dockerfile: <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile Official Documentation</a>. A dockerfile is a text file describing the software environment which will be run in the container. For example, running Ubuntu as a base with with X,Y standard linux packages installed onto it. So every library or package one would install on a linux desktop version, one could define in this file. This dockerfile can then be built into a docker image. (everytime a container is rebuilt, anything saved in it is LOST). See <code>Hardware_Interface_Low_Level_Computer/dockerfile</code> for an example of a dockerfile.Therefore software should be written outside the container and passed into the container through volumes. See <code>Hardware_Interface_Low_Level_Computer/docker-compose</code> how this is performed by mounting volumes.</p>
+<p>A docker image can then be spun up which creates a container.</p>
+<p>A container can be spun up with several configurations commands. <a href="https://docs.docker.com/engine/reference/commandline/run/">List of commands</a>. For example, it is possible to mount volumes (directories) into the container.</p>
+<h4 id="installation-of-docker">Installation of Docker</h4>
+<p>See official guide <a href="https://docs.docker.com/engine/install/">here</a> Choose appropriate operating system.</p>
+<p>As of August 2023 AP4 containers have only been configured to run on a Linux Host computer.</p>
+<h3 id="containers">Containers</h3>
+<p>The containers for autonomous platform contains two docker related files, <strong>dockerfile</strong> and <strong>docker-compose</strong>. The dockerfile describes the software environment (ubuntu 22.04 Jammy) with additional software and onto this the ROS2 framework and additional libraries are installed. The docker-compose file uses the dockerfile to launch a container with a set of parameters. For example, passing in and out graphical elements, and passing created software (as a directory) (performed by mounting a volume) into the container. In the docker-file a command which runs when starting the container can be defined. This can be useful to call a startup script that would run inside the container when starting it. This is done using the command: keyword.</p>
+<p>Note: Docker can be run on Windows, but certain commands/parameters used on AP4 are linux specific. I.e passing graphics to and from the container. As of August 2023 it is therefore only possible to run the high level software on linux. See 'FUTURE_WORK.md' for instructions on how to possibly solve this issue.</p>
+<p>The container, with the configurations, can be started using: (Terminal path has to be located in the directory where the dockerfile and docker-compose is located at)</p>
+<pre><code class="language-bash">docker-compose up
+</code></pre>
+<p>Note: The host PC needs to be configured to pass graphical elements to the high level computer container. (before starting the container)</p>
+<pre><code class="language-bash">xhost +local:*
+</code></pre>
+<p>It is possible to enter a running container environment using</p>
+<pre><code class="language-bash">docker exec -it &lt;container-name&gt; bash
+</code></pre>
+<p>Running containers can be listed using</p>
+<pre><code class="language-bash">docker container ps
+</code></pre>
+<p>A running container can be stopped by either 'Ctrl+C' in the terminal in which 'docker-compose up' was run. OR in a new terminal:</p>
+<pre><code class="language-bash">docker stop &lt;container-name&gt;
+</code></pre>
+<h3 id="robot-operating-system-2-ros2">Robot Operating System 2 (ROS2) <a name="Robot-Operating-System-2-(ROS2)"></a></h3>
+<p>Robot Operating System 2 (ROS2) is a framework / middleware developed to create very complex robotic software. The first version was released around 2007 and its successor, ROS2 was released around 2019. The version used for AP4 is ROS2-humble. <a href="https://docs.ros.org/en/humble/index.html">ROS2 Humble Docs</a>. ROS2 Humble has an End of Life (EOL) of <a href="https://docs.ros.org/en/humble/Releases.html">2027</a>. Future work should still use Humble as it has the most availible packages. Different distributions of ROS are NOT compatible. In theory it is possible to bridge a ROS1 distribution with a ROS2 distribution using ROS bridge if a package does not exist for ROS2, this is not implemented on AP4. <a href="https://industrial-training-master.readthedocs.io/en/melodic/_source/session7/ROS1-ROS2-bridge.html">ROS bridge link</a></p>
+<p>ROS2 has tier 1 support for Linux Ubuntu 22.04. And tier 3 support for Linux 20.04, on autonomous platform generation 4 Ubuntu 22.04 is used.</p>
+<p>ROS2 applications can be written in either C++ or Python. There are tutorials for both versions. Different nodes (Computational applications) written in separate languages can still communicate with another using the ROS2 API &amp; Framework. Therefore, use what programming language you are most comfortable with. In applications where execution speed is of outmost importance, using C++ can be preferred. But for testing new concepts or developing high level control algorithms Python is more than sufficient. Even if something is written in Python it still has to be compiled into a ROS2 package before it can be run.</p>
+<h4 id="ros2-useful-commands-quick-reference">ROS2 Useful commands quick reference</h4>
+<p>A common methodology to debug software written for the ROS2 framework is to observe the behavior through a terminal window. Here is a list of useful ROS2 commands for quick reference in the future.</p>
+<h4 id="commonly-used-commands-to-debug">Commonly used commands to debug</h4>
+<p>Source underlying ros2 environment variables</p>
+<pre><code class="language-bash">source /opt/ros/humble/setup.bash
+</code></pre>
+<p>Sourcing environment variables specific to a workspace (open terminal in workspace directory)</p>
+<pre><code class="language-bash">source install/setup.bash
+</code></pre>
+<p>List what topics are currently being broadcasted to on the ROS2 network.</p>
+<pre><code class="language-bash">ros2 topic list
+</code></pre>
+<p>Read in thermal what is broadcasted onto a specific topic</p>
+<pre><code class="language-bash">ros2 topic echo ${topic_name}
+</code></pre>
+<p>Publish data onto a specific ros2 topic. If environment variables are sourced tab autocomplete works.</p>
+<pre><code class="language-bash">ros2 topic pub ${topic name} ${message type} ${message data}
+</code></pre>
+<p>List active nodes on ROS2 network</p>
+<pre><code class="language-bash">ros2 node list
+</code></pre>
+<p>Display useful information about a specific node.</p>
+<pre><code class="language-bash">ros2 node info ${node name}
+</code></pre>
+<h4 id="visualization">Visualization</h4>
+<p>Visualize the ROS2 network of nodes and topics in a GUI.</p>
+<pre><code class="language-bash">ros2 run rqt_graph rqt_graph
+</code></pre>
+<p>Plot data sent over different topics. Useful for I.e plotting requested velocity vs measured velocity to debug system and observe behavior. Any numerical data sent over a topic can be plotted.</p>
+<pre><code class="language-bash">ros2 run rqt_plot rqt_plot
+</code></pre>
+<h4 id="saving-data-sent-on-topics">Saving data sent on topics</h4>
+<p>Save topic information transmitted over the ROS2 network. <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html">Documentation here</a>. Record what is transmitted over a specific topic (Ctrl + C to stop recording):</p>
+<pre><code class="language-bash">ros2 bag record -o ${your bag file name} ${topic name 1} ${...} ${topic name n}
+</code></pre>
+<p>Display information regarding the bagfile that was previously recorded</p>
+<pre><code class="language-bash">ros2 bag info ${bag file name}
+</code></pre>
+<p>To record all information sent over all topics in the ROS2 network</p>
+<pre><code class="language-bash">ros2 bag record -o ${your bag file name} -a
+</code></pre>
+<p>The information recorded can be played back and will be outputted to the ROS2 network on the same topics that they were recorded on, using:</p>
+<pre><code class="language-bash">ros2 bag play ${bag file name}
+</code></pre>
+<h4 id="available-ros2-resources">Available ROS2 Resources <a name="Additional-ROS2-Resources"></a></h4>
+<p>Here are resources on ROS2 which can be useful for future work.</p>
+<ul>
+<li>
+<p>Beginner level <a href="https://www.theconstructsim.com/robotigniteacademy_learnros/ros-courses-library/ros2-basics-course/">Interactive ROS2 tutorial</a> with online excercies. VERY USEFUL</p>
+</li>
+<li>
+<p>Beginner Tutorial: <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html">Writing a simple publisher and subscriber (Python)</a></p>
+</li>
+<li>
+<p>Beginner Tutorial: <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html">Writing a simple publisher and subscriber (C++)</a></p>
+</li>
+<li>
+<p><a href="https://docs.ros.org/en/humble/Concepts/About-Domain-ID.html">ROS_DOMAIN_ID</a></p>
+</li>
+<li>
+<p><a href="https://docs.ros.org/en/humble/Concepts/About-ROS-Interfaces.html">ROS2 Interfaces</a> Fields and datatypes in ROS2 topics.</p>
+</li>
+<li>
+<p><a href="https://docs.ros.org/en/humble/How-To-Guides.html">Official How-to Guides</a> For common problems when developing software in ROS2 framework.</p>
+</li>
+<li>
+<p><a href="https://docs.ros.org/en/humble/How-To-Guides/Installing-on-Raspberry-Pi.html">ROS2 On Raspberry Pi</a> @TODO MOVE THIS POINT TO LOW LEVEL SOFTWARE</p>
+</li>
+<li>
+<p><a href="https://docs.ros.org/en/humble/API-Docs.html">API Documentation</a></p>
+</li>
+</ul>
+<p>Here is a hands on video series on how ROS2 was used to create a mobile robot and a digital twin. It goes through the basics and then moves on to cover the advanced aspects of ROS2.  <a href="https://www.youtube.com/watch?v=2lIV3dRvHmQ&amp;list=PLunhqkrRNRhYYCaSTVP-qJnyUPkTxJnBt">Link - Articulated Robotics</a> Many of these concepts are used on Autonomous Platform Generation 4.</p>
+<h4 id="ros2-concepts">ROS2 Concepts <a name="ROS2-Concepts"></a></h4>
+<p>There are a few concepts which are very important to understand in order to understand how the high-level software is constructed on AP4. The official ROS2 documentation is a useful tool <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools.html">ROS2 Beginner: CLI tools</a>.</p>
+<h4 id="node">Node</h4>
+<p><a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">ROS2 Nodes official Documentation</a></p>
+<p><img alt="ROS nodes" src="../Resources/Report_sketches/ROS/ROS_nodes.png" /></p>
+<p>Nodes are where the software applications are written. Each node can be seen as a program (written in C++ or Python) performing some task. Weather it be processing information or interfacing with some hardware/software component. A node can perform multiple tasks and supports parallelization if configured correctly. <a href="https://docs.ros.org/en/humble/Concepts/About-Executors.html">See Execution Management</a></p>
+<p><img alt="ROS node graph" src="../Resources/Report_sketches/ROS/ROS_node_graph.png" /></p>
+<p>Nodes can communicate with other nodes using Topics, Services or Actions. This means sending information between them using a standardized communication interface. It is up for the developer to structure how information should be received and sent from nodes. This is done in the nodes themselves.</p>
+<p>The communication between different ROS2 components on a network uses <a href="https://docs.ros.org/en/foxy/Concepts/About-Different-Middleware-Vendors.html">DDS Middleware.</a></p>
+<h4 id="topic">Topic</h4>
+<p><a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">ROS2 Topic Official Documentation</a></p>
+<p><img alt="ROS publisher subscriber" src="../Resources/Report_sketches/ROS/ROS_publisher_subscriber.png" /></p>
+<p>Topics are the means in which different Nodes can send and receive specific information. Information can be broadcasted using publishers and listen to using subscribers. These communication channels are called topics, each topic contains a topic name and a data field. The topic name determines what channel it will be sent over and the data field contains the information itself.</p>
+<p><a href="https://docs.ros.org/en/humble/Concepts/About-ROS-Interfaces.html">List of generic built in topic data types</a>. Custom data field types, containing multiple values sent in a single message can be created by a developer. <a href="https://docs.ros.org/en/crystal/Tutorials/Custom-ROS2-Interfaces.html">Link how-to</a></p>
+<pre><code>Topic name
+    data
+</code></pre>
+<p>Topics are broadcasted over the whole ROS2 network by publishers, meaning any other Node on the network can listen to any publisher. In order to direct data to a specific node, a developer must create a subscriber in the desired node, which listens to the correct topic name.</p>
+<p>Note: There exists multiple <a href="https://docs.ros.org/en/rolling/Concepts/About-Quality-of-Service-Settings.html">Quality of Service</a> parameters which can be configured. These can tell the DDS middleware what topics should be priotized when sending over the ROS2 framework. As of June 2023 these are set as standard priority.</p>
+<h4 id="services">Services</h4>
+<p><a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html">ROS2 Services Official Documentation</a></p>
+<p><img alt="ROS service" src="../Resources/Report_sketches/ROS/ROS_service.png" /></p>
+<p>Services work much like the topics, but there is a key difference. a node can request information (structured as a topic) from one node, and is guaranteed to receive information back.</p>
+<p>Request functionality has to be created by the developer and is not something that is automatically built into a node. See tutorial <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Service-And-Client.html">C++</a>, <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Python</a></p>
+<h4 id="actions">Actions</h4>
+<p><a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html">ROS2 Actions Official Documentation</a></p>
+<p><img alt="ROS action" src="../Resources/Report_sketches/ROS/ROS_action.png" /></p>
+<h4 id="launch-files">Launch files</h4>
+<p>A launch file can be run in order to start several nodes at the same time. Launch files from existing packages can be called from within a launch file.</p>
+<p><a href="https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">ROS2 Documentation: Creating a launch file</a>.</p>
+<p><a href="https://answers.ros.org/question/306935/ros2-include-a-launch-file-from-a-launch-file/">Call launch files from inside launch files</a></p>
+<h4 id="creating-a-ros2-software-package">Creating a ROS2 software package</h4>
+<p>In ROS2 a package is a form of library with functionality. Software inside a package is related to one function, therefore ROS code is very decentralized. This is very useful since existing packages can started separately and mixed together depending on application needs. Existing software packages can run parallel with custom user developed plugins to create new functionality. New packages can also be built on top of existing packages by defining dependencies.</p>
+<p>A package can contain code for several nodes. So it does NOT have to be one node per package.</p>
+<p>See a list of available ROS2 (version = Humble) packages <a href="https://index.ros.org/packages/page/1/time/">here</a>. Make sure filter is set to 'Humble'.</p>
+<h4 id="structure-of-a-ros2-package">Structure of a ROS2 package</h4>
+<p>The file structure of a ROS2 workspace is standardized and can look something like like this: (don't worry most of the files in a package are automatically generated). All created packages are stored in the 'src' directory in the ROS2 workspace folder. Packages written in Python and C++ differ somewhat in content. Below is illustrated how to packages, one written in C++ and one written in Python are located in the filesystem.</p>
+<pre><code> ┗  ros_ws
+    ┗  src
+        ┣ example_pkg_1 (C++) 
+        ┃    ┣  launch (Optional)
+        ┃    ┣  src
+        ┃    ┃  ┗    &lt;CODE&gt;
+        ┃    ┃  
+        ┃    ┣   CMakeLists.txt
+        ┃    ┗   package.xml
+        ┃
+        ┗  example_pkg_2 (Python)
+             ┣  launch (Optional)
+             ┣  resource
+             ┣  test
+             ┣  example_pkg_2
+             ┃  ┣  __init__.py
+             ┃  ┗   &lt;CODE&gt;
+             ┃
+             ┣    package.xml
+             ┣    setup.cfg
+             ┗    setup.py
+</code></pre>
+<h4 id="creating-a-ros2-package">Creating a ROS2 package</h4>
+<p>The official ROS2 guide can be found <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">here</a>. The steps are summarized below. Packages can EITHER use CMake or Python depending on what programming language you want to use. You cannot mix programming languages within a package.</p>
+<p>In order to create a package you need to be located inside a ROS2 workspace. For autonomous platform 4 this has already been setup. For curious members the documentation on how to create a ROS2 workspace can be found <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">here</a>.</p>
+<h3 id="platformio-vscode">PlatformIO &amp; VSCode</h3>
+<p>PlatformIO is a Visual Studio Code (VSCode) extension.</p>
+<p>In order to program the STM32F103C8T6 (Bluepill) microcontroller used for the embedded software a software driver is needed.</p>
+<p><strong>Windows:</strong>\
+STSW-LINK009.
+ST-LINK, ST-LINK/V2, ST-LINK/V2-1, STLINK-V3 USB driver signed for Windows7, Windows8, Windows10</p>
+<p>Driver can be downloaded <a href="https://www.st.com/en/development-tools/stsw-link009.html">here</a>. It enables a windows computer to use the ST-Link v3 programmer which is used to program the bluepill microcontroller boards.</p>
+<h2 id="project-standards-and-conventions">Project standards and conventions</h2>
+<h3 id="git-commit-messages">Git commit messages</h3>
+<p>The project is using <a href="https://www.conventionalcommits.org">conventional commits</a> as a commit standard meaning the commit messages are structured using the following standard:</p>
+<pre><code class="language-bash">&lt;type&gt;[optional scope]: &lt;desription&gt;
+
+[optional body]
+
+[optional footer(s)]
+</code></pre>
+<p>Types can be found under the summary section on <a href="https://www.conventionalcommits.org">https://www.conventionalcommits.org</a>.</p>
+<p>Each section should be separated with a blank line.</p>
+<p>The footer <strong>SHALL</strong> contain the Azure task ID using the following format <code>Azure-ID: xxxx</code>.</p>
+<p>With conventional commits, a version can automatically be determined and assigned based on the "type" of commit made. The version follows the <a href="https://semver.org">Semantic Version (SemVer)</a> specification.</p>
+<h3 id="merge-commits">Merge commits</h3>
+<p>When merging locally the commit message will be declined by the commit-msg git hook. This can be overwritten by using the <code>--no-verify</code> option. In PyCharm this can be found by:</p>
+<ol>
+<li>Navigating to the <code>Git</code> menu</li>
+<li>Clicking on <code>Merge</code></li>
+<li>Clicking on the <code>Modify options</code> dropdown and selecting the <code>--no-verify</code> option</li>
+</ol>
+<h3 id="documentation">Documentation</h3>
+<p>Documentation is done in a markdown file. Try to keep our documentation close to your code. Keep the documentation short and clear.</p>
+<ul>
+<li><code>#</code> : Only used once for the tile of the project</li>
+<li><code>##</code> : usually once in each markdown file and usually share semantic with the markdown filename.</li>
+<li><code>###</code> : Different topics, try to split your documentation into at least 4 topics</li>
+<li><code>####</code> : sub topics. Try to avoid when you can use simple paragraphs</li>
+</ul>
+<h2 id="automated-testing-cicd">Automated Testing (CI/CD)</h2>
+<p>This document aims to describe how various software components on AP4 could be tested in jenkins. As of August 2023 no tests are implemented, instead this document collects useful links and resources that might lead to future automated software tests.</p>
+<p>There are three layers of software that needs to be tested:</p>
+<ul>
+<li>Embedded Software in ECUs : Uses PlatformIO environment / framework</li>
+<li>hardware interface and low level software : Uses ROS2 framework</li>
+<li>high level control software and digital twin : Uses ROS2 framework</li>
+</ul>
+<h3 id="resources-for-automated-testing-of-ros2-software-jenkins">Resources for automated testing of ROS2 software - Jenkins</h3>
+<ul>
+<li><a href="https://app.theconstructsim.com/courses/jenkins-basics-for-robotics-77/">Jenkins Basic for Robotics</a> Online course on how to test ROS software using Jenkins</li>
+<li><a href="https://docs.ros.org/en/eloquent/Contributing/CI-Server-Setup.html">How to setup the Jenkins master</a> for ROS (note outdated version of ROS but should exist similar for newer version)</li>
+</ul>
+<h3 id="resources-for-automated-testing-of-embedded-software-platformio-with-jenkins">Resources for automated testing of embedded software platformio with Jenkins</h3>
+<p>A simple hardware test platform would need to be constructed and connected to the jenkins server as i understand it.</p>
+<ul>
+<li><a href="https://github.com/Callet91/DEMO_Jenkins_PlatformIO">Callet91/DEMO_Jenkins_PlatformIO</a> online github repository with step by step guide on how to setup platformIO and jenkins</li>
+</ul>
+<h3 id="offline-local-platformio-software-tests">Offline local PlatformIO software tests</h3>
+<p>PlatformIO developed code could be tested offline on a local host computer connected to the micro-controller.</p>
+<ul>
+<li><a href="https://docs.platformio.org/en/latest/tutorials/core/unit_testing_blink.html">Unit Testing of a “Blink” Project</a> - Needs to be connected to hardware card?</li>
+<li><a href="https://docs.platformio.org/en/stable/advanced/unit-testing/index.html">Unit Testing</a> PlatformIO official guide</li>
+</ul>
+<h2 id="component-communication">Component Communication</h2>
+<p>The image below illustrate how a speed sensor sends data to <code>High_Level_Control_Computer</code> and further to development PC.</p>
+<p><img alt="communication overview" src="../Resources/AP-overview.drawio.png" /></p>
+<p>The diagram below shows different types of communication channels and IP address for different components.</p>
+<pre><code>             ┌───────────────────────────────────────────────┐
+             │                  Laptop                       │
+             │           High_Level_Control_Computer         │
+             └────────────────────────┬──────────────────────┘
+                                      │ 192.168.0.154
+             ROS (Ethernet Network)   │
+                                      │                       ┌───────────────────┐
+                                ┌─────┴─────┐                 │                   │
+                                │  Router   ├────────────────►│   Wifi Internet   │
+                                └─────┬─────┘                 │                   │
+                                      │ 192.168.0.1           └───────────────────┘
+             ROS (Ethernet Network)   │
+                                      │ 192.168.150.110
+             ┌────────────────────────┴──────────────────────┐
+             │      Hardware_interface_Low_Level_Computer    │
+             │              Raspberry PI 4                   │
+             └───────────────────────┬───────────────────────┘
+                                     │ GPIO
+                             ┌───────┴────────┐
+                             │ RS485 CAN HAT  │
+                           ┌─┤                ├─┐
+                           │ │     MCP2515    │ │
+                           │ └────────────────┘ │
+     CAN network           │                    │
+              ┌────────────┴───┐          ┌─────┴──────────┐
+              │     MCP2515    │          │     MCP2515    │
+              └────────┬───────┘          └───────┬────────┘
+┌──────────────────────┴──────────┐    ┌──────────┴──────────────────────┐
+│          STM32 Blue Pill        │    │         STM32 Blue Pill         │
+│       Propulsion/Steering       │    │          Speed sensor           │
+└─────────────────────────────────┘    └─────────────────────────────────┘
+</code></pre>
+<p>Illustration done using asciiflow online editor. (If any future changes has to be done)</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../HARDWARE_DESIGN/" class="btn btn-neutral float-left" title="Hardware Design"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../HOW_TO_EXTEND/" class="btn btn-neutral float-right" title="How to Extend">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../HARDWARE_DESIGN/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../HOW_TO_EXTEND/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

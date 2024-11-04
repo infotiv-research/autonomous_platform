@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/CAN_Nodes_Microcontroller_Code/Shared_HW_Node_Libraries/SteeringMotorInterface/documentation_and_research/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Steering Motor Documentation - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Steering Motor Documentation";
+        var mkdocs_page_input_path = "CAN_Nodes_Microcontroller_Code/Shared_HW_Node_Libraries/SteeringMotorInterface/documentation_and_research/README.md";
+        var mkdocs_page_url = "/autonomous_platform/CAN_Nodes_Microcontroller_Code/Shared_HW_Node_Libraries/SteeringMotorInterface/documentation_and_research/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../../High_Level_Control_Computer/HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/IMITATION_LEARNING/">Imitation Learning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../High_Level_Control_Computer/TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Steering Motor Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/CAN_Nodes_Microcontroller_Code/Shared_HW_Node_Libraries/SteeringMotorInterface/documentation_and_research/README.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="steering-motor-documentation">Steering Motor Documentation</h1>
+<p>Documentation regarding the investigation around the steering motor to be used on autonomous platform.</p>
+<h2 id="hardware-related-to-motor-steering">Hardware Related To Motor Steering</h2>
+<p>The steering hardware setup was reused from Autonomous Platform Generation 3 due to its simplicity and it is proven to work already.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Function</th>
+<th>Product Manual</th>
+<th>Bought where?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EMG49</td>
+<td>DC Motor with preattached gearbox and encoder</td>
+<td>see manuals folder</td>
+<td>was already in infotiv's inventory</td>
+</tr>
+<tr>
+<td>SABERTOOTH DUAL 2X25A/6-24V MOTOR DRIVER</td>
+<td>Motor Drive board to control an DC motor</td>
+<td>see manuals folder</td>
+<td>https://www.mybotshop.de/Sabertooth-Dual-2x25A-6-24V-Motor-Driver</td>
+</tr>
+<tr>
+<td>Sabertooth Kangaroo x2</td>
+<td>Motor controller board, automatic tuning and feedback capability</td>
+<td>see manuals folder</td>
+<td>https://www.mybotshop.de/Sabertooth-Kangaroo-x2_1</td>
+</tr>
+<tr>
+<td>Limitswitches (2 of them)</td>
+<td>Sense maximum and minimum turning angle. Wired in normally closed configuration</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="EMG49" src="images/emg49_3d.png" /></p>
+<p>This is the EMG49 dc motor used. It has the following cables connected to it:</p>
+<ul>
+<li>(red) +12v</li>
+<li>(black) GND</li>
+<li>(purple) Hall Sensor B Vout</li>
+<li>(blue) Hall Sensor A Vout</li>
+<li>(green) Hall Sensor Ground</li>
+<li>(brown) Hall Sensor Vcc</li>
+</ul>
+<p>The 12V and GND from the motor should be connected to M1+ and M1- on the sabertooth board.
+The purple, blue, green and brown cables should be connected to the kangaroo x2 board.</p>
+<p>(see illustrations later down for clarification)</p>
+<p><img alt="Sabertooth 3D" src="images/sabertooth_3d.png" /></p>
+<p>This is the Sabertooth driver board. Different settings can be configured with the dip switches (see more in manual).</p>
+<p><img alt="Kangaroo 3D " src="images/kangaroo_3d.png" /></p>
+<p>Kangaroo x2 board.
+The Kangaroo x2 board eceives power from the Sabertooth driver board and connects to the 4 screw terminals in front of the sabertooth board. Different settings can be configured with the dipswitches (see more in manual).</p>
+<h2 id="available-software">Available Software</h2>
+<p>There are some available and ready to use software to controll the Kangaroo x2 motor controller board.
+<a href="https://www.dimensionengineering.com/info/arduino">Here one can download</a> the Kangaroo Arduino library and/or access example code.</p>
+<h2 id="offline-test-rig-tuning-the-motor-initial-setup-and-configuration">Offline Test Rig - Tuning The Motor (initial setup and configuration)</h2>
+<p>To verify and test functionality, a test rig was setup.</p>
+<p>Some additional hardware was used in order to test the system offline.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Function</th>
+<th>Product Manual</th>
+<th>Bought where?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12v Power Supply</td>
+<td>Supply power to the sabertooth driver board 12v 4.5 Amps</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wires</td>
+<td>signals and power</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-setup">The Setup</h3>
+<p>This was the hardware wiring setup during the tuning procedure of the motor.</p>
+<p><img alt="Hardware wiring" src="images/20230217_132203.jpg" /></p>
+<p>Whilst tuning, in order to stabilize the motor, it was mounted in a vice grip.</p>
+<p><img alt="Mount" src="images/20230217_150127.jpg" /></p>
+<h3 id="how-to-tune-the-kangaroo-x2-controller-board-autotuning">How To Tune The Kangaroo x2 controller board (Autotuning)</h3>
+<p>In order to use the kangaroo x2 controller board it needs to be configured once. This is referenced in the Kangaroo x2 manual as 'Autotuning' at page 16. There are several modes. Whilst testing we  choose mode 1, Teach Tune, since it was the simplest and we wanted to verify that the components worked.</p>
+<p>Autotuning Modes</p>
+<ul>
+<li>1: Teach Tune</li>
+<li>2: Limit Switch Tune</li>
+<li>3: Crash Limit Tune</li>
+<li>4: Input Calibrate Mode</li>
+</ul>
+<p>The teach tune mode let us manually move the motor left and right to indicate the maximum and minimum turning positions. Please read the kangaroo x2 manual for in depth description how to do the autotuning procedure.</p>
+<h3 id="results-from-offline-test-rig-tuning-the-motor-initial-setup-and-configuration">Results from Offline Test Rig - Tuning The Motor (initial setup and configuration)</h3>
+<p>Once we manually moved the motor to its maximum and minimum position, it performed an autotune procedure. It did some moves on its own and calibrated the steps using the built in encoder in the motor. This defines the range of motion for the motor.</p>
+<p>In the future when the motor is installed in the gokart, it should to be tuned in mode 2, 'Limit Switch Tune'.</p>
+<h2 id="offline-test-rig-sending-commands-to-kangaroo-x2">Offline Test Rig - Sending Commands To Kangaroo x2</h2>
+<p>MAKE SURE YOU HAVE PERFORMED AN AUTOTUNE OF THE MOTOR AS DESCRIBED ABOVE BEFORE TRYING TO COMMUNICATE WITH THE KANGAROO BOARD!!!</p>
+<h3 id="communication-options-kangaroo-x2">Communication Options Kangaroo x2</h3>
+<p>There are several ways in which to controll the position and or speed of the motor using the kangaroo x2 controller according to the manual. (Described in depth at page 10 in kangaroo x2 manual)</p>
+<p>Available options are:</p>
+<ul>
+<li>Analg Inputs</li>
+<li>Radio Control Input</li>
+<li>Serial Input</li>
+<li>Simplified Serial Input</li>
+<li>Packet Serial</li>
+</ul>
+<p>Out of these options the 'Simplified Serial' was deemed to be the simplest solution since there is only need for controlling one single motor.</p>
+<h3 id="simplified-serial-communication-protocol">Simplified Serial Communication Protocol</h3>
+<p>This is described in depth in the kangaroo x2 manual at page 11. Here are the contents as images:</p>
+<p>According to the manual:
+Kangaroo supports plain text TTL level simplified serial input. The default serial settings to use this mode are 9600 baud, 8N1. All commands follow the same format. Spaces are ignored and can be added for readability. All commands consist of a channel number, followed by a comma, the command and a newline (Enter key)</p>
+<p><img alt="Serial Communication Protocol" src="images/sim_serial_motion_cmds.png" /></p>
+<p><img alt="Serial Communication Protocol" src="images/sim_serial_feedback_cmds.png" /></p>
+<p><img alt="Serial Communication Protocol" src="images/sim_serial_setup_cmds.png" /></p>
+<p><img alt="Serial Communication Protocol" src="images/sim_serial_example.png" /></p>
+<p><img alt="imaSerial Communication Protocolgeinfo" src="images/sim_serial_error_codes.png" /></p>
+<h3 id="wiring-setup">Wiring Setup</h3>
+<p>Some additional hardware was used in order to test the system offline.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12v Power Supply</td>
+<td>Supply power to the sabertooth driver board12v 4.5 Amps</td>
+</tr>
+<tr>
+<td>Wires</td>
+<td>carry signals and power (duh)</td>
+</tr>
+<tr>
+<td>Arduino Mega</td>
+<td>Has multiple Serial ports. Can communicate with Arduino serial monitor and send serial commands to the kangaroo board the same time.</td>
+</tr>
+</tbody>
+</table>
+<p>Here is the general wiring setup when connecting the Kangaroo x2 to a microcontroller.</p>
+<p><img alt="Kangaroo microcontroller wiring" src="images/kangaroo_microcontroller_wiring.png" /></p>
+<h3 id="serial-passthrough-test-setup">Serial Passthrough Test Setup</h3>
+<p>This test case was setup to begin with. The idea is to passthrough serial data from the Arduino IDE serial monitor to the kangaroo x2 controller board. Both the transmitting signal and receiving signal. The kangaroo x2 communicates at a baud rate 9600 which means the Arduino IDE serial monitor needs to be set to 9600 as well. This was done on an Arduino Mega as it has multiple serial ports. The</p>
+<p>Wiring</p>
+<table>
+<thead>
+<tr>
+<th>Wire Name</th>
+<th>Arduino Mega Pin</th>
+<th>Kangaroo x2 Pin</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB</td>
+<td>USB type B port</td>
+<td>-</td>
+<td>Supplies power to Arduino Mega and transmitts/receive data from arduino Mega to the Arduino IDE serial monitor on laptop</td>
+</tr>
+<tr>
+<td>Ground</td>
+<td>GND</td>
+<td>0V</td>
+<td>Connects the ground of the Arduino Mega to the ground of Kangaroox 2</td>
+</tr>
+<tr>
+<td>Serial wire (green)</td>
+<td>TX1- 18</td>
+<td>S1</td>
+<td>Serial Transmitt from Arduino Mega to Serial Recieve on Kangaroo x2</td>
+</tr>
+<tr>
+<td>Serial wire (blue)</td>
+<td>RX1 - 19</td>
+<td>S2</td>
+<td>Serial Transmitt from kangaroo to Serial Recieve on Arduino Mega</td>
+</tr>
+</tbody>
+</table>
+<p>Here are images of the setup. Note how the DIP switches are configured on the sabertooth and kangaroo board.</p>
+<p><img alt="Serial pass through wiring" src="images/serial_pass_through_wiring1.jpg" /></p>
+<p><img alt="Simplified serial wiring" src="images/simplified_serial_wiring2.jpg" /></p>
+<p><img alt="Simplified serial wiring" src="images/simplified_serial_wiring3.jpg" /></p>
+<p>The Arduino Code for this is very short and simple, the code as taken from: https://docs.arduino.cc/built-in-examples/communication/SerialPassthrough</p>
+<pre><code class="language-c">void setup() {
+
+  Serial.begin(9600);
+
+  Serial1.begin(9600);
+}
+
+void loop() {
+
+  if (Serial.available()) {      // If anything comes in Serial (USB),
+
+    Serial1.write(Serial.read());   // read it and send it out Serial1 (pins 0 &amp; 1)
+
+  }
+
+  if (Serial1.available()) {     // If anything comes in Serial1 (pins 0 &amp; 1)
+
+    Serial.write(Serial1.read());   // read it and send it out Serial (USB)
+
+  }
+}
+</code></pre>
+<h3 id="serial-passthrough-test-result">Serial Passthrough Test Result</h3>
+<p>The test was a success. We could send simplified serial commands as described in 'Example Simplified Serial Communication'. After starting the motor with '1,start' and homing with '1,home' the motor could be controlled with commands through the arduino IDE serial monitor. We could set positions and velocities, retrieve positions and retrieve the minimum and maximum position in an arbitrary format.</p>
+<h3 id="simplified-serial-commands-sent-by-arduino-test">Simplified Serial Commands Sent by Arduino Test</h3>
+<p>A script to test sending simplified serial commands from an arduino was created. Saved in 'Code' folder named as 'simplified_serial_arduino_mega_test'.</p>
+<p>The wiring setup is the same as for Serial Passthrough.</p>
+<p>The idea for this script is to send simplified serial commands straight from the arduino mega board, such as '1,p100', 1,s100' etc etc in a controlled mannor. Whilst also continously reading the measured position.</p>
+<h3 id="results-simplified-serial-commands-sent-by-arduino-test">Results Simplified Serial Commands Sent by Arduino Test</h3>
+<p>The test was successfull. Some revelations from this experiment was:</p>
+<ul>
+<li>A positional command such as '1,p100' only needed to be sent once.</li>
+<li>Reading values could be done continously, I.e after setting a positional value once, we could read the position in real time whilst the motor turned to the desired position.</li>
+<li>The kangaroo x2 board needs to handshake with the arduino before any commands can be sent to it or any values read from it. We had to restart the arduino mega a few times sometimes in order for our code to run successfull. (pressing the red button on it)</li>
+<li>If a command cannot be executed on the kangaroo board, an error will be returned according to the list of errors in the kangaroo manual. It would be nice to handle these errors automatically in the future, i.e if connection failed to establish automatically establish connection again.</li>
+</ul>
+<p>To test functionality we first send the handshake commands, '1,start' and '1,home' in the arduino setup function. In the the loop function that runs continuously on arduino we do the following</p>
+<ol>
+<li>
+<p>Read the maximum and minimum encoder positions (these were set when we tuned the motor)</p>
+</li>
+<li>
+<p>'1,getmin' -&gt; returns -&gt; 1,Pxxx</p>
+</li>
+<li>
+<p>'1,getmax' -&gt; returns -&gt; 1,Pyyy</p>
+</li>
+<li>
+<p>Send a positional target position '1,p80' over Serial1</p>
+</li>
+<li>Continously read the actual position of the motor whilst it is moving to the target position. Wait 1 ms between reading values. From Serial1</li>
+<li>Write the target position and current position and write to terminal (Serial)</li>
+<li>Create plots using serial plotter</li>
+</ol>
+<p>Below: Target pos = 50 and -50. Max speed.</p>
+<p><img alt="Reference vs measured pos over time" src="images/ref_vs_measured_pos_over_time_1.PNG" /></p>
+<p>Below: Target pos = 80 and -80. Max speed.</p>
+<p><img alt="Reference vs measured pos over time" src="images/ref_vs_measured_pos_over_time_2.PNG" /></p>
+<p>Below: Target pos = 80 and -80. Lowered speed.</p>
+<p><img alt="Reference vs measured pos over time" src="images/ref_vs_measured_pos_over_time_3_lowered_speed.PNG" /></p>
+<p>The velocity of the motor could be controlled by turning a potentiometer on the kangaroo x2 controller board. It is the blue potentiometer next to the encoder pins. It has to be changed before a new move-to-position command is sent for it to take affect. This would affect the Time constant of the system. Aka the time for it to reach the target position. Which seems reasonable.</p>
+<p>It is yet unclear of how setting a speed command affects the behavior of the grap. I.e by sending '1,s1000' vs '1,s10'.</p>
+<h4 id="code">Code</h4>
+<p>The Code for this test can be found in the 'code' directory, named as 'simplified_serial_arduino_mega_test.ino'.</p>
+<h2 id="features-to-add-from-this-investigation-onto-autonomous-platform-generation-4">Features to add from this investigation onto autonomous platform generation 4:</h2>
+<p>From this investigation there are a few takeaways with respect to what functionality should be added onto the autonomous platform 4 steering node.</p>
+<p>We need to decide if we want to control the velocity of the motor or the position of the motor. Only sending positional commands would be simpler but having a cascade controlle that controlls the velocity would probably be more relevant for a thesis work within controls?</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

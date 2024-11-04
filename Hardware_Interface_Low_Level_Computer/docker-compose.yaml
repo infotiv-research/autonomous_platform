@@ -1,0 +1,19 @@
+version: '3'
+services:
+  ros2:
+    container_name: ap4hwi
+    build: .
+    command: /bin/bash -c "./hwi_startup.bash"
+    #command: tail -f /dev/null 
+    environment:
+    - DISPLAY=${DISPLAY}
+    volumes: 
+      - ./ap4_hwi_code:/root/ap4_hwi_docker_dir:rw
+      - ./../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/src:/root/ap4_hwi_docker_dir/ap4hwi_ws/src/can_msgs_to_ros2_topic_pkg/src/include:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev/dri:/dev/dri
+      - /dev/snd:/dev/snd
+      - /dev/input:/dev/input #Pass joystick and mouse input to docker container
+    network_mode: host
+    privileged: true
+

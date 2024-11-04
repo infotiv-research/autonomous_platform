@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Hamid Ebadi @ Infotiv" /><link rel="canonical" href="https://infotiv-research.github.io/autonomous_platform/High_Level_Control_Computer/IMITATION_LEARNING/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Imitation Learning - Autonomous Platform Generation 4</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Imitation Learning";
+        var mkdocs_page_input_path = "High_Level_Control_Computer/IMITATION_LEARNING.md";
+        var mkdocs_page_url = "/autonomous_platform/High_Level_Control_Computer/IMITATION_LEARNING/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/c.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Autonomous Platform Generation 4
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">High Level overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Autonomous Platform Generation 4</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG/">Changelog</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HARDWARE_DESIGN/">Hardware Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../SOFTWARE_DESIGN/">Software Design</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAN Nodes and Microcontroller</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/">CAN Nodes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Propulsion_Steering/">Propulsion Steering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/Speed_Sensor/">Speed Sensor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAN_Nodes_Microcontroller_Code/CAN_LIBRARY_DATABASE/">CAN library</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Hardware Interface Low Level Computer</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/">Hardware Interface Low Level Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/HOW_TO_EXTEND/">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/SETUP_OF_RASPBERRY_PI/">Setting up RaspberryPi</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">High Level Control Computer</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">High Level Control Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../HOW_TO_EXTEND.md">How to Extend</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Imitation Learning</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#imitation-learning-network">Imitation Learning Network</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#oak-d-camera-node">OAK-D camera node</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DONKEY_CAR_SETUP/">DonkeyCar simulator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DIGITAL_TWIN_ROS/">Digital Twins in ROS</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Power Unit</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Power_Unit/">Power Unit</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Issues and Future work</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ISSUES_AND_FUTURE_WORK/">Issues and Future work</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">CAD designs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../CAD/">Images</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Test & Debugging</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../TEST_DEBUGGING/">Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Hardware_Interface_Low_Level_Computer/TEST_DEBUGGING/">Hardware_Interface_Low_Level_Computer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../TEST_DEBUGGING/">High_Level_Control_Computer</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Autonomous Platform Generation 4</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">High Level Control Computer</li>
+      <li class="breadcrumb-item active">Imitation Learning</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/infotiv-research/autonomous_platform/edit/master/docs/High_Level_Control_Computer/IMITATION_LEARNING.md">Edit on infotiv-research/autonomous_platform</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="imitation-learning">Imitation Learning</h1>
+<h3 id="imitation-learning-network">Imitation Learning Network</h3>
+<p>To collect data from training and test drive rosbag2 is used. The data collection is done in the High Level Planner Docker and specifically in the folder bagfiles_2024, within source. With the High Level Control Docker running, the directory is accessed as follows.</p>
+<pre><code class="language-bash">docker exec -it ap4hlc bash
+source rosbag_startup.bash
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">docker exec -it ap4hlc bash
+cd ap4hlc_ws
+source install/setup.bash
+cd ap4hlc_ws/src/bagfiles_2024
+</code></pre>
+<p>To record topics from the physical Go-Kart you will have to be in ROS_DOMAIN_ID=1 such as</p>
+<pre><code class="language-bash">export ROS_DOMAIN_ID=1
+</code></pre>
+<p>When data is published to the topics which you want to record data from (probably /cmd_vel, /color/image, /stereo/depth, /imu)</p>
+<pre><code class="language-bash">ros2 bag record cmd_vel_stamped color/image stereo/depth imu
+</code></pre>
+<p>The recorded data can be replayed as, replacing <bag> with the desired bag:</p>
+<pre><code class="language-bash">ros2 bag play &lt;bag&gt;
+</code></pre>
+<p>The playback can also be played as a loop</p>
+<pre><code class="language-bash">ros2 bag play --loop &lt;bag&gt;
+</code></pre>
+<p>Empty bagfiles directory</p>
+<pre><code class="language-bash">rm -R -- */
+</code></pre>
+<p>to delete all files in a directory wihtout deleting any folders run:</p>
+<pre><code class="language-bash">find . -type f -delete
+</code></pre>
+<p>Instead of saving the data to a rosbag and then play it back creating a .pkl file it can also directly be recorded into a .pkl file using the following command:</p>
+<pre><code class="language-bash">docker exec -it ap4hlc bash
+source data_collection_startup.bash
+</code></pre>
+<p>To train the network using the collected data, the data is written to a .pkl file as this allows training the network fully outside of ROS. This is done by playing the desired rosbag while running the file data_collection.py. It is important to start the data_collection file before starting playing the rosbag. It is also important to play the rosbag with loop for it to be able to collect all the messages.</p>
+<p>The subscriber queue deletes the messages with the oldest timestamp first. Therefore no messages will be collected on the second run of the loop.</p>
+<p>The <code>data_collection.py</code> file is run in the High Level Computer docker as:</p>
+<pre><code class="language-bash">ros2 run autonomous_platform_robot_description_pkg data_collection.py 
+</code></pre>
+<p>The .pkl file can then be used as input within train_DAgger.py, found in <code>/autonomous_platform/Imitation_Learning/train_Dagger.py</code></p>
+<h3 id="oak-d-camera-node">OAK-D camera node</h3>
+<p>Before running the OAK-D camera node, build the docker with:</p>
+<pre><code class="language-bash">docker build --build-arg USE_RVIZ=1 -t depthai-ros .
+</code></pre>
+<p>To start OAK-D camera nodes enter the High_Level_Control_Computer directory and run:</p>
+<pre><code class="language-bash">./launch_depthai_ros.sh
+</code></pre>
+<p>This will launch the camera at the resolution 208 x  156, the resolution can be change by changing rgbScaleDinominator and rgbScaleNumerator in 'launch_depthai_ros.sh', however there is a latancy at higher resolutions for the depth image. Possible resolutions can be seen in the table below:</p>
+<p>4056 x 3040 *  2/13 --&gt;  624 x  468
+4056 x 3040 *  2/39 --&gt;  208 x  156
+4056 x 3040 *  2/51 --&gt;  160 x  120
+4056 x 3040 *  4/13 --&gt; 1248 x  936
+4056 x 3040 *  4/26 --&gt;  624 x  468
+4056 x 3040 *  4/29 --&gt;  560 x  420
+4056 x 3040 *  4/35 --&gt;  464 x  348
+4056 x 3040 *  4/39 --&gt;  416 x  312
+4056 x 3040 *  6/13 --&gt; 1872 x 1404
+4056 x 3040 *  6/39 --&gt;  624 x  468
+4056 x 3040 *  7/25 --&gt; 1136 x  852
+4056 x 3040 *  8/26 --&gt; 1248 x  936
+4056 x 3040 *  8/39 --&gt;  832 x  624
+4056 x 3040 *  8/52 --&gt;  624 x  468
+4056 x 3040 *  8/58 --&gt;  560 x  420
+4056 x 3040 * 10/39 --&gt; 1040 x  780
+4056 x 3040 * 10/59 --&gt;  688 x  516
+4056 x 3040 * 12/17 --&gt; 2864 x 2146
+4056 x 3040 * 12/26 --&gt; 1872 x 1404
+4056 x 3040 * 12/39 --&gt; 1248 x  936
+4056 x 3040 * 13/16 --&gt; 3296 x 2470
+4056 x 3040 * 14/39 --&gt; 1456 x 1092
+4056 x 3040 * 14/50 --&gt; 1136 x  852
+4056 x 3040 * 14/53 --&gt; 1072 x  804
+4056 x 3040 * 16/39 --&gt; 1664 x 1248
+4056 x 3040 * 16/52 --&gt; 1248 x  936</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="High Level Control Computer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../DONKEY_CAR_SETUP/" class="btn btn-neutral float-right" title="DonkeyCar simulator">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../DONKEY_CAR_SETUP/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
