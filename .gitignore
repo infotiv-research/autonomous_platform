@@ -37,10 +37,13 @@ tex2pdf*
 pandoc*
 tmp.pdf
 
+
 #Bagfiles
 High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/bagfiles_2024
 High_Level_Control_Computer/ap4_hlc_code/recorded_data
 High_Level_Control_Computer/ap4_hlc_code/rosbag2_2024_05_06-09_32_17
+High_Level_Control_Computer/ap4_hlc_code/rosbag2_*/metadata.yaml
+High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/rosbag2_*/metadata.yaml
 *.pt
 recorded_data.zip
 *.db3
@@ -52,4 +55,9 @@ current_topics.txt
 nodes_diff.txt
 topics_diff.txt
 
+# Ignore mac junk files
+.DS_Store
+**/.DS_Store
 
+# Ignore startup report
+startup_report.txt

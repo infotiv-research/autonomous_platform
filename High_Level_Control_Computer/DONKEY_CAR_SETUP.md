@@ -2,7 +2,7 @@
 
 To get started with the Donkey car simulator the following steps should be followed:
 
-1. Go to: https://docs.donkeycar.com/guide/host_pc/setup_ubuntu/ and install the conda environment and the developer install standing in the HOME directory. You do not need to create a new car/ local working directory since it can be found in Imitation_Learning/simulation_donkeycar.
+1. Go to: https://docs.donkeycar.com/guide/host_pc/setup_ubuntu/ and install the conda environment and the developer install standing in the HOME directory. You do not need to create a new car/ local working directory since it can be found in `High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/imitation_learning/simulation_donkeycar`.
 
 ```
 mkdir ~/projects

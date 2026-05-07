@@ -4,6 +4,8 @@ FROM ros:humble-ros-core-jammy
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     git \
+    libusb-1.0-0-dev \
+    udev \
     python3-colcon-common-extensions \
     python3-colcon-mixin \
     python3-rosdep \
@@ -20,7 +22,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     alsa-utils \
     can-utils \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install depthai
+    && pip install depthai scipy
 
 
 # bootstrap rosdep
@@ -38,7 +40,7 @@ RUN colcon mixin add default \
 # install ros2 packages
 # Raspberry Pi 4 Hardware interface cannot run GUI applications, hence install ros2 base instead
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-humble-ros-base\
+    ros-humble-ros-base \
     ros-humble-teleop-twist-keyboard \
     ros-humble-joint-state-publisher-gui \
     ros-humble-xacro \

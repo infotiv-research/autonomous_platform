@@ -82,7 +82,7 @@ There are some issues with this and the hardware for the positioning/localizatio
 
 ### Steering angle issue
 
-There is a issue with the AP4 steering angle which affects the AP4 to not have te ability to take that sharp turns as it needs in order to navigate around the track. In addition to that the steering angle to the left is greater than the steering angle to the right. It would be good to increase the steering angel in general and as well as that make the steering angle the same for both directions.
+A issue with the steering that has been encountered and solved but could arise again, is that a slack in the steering power units drive shaft to the belt can occur. This causes the wheels to not being able to steer in the control units intended angle and also not being able to return to true zero in certain conditions. This can be solved by removing the belt and steering motor and readjusting the screw on the clamping timing pulley and applying a small amount of loctite to it since it can come loose after much use or not clamping it with adequate torque.
 
 ### IMU issue
 

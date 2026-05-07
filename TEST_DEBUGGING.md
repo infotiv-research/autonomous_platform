@@ -8,6 +8,10 @@ If the existing documentation could not provide a sufficient solution for a prob
 
 ### Possible Errors When Starting AP4
 
+Problem: Wheels dont turn right to left after 60 sec segway beep:.
+
+Solution: One or multiple crucial topics and or nodes did not start. Check ros network how this can be done is described in README.md in the directories root.
+
 Problem: Steering works but not propulsion?
 
 Solution(s): Check that segway is turned on (and charged), check that the the propulsion can be controlled manually by pressing the pedals. The back wheels should spin.
@@ -49,7 +53,7 @@ xxxx   hardware_interface_low_level_computer_ros2   xxxx   10 seconds ago   Up 1
 
 If the container has not started there are two possibilities: 1. The container is still being built (could take a lot of time if new changes have been pulled). 2. The startup service has not been started properly (could have failed due to docker building errors) [systemd service guide](https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/)
 
-The startup service will run the 'testing.bash' script located in `Hardware_Interface_Low_Level_Computer` once called.
+The startup service will run the 'init_system.bash' script located in `Hardware_Interface_Low_Level_Computer` once called.
 
 In a terminal check that the service has been started
 
@@ -282,6 +286,9 @@ ros2 topic echo @TODO ACC + BREAK + STEERING ANGLE
 
 Next Verify that the SPCU software and low-level software can communicate. The low-level software can request a ping signal from the ECUs on one topic and receive ping confirmations on another. The ping will be sent over the CAN
 
+### Speed Sensors stop publishing data over CAN-network
+
+This problem occured multiple times during the 2026 work and more of this can be read about in `CAN_Nodes_Microcontroller_Code\Speed_Sensor_ECU/Speed_Sensor.md`
 
 
 
@@ -576,6 +583,170 @@ Now you can finally run your ROS2 node by entering:\
 
 ______________________________________________________________________
 
+## Fixing Git Repository Corruption on Raspberry Pi
+
+During development on the Raspberry Pi it is possible for the local Git repository to become corrupted. This can happen due to sudden power loss, SD card filesystem issues, interrupted Git operations, or network problems.
+
+This section explains how to diagnose the issue and safely recover by recloning the repository **without deleting important files**.
+
+---
+
+### Typical Error Messages
+
+If the repository is corrupted you may see errors like:
+
+```
+fatal: bad object HEAD
+```
+
+```
+error: Your local changes would be overwritten by checkout
+```
+
+```
+unable to update url base from redirection
+```
+
+```
+ssh: no route to host
+```
+
+```
+Permission denied (publickey)
+```
+
+You may also notice:
+
+* `git fetch` or `git pull` crashing midway
+* empty or corrupted files
+* Git commands behaving unpredictably
+
+---
+
+### Step 1 — Navigate to the Repository
+
+```
+cd ~/Desktop/GIT/autonomous_platform_generation_4
+git status
+```
+
+If `git status` returns:
+
+```
+fatal: bad object HEAD
+```
+
+the repository is corrupted and should be repaired.
+
+---
+
+### Step 2 — Check Internet Connectivity
+
+```
+ping 8.8.8.8
+ping gitlab.com
+```
+
+If these commands fail, reconnect WiFi or Ethernet before continuing.
+
+---
+
+### Step 3 — Verify the Git Remote
+
+```
+git remote -v
+```
+
+If necessary, reset the remote to GitLab HTTPS:
+
+```
+git remote remove origin
+git remote add origin https://gitlab.com/USERNAME/REPO.git
+git fetch origin
+```
+
+---
+
+### Step 4 — Check Available Disk Space
+
+```
+df -h
+```
+
+If storage is nearly full, free space before continuing.
+
+---
+
+### Step 5 — Check for Filesystem Errors
+
+```
+dmesg | tail -30
+```
+
+Look for messages such as:
+
+```
+I/O error
+EXT4-fs error
+mmcblk0
+```
+
+These indicate SD card or filesystem corruption.
+
+### Step 7 — Backup the Old Repository
+
+Do **not** delete the original repository immediately. Rename it as a backup:
+
+```
+cd ~/Desktop/GIT
+mv autonomous_platform_generation_4 autonomous_platform_generation_4_old
+```
+
+This preserves all files in case something important needs to be recovered.
+
+---
+
+### Step 8 — Reclone a Clean Repository
+
+```
+git clone https://${GitLabUsername}:${PersonalAccessToken}@gitlab.infotivlab.se/internal-development/autonomous_platform.git
+cd autonomous_platform
+git checkout main
+git pull origin main
+```
+
+At this point the repository should be fully functional again.
+
+
+### Prevention Tips
+
+* Always shut down the Raspberry Pi properly:
+
+  ```
+  sudo shutdown -h now
+  ```
+
+* Avoid sudden power loss
+
+* Use a high-quality SD card
+
+* Keep regular backups
+
+* Maintain sufficient free disk space
+
+---
+
+### Quick Summary
+
+If Git breaks on the Raspberry Pi:
+
+1. Check internet connectivity
+2. Verify the remote URL
+3. Check disk space
+4. Inspect filesystem errors
+5. Run filesystem repair
+6. Rename the old repo as backup
+7. Reclone the repository
 
 
 

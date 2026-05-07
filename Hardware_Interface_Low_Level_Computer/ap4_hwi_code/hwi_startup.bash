@@ -6,6 +6,8 @@ cd ap4hwi_ws
 echo "Sourcing ros humbe..."
 source /opt/ros/humble/setup.bash
 echo "Building ROS packages..-"
+#clean previous build artifacts (host vs container path missmatch breaks CMake)
+#rm -rf build install log
 colcon build
 echo "Sourcing built packages..."
 source install/setup.bash

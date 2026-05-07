@@ -60,21 +60,21 @@ ament_target_dependencies(sllidar_client
   sensor_msgs
 )
 
-add_executable(lidar_listener src/lidar_listener.cpp)
-ament_target_dependencies(lidar_listener
-  rclcpp
-  std_srvs
-  sensor_msgs
-)
+#add_executable(lidar_listener src/lidar_listener.cpp)
+#ament_target_dependencies(lidar_listener
+ # rclcpp
+ # std_srvs
+ # sensor_msgs
+#)
 ################################################################################
 # Install
 ################################################################################
-install(DIRECTORY launch rviz urdf src
+install(DIRECTORY launch rviz src
   DESTINATION share/${PROJECT_NAME}
 )
 
 install(
-  TARGETS sllidar_node sllidar_client lidar_listener
+  TARGETS sllidar_node sllidar_client
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 

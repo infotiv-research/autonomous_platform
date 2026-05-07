@@ -15,7 +15,11 @@ install(
   DIRECTORY src launch rviz worlds config
   DESTINATION share/${PROJECT_NAME}
 )
-
+install(
+  PROGRAMS
+    scripts/odom_noise_injector.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

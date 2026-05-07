@@ -46,13 +46,13 @@ cd Desktop/autonomous_platform/High_Level_Control_Computer
 First, rebuild the container using
 
 ```bash
-docker-compose build
+docker compose build
 ```
 
 The high level software container, with the configurations, can be started using
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Enter the running container by typing
@@ -67,7 +67,15 @@ When inside the docker, run:
 ros2 launch autonomous_platform_robot_description_pkg launch_robot_simulation.launch.py
 ```
 
-Now two windows with Gazebo and RViz2 should open. It should look something like this:
+To start `launch_robot.launch.py` together with `odometry_test_pkg` directly from the host in `High_Level_Control_Computer`, run:
+
+```bash
+./start_and_record.sh
+```
+
+This helper does not rebuild the workspace. It expects the ROS 2 workspace inside `ap4hlc` to already be built. In the terminal where you start it, press Enter once to start recording `/odometry_test` and press Enter again to stop. The rosbag is saved on the host under `High_Level_Control_Computer/ap4_hlc_code/recorded_data/odometry_test_bags`.
+
+If the simulation is instead started two windows with Gazebo and RViz2 should open. It should look something like this:
 
 ![Digital Twin start-up](../Resources/Report_sketches/digital_twin/simulation_startup.png)
 
@@ -92,7 +100,7 @@ docker-compose down
 ```
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ```bash
@@ -103,9 +111,13 @@ docker exec -it ap4hlc bash
 ros2 launch autonomous_platform_robot_description_pkg launch_robot_simulation.launch.py
 ```
 
-## Path tracker - Record and results
+
+## Robot_localization - EKF
+The EKF used to estimate the position and orientation during the SLAM algorithm is a packaged called robot_localization. The input can be tuned to fuse both the IMU and the odometry or just use the odometry based on wich file is used (ekf_imu.yaml or ekf.yaml). The filter has 15 stated and wich stated are influenced by wich sensors can be tuned. The filter needs covariances from each sensors to correctly estimate which sensor to trust a process noise covariance tuning matrix for balancing the model contra sensor inputs.
 
 To collect the results for the AP4 navigation a script has been created that calculates the difference betqeen the planned path and the path that the AP4 is taking during the drive. Run the path tracker at the same time as the simulation to record the data from the AP4 path and the planned path.
+
+## Path tracker - Record and results
 
 ```bash
 ros2 launch path_tracker launch_path_comparison.launch.py
@@ -127,7 +139,7 @@ The simulation used for imitation learning is a donkey car simulator and the set
 Collecting data from the simulation can be done in the following way.
 
 ```bash
-cd Imitation_Learning/simulation_donkeycar
+cd ap4_hlc_code/ap4hlc_ws/src/imitation_learning/simulation_donkeycar
 conda activate donkey
 python manage.py drive --js
 ```
@@ -148,7 +160,7 @@ The framework for autonomous drive is implemented in high level control. To get 
 To start the autonomous drive for the gokart or to collect more data for DAgger, start the high level docker, open a new terminal in `High_Level_Control_Computer` and run:
 
 ```bash
-source start_data_collection.sh --param <param>
+"./Imitation learning/start_data_collection.sh" --param <param>
 ```
 
 The params can either be:
@@ -275,10 +287,10 @@ The training can then be started by running `python train_DAgger.py simulation` 
 
 ### Real world
 
-To train the imitation learning models from the data collected via `source data_collection.sh`, start the high-level docker by standing in High_Level_Control_Computer and running `docker-compose up` then in a new terminal run:
+To train the imitation learning models from the data collected via `"./Imitation learning/start_data_collection.sh"`, start the high-level docker by standing in High_Level_Control_Computer and running `docker compose up` then in a new terminal run:
 
 ```bash
-source start_training --param <param>
+"./Imitation learning/start_training.sh" --param <param>
 ```
 
 The params can either be:
