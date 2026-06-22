@@ -68,10 +68,12 @@ uint16_t ThrottleVoltage;
 uint16_t BreakVoltage;
 
 int8_t steer_pos;
+int8_t current_pos;
 
 uint32_t t; 
 uint32_t t_i1;
 uint32_t t_i2;
+int32_t current_encoder_ticks;
 bool interupt_flag = false;
 
 bool recieved_interrupt = false;
@@ -247,23 +249,14 @@ void loop() {
     can_interface.SendSingleCanFrame(CAN_ID_ERROR_SPCU);
     }
 
-
-
-// Check if Heartbeat requested
-  if(Heartbeat_frame_recieved)
-  {
-    Serial.println("Heartbeat recieved");
-    encode_can_0x065_Response_Heartbeat_sig(&can_interface.can_storage_container,uint8_t(1));
-    can_interface.SendSingleCanFrame(CAN_ID_RESPONSE_HEARTBEAT_SPCU);
-    Heartbeat_frame_recieved =false;
-    
-  }
-
-  // Steering Control:
+  // Steering Control: 23.9 is the calculated avg maximum steering angle for the approximated bicycle model of the ackermann steering
   decode_can_0x3e8_Act_SteeringPosition(&can_interface.can_storage_container,&steer_pos); //gets stored val
-  steering_motor.SetMotorAbsolutePosition(int(map(steer_pos,-40,40,steering_motor.GetSavedMotorMinLimit(),steering_motor.GetSavedMotorMaxLimit())));
-  encode_can_0x7d0_Get_SteeringAngle(&can_interface.can_storage_container,steer_pos);
-
+  steering_motor.SetMotorAbsolutePosition(int(map(steer_pos,-22,22,steering_motor.GetSavedMotorMaxLimit(),steering_motor.GetSavedMotorMinLimit())));
+  
+  // Steering feedback 
+  current_encoder_ticks = steering_motor.ReadCurrentMotorEncoderPosition();
+  current_pos = map(current_encoder_ticks, steering_motor.GetSavedMotorMinLimit(), steering_motor.GetSavedMotorMaxLimit(), 22,-22);
+  encode_can_0x7d0_Get_SteeringAngle(&can_interface.can_storage_container,current_pos);
 
   // Propulsion Control
   decode_can_0x3e8_Act_ThrottleVoltage(&can_interface.can_storage_container,&ThrottleVoltage);
@@ -283,11 +276,11 @@ void loop() {
   propulsion_controller.send_voltage("dac_acc",3);
   
   if (getCurrentMillis()-t> (uint32_t) 5000 && getCurrentMillis()-t < (uint32_t) 5500 ){
-    steering_motor.SetMotorAbsolutePosition(int(map(30,-40,40,steering_motor.GetSavedMotorMinLimit(),steering_motor.GetSavedMotorMaxLimit())));
+    steering_motor.SetMotorAbsolutePosition(int(map(20,-24,24,steering_motor.GetSavedMotorMaxLimit(),steering_motor.GetSavedMotorMinLimit())));
   }
   if (getCurrentMillis()-t> (uint32_t) 10000)
   {
-    steering_motor.SetMotorAbsolutePosition(int(map(-30,-40,40,steering_motor.GetSavedMotorMinLimit(),steering_motor.GetSavedMotorMaxLimit())));
+    steering_motor.SetMotorAbsolutePosition(int(map(-20,-24,24,steering_motor.GetSavedMotorMaxLimit(),steering_motor.GetSavedMotorMinLimit())));
     t=getCurrentMillis();
     Serial.println(String(t));
   }
@@ -304,4 +297,3 @@ void AP4CANInterrupt()
   Serial.println("in CAn int loop");
    
 }
-

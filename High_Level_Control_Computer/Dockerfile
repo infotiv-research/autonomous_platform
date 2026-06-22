@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/* \
     && pip install depthai \
     && pip install imitation \
-    && pip install stable-baselines3
+    && pip install stable-baselines3 \
+    && pip install transforms3d
     
 ENV DISPLAY=:0
 

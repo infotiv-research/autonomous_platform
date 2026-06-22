@@ -1,10 +1,5 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-import launch_ros
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from ament_index_python import get_package_share_directory
-import os
 
 
 # *
@@ -16,17 +11,15 @@ import os
 #
 # *#
 def generate_launch_description():
-    # pkg_share = launch_ros.substitutions.FindPackageShare(package='xbox_controller_feed_forward_ctrl_pkg').find('xbox_controller_feed_forward_ctrl_pkg')
-
     # start joy node
-    joy_node = feed_forward_node = Node(
+    joy_node = Node(
         package="joy",
         executable="joy_node",
         output="screen",
         # parameters=[{'autorepeat_rate': '5', 'coalesce_interval_ms' : '100'}]
     )
 
-    teleop_twist_joy_node = launch_ros.actions.Node(
+    teleop_twist_joy_node = Node(
         package="teleop_twist_joy",
         executable="teleop_node",
         name="teleop_twist_joy_node",
@@ -39,17 +32,16 @@ def generate_launch_description():
         arguments=["--ros-args", "--log-level", "info"],
         remappings=[("/cmd_vel", "/joystick_cmd_vel")],
     )
-    # start teleop_twist_joy node, turn /joy into /cmd_vel topics
-    # teleop_twist_joy_node = IncludeLaunchDescription(
-    #        PythonLaunchDescriptionSource([get_package_share_directory('teleop_twist_joy'), '/launch/teleop-launch.py']),
-    #                   launch_arguments={'joy_config': 'xbox'}.items()
-    # )
-
     # feedforward controller
     feed_forward_node = Node(
         package="xbox_controller_feed_forward_ctrl_pkg",
         executable="feed_forward_node",
         output="screen",
+        parameters=[
+            {"min_forward_linear_speed_mps": 0.14},
+        ],
     )
 
-    return LaunchDescription([joy_node, teleop_twist_joy_node, feed_forward_node])
+    return LaunchDescription(
+        [joy_node, teleop_twist_joy_node, feed_forward_node]
+    )

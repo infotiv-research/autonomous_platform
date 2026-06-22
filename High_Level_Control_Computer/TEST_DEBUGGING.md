@@ -8,6 +8,11 @@ If a new unknown error occurs, please write down the solution in this document f
 
 Build failed? Try to rebuild
 
+### Controlling AP4 with controller
+
+All nodes up and running and xbox controllers input is showing but propulsion and steering not working?
+Wait a couple minutes and if it still doesn't work try restarting
+
 ### Gazebo and Rviz does not show up when starting the container
 
 Output from console:
@@ -21,3 +26,5 @@ Solution: Graphics permission have not been set, the docker container is not all
 ```bash
 xhost +local:*
 ```
+
+

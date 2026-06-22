@@ -30,9 +30,9 @@ Examples to send CAN messages from HWI to SPCU by writing to a ROS2 topic
 
 > ros2  topic pub /SET_0x5dc_SpeedSensorLF_PulseCnt  std_msgs/msg/UInt16 "{data: 0x55}" -r 10
 
-- Actuate the steering wheel wihtout joy controller:
+- Actuate the steering wheel wihtout joy controller. Positive values steer left and negative values steer right:
 
-ros2 topic pub /SET_0x3e8_Act_SteeringPosition std_msgs/msg/Int8 "{data: 40}" -r 100
+ros2 topic pub /SET_0x3e8_Act_SteeringPosition std_msgs/msg/Int8 "{data: 24}" -r 100
 
 This latter example can also by achieved by sending a direct command to the CAN interface
 
@@ -117,6 +117,11 @@ How to extend this functionality with new CAN frames and signals is explained in
 
 ![CAN communication information transportation illustration.](../Resources/Report_sketches/SW/can_sw_com_detailed.png)
 
+### Odometry and control feedback
+ 
+The odom_ackermann node calculates the trajectory and position with help of the real time steering angle from the steering motor and the speedsensors mounted on each wheel. The speed is calculated by averaging all four sensors when driving straight and only the back wheels when turning due to the ackermann steering model.
+
+
 ### Interfacing with High Level Control Software <a name="Interfacing-with-High-Level-Control-Software"></a>
 
 The hardware interface and low level software can communicate with the high level control software running on an external computer. (I.e linux laptop- or intel NUC) This is done through an ethernet communication. A Wifi router is mounted to autonomous platform which means this can be done wirelessly.
@@ -133,11 +138,22 @@ How to add new functionality to the hardware interfacing software and low level 
 
 ### Automatic Startup of Software <a name="Automatic-Startup-of-Software"></a>
 
-Once the Raspberry Pi 4b boots up it will automatically start the hardware interfacing and low level algorithm software. This is done using linux services that run on boot-up which in turn call the script "testing.bash".
+Once the Raspberry Pi 4b boots up it will automatically start the hardware interfacing and low level algorithm software. This is done using linux services that run on boot-up which in turn call the script "init_system".
 
-If you need to change what is done during boot-up, edit the `testing.bash` script.
+If you need to change what is done during boot-up, edit the `init_system` script.
 
 If the software does not automatically start, see **Software container not started?** in  `TEST_DEBUGGING.md` located in this directory.
+
+### Generation of Startup Report <a name="Generation_of_Startup_Report"></a>
+
+In the boot-up script `init_system`, a report of critical systems on the platform is also produced. This report generation was developed for rapid development and verification of the platform. This script is hierarchical and should call other sub-scripts to test functionality on the platform. By using this structure, the startup report can present an overview of the platform without overwhelming the user. Thereafter, the sub-scripts can be called manually by the user for a more in-depth description of that particular system, e.g., the SPCU.
+
+Below is a short description of the sub-scrips called upon by `init_system`.
+
+`AP4_init_test_script.py` - Checks that crucial topics and nodes are up and running. If that is the case the wheels will turn right to left for visual confirmation.
+
+`AP4_sensor_test_scrip_.py` - Checks if any sensors topics are silent or are publishing but not the contents of the actuall publishment
+
 
 ### Installing Base Software on Fresh Raspberry Pi 4b <a name="Installing-Base-Software-on-Fresh-Raspberry-Pi-4b"></a>
 

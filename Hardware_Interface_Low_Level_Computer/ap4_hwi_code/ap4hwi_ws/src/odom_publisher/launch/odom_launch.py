@@ -11,7 +11,7 @@ def generate_launch_description():
 
     ackermann_odometry_node = launch_ros.actions.Node(
         package="odom_publisher",
-        executable="odom_ekf",
+        executable="odom_ackermann",
         output="screen",
     )
 

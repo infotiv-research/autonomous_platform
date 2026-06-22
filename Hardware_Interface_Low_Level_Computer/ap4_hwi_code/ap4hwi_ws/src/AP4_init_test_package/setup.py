@@ -18,6 +18,10 @@ setup(
     license="None",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": ["talker = AP4_init_test_package.AP4_init_test_script:main"],
+        "console_scripts": ["init_check = AP4_init_test_package.AP4_init_test_script:main",
+                            "sensor_check = AP4_init_test_package.AP4_sensor_test_script:main",
+                            "distance = AP4_init_test_package.ap4_distance_test:main",
+                            "turning = AP4_init_test_package.ap4_turning_test:main",
+                            "imu_calibration = AP4_init_test_package.ap4_imu_calibration_test:main"],
     },
 )

@@ -23,7 +23,7 @@ setup(
     entry_points={
         "console_scripts": [
             "odom_publisher = odom_publisher.odom_publisher:main",
-            "odom_ekf = odom_publisher.odom_ekf:main",
+            "odom_ackermann = odom_publisher.odom_ackermann:main",
         ],
     },
 )

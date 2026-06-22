@@ -47,3 +47,7 @@ Speed sensor functionality for the new go-kart, including enhancements to the re
 ### Version 4.5, Jun 2025
 
 Implementation of LiDAR and SLAM to the platform. An investigation of how LiDAR can be used to Simultaneously Localize a Vehicle and Map its Surroundings using SLAM. Done by David Espedalen and Anton Stigemyr Hill as part of a master thesis at Chalmers University of technology spring 2025. Supervisor: Hamid Ebadi
+
+### Version 4.6, Jun 2026
+
+The implementation of a validation pipeline, along with improvements to the kinematic bicycle model for odometry and sensor fusion of the IMU and odometry for improved localization, was carried out by **Anton Espedalen** and **Jurek Preisegger** as part of a master thesis at Chalmers University of Technology spring 2026. Supervisor: Hamid Ebadi

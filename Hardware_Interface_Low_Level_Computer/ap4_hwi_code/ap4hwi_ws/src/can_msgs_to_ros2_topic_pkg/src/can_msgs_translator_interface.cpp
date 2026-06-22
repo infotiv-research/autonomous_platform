@@ -1,4 +1,5 @@
 #include <chrono>
+#include <algorithm> //without this the std_msgs::msg could fail
 #include <functional>
 #include <memory>
 #include <string>
@@ -70,8 +71,8 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
         publisher_frame_1500_SpeedSensorSampleTime_ = this->create_publisher<std_msgs::msg::UInt16>("/GET_0x5dc_SpeedSensorSampleTime", 10);
 
         // Frame ID 2000
-        publisher_frame_2000_Get_SteeringAngle_ = this->create_publisher<std_msgs::msg::Int16>("GET_0x7d0_Get_SteeringAngle", 10);
-        publisher_frame_2000_Get_ReverseMode_ = this->create_publisher<std_msgs::msg::UInt8>("GET_0x7d0_Get_ReverseMode", 10);
+        publisher_frame_2000_Get_SteeringAngle_ = this->create_publisher<std_msgs::msg::Int16>("/GET_0x7d0_Get_SteeringAngle", 10);
+        publisher_frame_2000_Get_ReverseMode_ = this->create_publisher<std_msgs::msg::UInt8>("/GET_0x7d0_Get_ReverseMode", 10);
 
         //todo next frame
         //todo next signal
@@ -108,8 +109,8 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
         subscriber_frame_1500_SpeedSensorSampleTime_ = this->create_subscription<std_msgs::msg::UInt16>("/SET_0x5dc_SpeedSensorSampleTime", 10, std::bind(&TranslatorCANtoROS2Node::Callback_frame_1500_SpeedSensorSampleTime_, this, std::placeholders::_1));
 
         // Frame ID 2000
-        subscriber_frame_2000_Get_SteeringAngle_ = this->create_subscription<std_msgs::msg::Int16>("/SET_0x3e8_Get_SteeringAngle", 10, std::bind(&TranslatorCANtoROS2Node::Callback_frame_2000_Get_SteeringAngle, this, std::placeholders::_1));
-        subscriber_frame_2000_Get_ReverseMode_ = this->create_subscription<std_msgs::msg::UInt8>("/SET_0x3e8_Get_ReverseMode", 10, std::bind(&TranslatorCANtoROS2Node::Callback_frame_2000_Get_ReverseMode, this, std::placeholders::_1));
+        subscriber_frame_2000_Get_SteeringAngle_ = this->create_subscription<std_msgs::msg::Int16>("/SET_0x7d0_Get_SteeringAngle", 10, std::bind(&TranslatorCANtoROS2Node::Callback_frame_2000_Get_SteeringAngle, this, std::placeholders::_1));
+        subscriber_frame_2000_Get_ReverseMode_ = this->create_subscription<std_msgs::msg::UInt8>("/SET_0x7d0_Get_ReverseMode", 10, std::bind(&TranslatorCANtoROS2Node::Callback_frame_2000_Get_ReverseMode, this, std::placeholders::_1));
 
         //todo next frame
         //todo next signal
@@ -249,6 +250,7 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
 
             case CAN_ID_GET_SPEED_SENSOR:
             {
+
                 uint16_t temp_data_SpeedSensorLF_PulseCnt_;
                 
                 decode_can_0x5dc_SpeedSensorLF_PulseCnt(&can_storage_container, &temp_data_SpeedSensorLF_PulseCnt_);
@@ -302,7 +304,7 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
                 decode_can_0x7d0_Get_SteeringAngle(&can_storage_container, &temp_data_Get_SteeringAngle);
 
                 // Clamp the steering angle to actual kinematics
-                temp_data_Get_SteeringAngle = std::max<int16_t>(-40, std::min<int16_t>(temp_data_Get_SteeringAngle, 40));
+                temp_data_Get_SteeringAngle = std::max<int16_t>(-22, std::min<int16_t>(temp_data_Get_SteeringAngle, 22));
 
                 std_msgs::msg::Int16 send_data_Get_SteeringAngle;
                 send_data_Get_SteeringAngle.data = temp_data_Get_SteeringAngle;
@@ -417,13 +419,13 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
    
    // Needs a callback for every signal in the frame
 
- void Callback_frame_1500_SpeedSensorLF_PulseCnt_(const std_msgs::msg::UInt16 msg)
+    void Callback_frame_1500_SpeedSensorLF_PulseCnt_(const std_msgs::msg::UInt16 msg)
     {
         encode_can_0x5dc_SpeedSensorLF_PulseCnt(&can_storage_container, msg.data);
         PublishCanFrameToCanNetwork(CAN_ID_GET_SPEED_SENSOR);
     }
 
- void Callback_frame_1500_SpeedSensorRF_PulseCnt_(const std_msgs::msg::UInt16 msg)
+    void Callback_frame_1500_SpeedSensorRF_PulseCnt_(const std_msgs::msg::UInt16 msg)
     {
         encode_can_0x5dc_SpeedSensorRF_PulseCnt(&can_storage_container, msg.data);
         
@@ -431,7 +433,7 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
     }
  
 
- void Callback_frame_1500_SpeedSensorLR_PulseCnt_(const std_msgs::msg::UInt16 msg)
+    void Callback_frame_1500_SpeedSensorLR_PulseCnt_(const std_msgs::msg::UInt16 msg)
     {
         encode_can_0x5dc_SpeedSensorLR_PulseCnt(&can_storage_container, msg.data);
         
@@ -439,7 +441,7 @@ class TranslatorCANtoROS2Node : public rclcpp::Node
     }
 
 
- void Callback_frame_1500_SpeedSensorRR_PulseCnt_(const std_msgs::msg::UInt16 msg)
+    void Callback_frame_1500_SpeedSensorRR_PulseCnt_(const std_msgs::msg::UInt16 msg)
     {
         encode_can_0x5dc_SpeedSensorRR_PulseCnt(&can_storage_container, msg.data);
         
@@ -554,5 +556,3 @@ int main(int argc, char * argv[])
   rclcpp::shutdown();
   return 0;
 }
-
-

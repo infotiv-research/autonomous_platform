@@ -140,7 +140,7 @@ def generate_launch_description():
     ekf_config = os.path.join(
         get_package_share_directory("autonomous_platform_robot_description_pkg"),
         "config",
-        "ekf.yaml",
+        "ekf_imu.yaml",
     )
 
     ekf_node = Node(
@@ -151,11 +151,29 @@ def generate_launch_description():
         parameters=[
             ekf_config,
             {"use_sim_time": use_sim_time},
-            {"odom0": "/odom"},
+            {"odom0": "/odom_noisy"},
             {"imu0": "/imu"},
         ],
     )
-
+    odom_noise_node = Node(
+        package = "autonomous_platform_robot_description_pkg",
+        executable = "odom_noise_injector.py",
+        name = "odom_noise_injector",
+        output = "screen",
+        parameters=[
+            {"use_sim_time":use_sim_time},
+            {"input_topic": "/odom"},
+            {"output_topic": "/odom_noisy"},
+            {"position_noise_stddev": 0.0},
+            {"yaw_noise_stddev": 0.01},
+            {"linear_velocity_noise_stddev": 0.01},
+            {"angular_velocity_noise_stddev": 0.007},
+            {"position_random_walk_stddev": 0.0},
+            {"yaw_random_walk_stddev": 0.0},
+            {"covariance_scale": 2.0},
+            {"random_seed":35},
+        ],
+    )
     return LaunchDescription(
         [
             launch.actions.DeclareLaunchArgument(
@@ -179,6 +197,7 @@ def generate_launch_description():
             gazebo_node,
             spawn_entity_node,
             ros_gz_bridge,
+            odom_noise_node,
             nav2_launch,
             slam_launch,
             ekf_node,

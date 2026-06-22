@@ -89,7 +89,7 @@ def generate_launch_description():
     ekf_config = os.path.join(
         get_package_share_directory("autonomous_platform_robot_description_pkg"),
         "config",
-        "ekf.yaml",
+        "ekf_imu.yaml",
     )
 
     ekf_node = Node(

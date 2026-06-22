@@ -1,4 +1,3 @@
-version: '3'
 services:
   ros2:
     container_name: ap4hwi

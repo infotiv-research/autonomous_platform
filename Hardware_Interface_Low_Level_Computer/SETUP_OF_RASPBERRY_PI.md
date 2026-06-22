@@ -91,7 +91,7 @@ Clone repository
 git clone --recursive https://GITLAB_USERNAME:PERSONAL_ACCESS_TOKEN@gitlab.infotivlab.se/internal-development/autonomous_platform.git
 ```
 
-The canbus communication socket speed can be set using these commands. They need to be runned after every boot but they are automatically done so using the [startup script](./testing.bash). **You do not need to run these two commands**.
+The canbus communication socket speed can be set using these commands. They need to be runned after every boot but they are automatically done so using the [startup script](./ini_system.bash). **You do not need to run these two commands**.
 
 ```bash
 sudo apt install can-utils
@@ -193,7 +193,7 @@ Raspberry Pi GPIO pins are ONLY 3.3V tolerant, meaning the MCP2515 board had to 
 
 It is very useful for the software running on the raspberry pi 4b to start when booting up.
 
-This can be done using linux services. The service will call a bash script "testing.bash" located in this directory.
+This can be done using linux services. The service will call a bash script "init_system.bash" located in this directory.
 
 The full procedure can be read [here](https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/).
 
@@ -217,8 +217,8 @@ StartLimitIntervalSec=0
 [Service]
 Type=oneshot
 User=root
-WorkingDirectory=/home/ap4/Desktop/GIT/autonomous_platform/Hardware_Interface_Low_Level_Computer
-ExecStart=/home/ap4/Desktop/GIT/autonomous_platform/Hardware_Interface_Low_Level_Computer/testing.bash
+WorkingDirectory=/home/ap4/Desktop/GIT/autonomous_platform_generation_4/Hardware_Interface_Low_Level_Computer
+ExecStart=/home/ap4/Desktop/GIT/autonomous_platform_generation_4/Hardware_Interface_Low_Level_Computer/init_system.bash
 
 [Install]
 WantedBy=multi-user.target

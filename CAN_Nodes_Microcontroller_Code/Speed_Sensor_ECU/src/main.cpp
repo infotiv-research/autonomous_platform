@@ -30,7 +30,7 @@ adding paths to each one is done in platformio.ini
 bool set_SW_filter = false;
 AP4_CAN can_interface(CAN_CS_PIN, set_SW_filter);
 uint32_t t;
-bool received_interrupt = false;
+volatile bool received_interrupt = false;
 
 
 double Velocity_LF,Velocity_RF,Velocity_LR,Velocity_RR ; //Variable to store readings from speed sensor
@@ -40,13 +40,9 @@ const int LM393_RightFront = PA1;    // Connect the sensor output to PA0 pin
 const int LM393_LeftRear = PA2;    // Connect the sensor output to PA3 pin
 const int LM393_RightRear = PA3;    // Connect the sensor output to PA2 pin
 
-
+//const long IgnoreWindow = 500 
 // Definition for interrupt handler in the speed sensor.
-<<<<<<< HEAD
-const long IgnoreWindow = 500 ; // define a time window in microseconds to ignore new edges to be handled
-=======
 const long IgnoreWindow = 100 ; // define a time window in microseconds to ignore new edges to be handled
->>>>>>> david_dev
 //                   This implies a sample time of 2000 pulses/s, which should be fast enough to sample 1 KHz.
 
  unsigned long  NewEdgeTimeLF = 0,
@@ -82,7 +78,11 @@ unsigned long test_time=0.0;
 
 // const double pi = 3.14159; // Definition of pi
 
-bool interupt_flag = false;
+volatile bool interupt_flag = false;
+const bool enable_debug_serial = true;
+uint32_t can_tx_ok_count = 0;
+uint32_t can_tx_fail_count = 0;
+uint32_t can_diag_last_print_time = 0;
 /* Include node specific library dependencies */
 // From the lib folder within each project
 
@@ -178,6 +178,13 @@ void setup() {
 
   //Serial is used for debugging purposes, USB-micro connection cable of the STM32 Bluepill
   Serial.begin(baud_rate);
+  if (enable_debug_serial) {
+    Serial.println("[BOOT] Speed ECU starting...");
+    Serial.print("[BOOT] CAN CS pin: "); Serial.println(CAN_CS_PIN);
+    Serial.print("[BOOT] CAN INT pin: "); Serial.println(CAN_INTERRUPT_PIN);
+    Serial.print("[BOOT] schedule ms: "); Serial.println(can_schedule_time);
+  }
+  pinMode(LED_BUILTIN, OUTPUT); //visually see if init-failure
   // Set LM393 as an input pin
   pinMode(LM393_LeftFront, INPUT);   
   pinMode(LM393_RightFront, INPUT);   
@@ -201,31 +208,43 @@ void setup() {
     }
   }
 
-  
-  can_interface.InitMCP2515();
-  //Serial.println("waiting 1 minute for raspberry pi to start!!!");
   //delay(60000);
   //  Set up of CAN buss, will be needed for every ECU:
-  can_interface.InitMCP2515();
-  int nr_can_bus_init_attempts = 0;
-  int max_attempts = 500;
-  // Tries 500 times to setup the CAN bus
-  while(can_interface.InitMCP2515() == false && nr_can_bus_init_attempts < max_attempts)
-  {
-    Serial.println("  INIT OF CANBUSS FAILED! Waiting 1 second and retrying");
-    nr_can_bus_init_attempts++;
-    delay(1000);
+  const int max_attempts = 10;
+  const int retry_delay_ms = 200;
+  bool can_initialized = false;
+  for (int i = 0; i < max_attempts; i++) {
+    if (enable_debug_serial) {
+      Serial.print("[INIT] MCP2515 init attempt ");
+      Serial.print(i + 1);
+      Serial.print("/");
+      Serial.println(max_attempts);
+    }
+    can_initialized = can_interface.InitMCP2515();
+    if (can_initialized) break;
+    Serial.println(" INIT of CANBUS FAILED, waiting and retrying!");
+    delay(retry_delay_ms);
   }
-  
+  if (!can_initialized) {
+    Serial.println("INIT of CANBUS failed after max attempts- HALTING!");
+    while (true) {
+      digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+      delay(150);
+    }
+  }
+  if (enable_debug_serial) {
+    Serial.println("[INIT] MCP2515 init successful.");
+  }
   /*
   Configure what CAN signals should be read from the CAN bus (by Id), any other message ID will be ignored!!
   */
-  attachInterrupt(digitalPinToInterrupt(CAN_INTERRUPT_PIN), AP4CANInterrupt, LOW);
+  pinMode(CAN_INTERRUPT_PIN,INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(CAN_INTERRUPT_PIN), AP4CANInterrupt, FALLING);
 
   Serial.println("Set up of CAN interface complete!");
 
   // Send speed sensor by ID (CAN_ID_GE_SPEED_SENSOR) once every second (100ms). 
-  can_interface.AddPeriodicCanSend(CAN_ID_GET_SPEED_SENSOR,1000);
+  //can_interface.AddPeriodicCanSend(CAN_ID_GET_SPEED_SENSOR,1000);
   
   
 
@@ -248,26 +267,25 @@ void loop() {
     Serial.println("hello");
     interupt_flag=false;
   }
-  can_interface.PeriodicCanSend();
+  bool periodic_ok = can_interface.PeriodicCanSend();
+  if (enable_debug_serial && !periodic_ok) {
+    Serial.print("[CAN] Periodic send failed, EFLG=0x");
+    Serial.println(can_interface.GetMCP2515Errors(), HEX);
+  }
   // the loop function runs over and over again forever
-  if(received_interrupt)
-  {
-  // Updates each value in the can_interface object
-  can_interface.InterruptReadCAN();
+  if(received_interrupt) {
+    received_interrupt = false;
+    can_interface.InterruptReadCAN();
   }
 
   // Speed Sensor
   if (millis() - lastTime >= can_schedule_time) {   // Check if "can_schedule_time" has passed. 
-<<<<<<< HEAD
-    
-=======
->>>>>>> david_dev
     lastTime = millis();   // Store the current time for the next comparison
 // debug messages to serial terminal
-    Serial.print("CAN schedule Time base (ms): ");
+    Serial.print("[SPEED] CAN schedule Time base (ms): ");
     Serial.print(can_schedule_time);
 
-    Serial.print("Pulse counts (LF,RF,LR,RR): ");
+    Serial.print("[SPEED] Pulse counts (LF,RF,LR,RR): ");
     Serial.print(pulseCount_LeftFront ); Serial.print("\t");
     Serial.print(pulseCount_RightFront);Serial.print("\t");
     Serial.print(pulseCount_LeftRear  );Serial.print("\t");
@@ -276,23 +294,25 @@ void loop() {
 // Encode the values in the buffer
 
     encode_can_0x5dc_SpeedSensorLF_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftFront);
-<<<<<<< HEAD
-    encode_can_0x5dc_SpeedSensorRF_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftFront);
-    encode_can_0x5dc_SpeedSensorLR_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftFront);
-    encode_can_0x5dc_SpeedSensorRR_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftFront);
-    encode_can_0x5dc_SpeedSensorRR_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftFront);
-=======
     encode_can_0x5dc_SpeedSensorRF_PulseCnt(&can_interface.can_storage_container,pulseCount_RightFront);
     encode_can_0x5dc_SpeedSensorLR_PulseCnt(&can_interface.can_storage_container,pulseCount_LeftRear);
     encode_can_0x5dc_SpeedSensorRR_PulseCnt(&can_interface.can_storage_container,pulseCount_RightRear);
->>>>>>> david_dev
     encode_can_0x5dc_SpeedSensorSampleTime(&can_interface.can_storage_container, can_schedule_time);
     
     
 
 // Send the buffer on CAN
 
-    can_interface.SendSingleCanFrame(CAN_ID_GET_SPEED_SENSOR);
+    bool can_send_ok = can_interface.SendSingleCanFrame(CAN_ID_GET_SPEED_SENSOR);
+    if (can_send_ok) {
+      can_tx_ok_count++;
+    } else {
+      can_tx_fail_count++;
+      if (enable_debug_serial) {
+        Serial.print("[CAN] Send 0x5DC failed, EFLG=0x");
+        Serial.println(can_interface.GetMCP2515Errors(), HEX);
+      }
+    }
 
     // Reset pulse count values for the next loop.
 
@@ -301,6 +321,16 @@ void loop() {
     pulseCount_LeftRear = 0;   // Reset pulse count for the next second
     pulseCount_RightRear = 0;   // Reset pulse count for the next second
 
+  }
+
+  if (enable_debug_serial && (millis() - can_diag_last_print_time >= 1000)) {
+    can_diag_last_print_time = millis();
+    Serial.print("[CAN] tx_ok=");
+    Serial.print(can_tx_ok_count);
+    Serial.print(" tx_fail=");
+    Serial.print(can_tx_fail_count);
+    Serial.print(" EFLG=0x");
+    Serial.println(can_interface.GetMCP2515Errors(), HEX);
   }
 
   

@@ -71,7 +71,7 @@ The `data_collection.py` file is run in the High Level Computer docker as:
 ros2 run autonomous_platform_robot_description_pkg data_collection.py 
 ```
 
-The .pkl file can then be used as input within train_DAgger.py, found in `/autonomous_platform/Imitation_Learning/train_Dagger.py`
+The .pkl file can then be used as input within train_DAgger.py, found in `/autonomous_platform/High_Level_Control_Computer/ap4_hlc_code/ap4hlc_ws/src/imitation_learning/train_DAgger.py`
 
 ### OAK-D camera node
 
@@ -84,11 +84,12 @@ docker build --build-arg USE_RVIZ=1 -t depthai-ros .
 To start OAK-D camera nodes enter the High_Level_Control_Computer directory and run:
 
 ```bash
-./launch_depthai_ros.sh
+"./Imitation learning/launch_depthai_ros.sh"
 ```
 
 This will launch the camera at the resolution 208 x  156, the resolution can be change by changing rgbScaleDinominator and rgbScaleNumerator in 'launch_depthai_ros.sh', however there is a latancy at higher resolutions for the depth image. Possible resolutions can be seen in the table below:
 
+```
 4056 x 3040 *  2/13 -->  624 x  468
 4056 x 3040 *  2/39 -->  208 x  156
 4056 x 3040 *  2/51 -->  160 x  120
@@ -115,3 +116,4 @@ This will launch the camera at the resolution 208 x  156, the resolution can be 
 4056 x 3040 * 14/53 --> 1072 x  804
 4056 x 3040 * 16/39 --> 1664 x 1248
 4056 x 3040 * 16/52 --> 1248 x  936
+```

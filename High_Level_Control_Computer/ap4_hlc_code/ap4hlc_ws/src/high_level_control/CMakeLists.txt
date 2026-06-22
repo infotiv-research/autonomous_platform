@@ -14,10 +14,6 @@ find_package(ament_cmake REQUIRED)
   
 install(PROGRAMS  
   high_level_model.py 
-  ############-- THESE WERE HERE FROM 2024 BUT NEVER EXISTED AS FILES --############
-  # high_level_model_depth.py                                                      #
-  # high_level_model_orb.py                                                        #
-  ##################################################################################
   data_collection.py
   utils.py
   DESTINATION lib/${PROJECT_NAME} )
