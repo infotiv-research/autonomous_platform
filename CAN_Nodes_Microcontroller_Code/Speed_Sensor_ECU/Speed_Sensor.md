@@ -31,7 +31,7 @@ cd Desktop/autonomous_platform/CAN_Nodes_Microcontroller_Node/Speed_Sensor_ECU
 Here is an overwiev of ST-LINK pins and what they refer to.
 
 
- ![ST-LINK pin_chart](../../Resources\extra_documentation_images\ST-LINK_pins.jpg)
+ ![ST-LINK pin_chart](../../Resources\extra_documentation_images\ST-LINK-pins.png)
 
 Now when you have connected the ST-LINK properly and are located in `Speed_Sensor_ECU`-folder you write the follwoing command in the terminal.
 ```bash

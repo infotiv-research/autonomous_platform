@@ -17,11 +17,20 @@ This is the repository for Autonomous Platform at Infotiv Technology Development
 
 - The implementation of a LiDAR using SLAM for autonomous navigation of the AP4 is done by **David Espedalen** and **Anton Stigemyr Hill** under supervision of **Hamid Ebadi** as a part of a master thesis with the title of **Implementation of LiDAR and SLAM on a Small-Scale Autonomous Platform - Investigation of how LiDAR can be used to Simultaneously Localize a Vehicle and Map its Surroundings using SLAM** that is accessible [in this link ![PDF](Resources/PDF_file_icon.svg.png) ](Master_Thesis2025.pdf).
 
-[![Implementation of LiDAR and SLAM on a Small-Scale Autonomous Platform
-](Resources/Thesis_2025.png)](Master_Thesis2025.pdf)
-[![software pipeline for Imitation Learning for achieving autonomous driving using both behavioral cloning (BC) and Human Gated Dataset Aggregation (HG-DAgger) ](Resources/Spring_2024/thesis.png)](Master_Thesis2024.pdf)
-[![Design of a modular centralized E/E and software architecture for a small-scale automotive platform](Resources/thesis.png)](Master_Thesis2023.pdf)
+- The implementation of a validation pipeline, along with improvements to the kinematic bicycle model for odometry and sensor fusion of the IMU and odometry for improved localization, was carried out by **Anton Espedalen** and **Jurek Preisegger** under the supervision of **Hamid Ebadi** as part of the master thesis titled **Bridging the Sim-to-Real Gap in a Small-Scale Autonomous Platform**. The thesis is accessible [in this link ![PDF](Resources/PDF_file_icon.svg.png)](Master_Thesis2026.pdf).
 
+<a href="Master_Thesis2026.pdf">
+  <img src="Resources/Thesis_2026.png" alt="Bridging the Sim-to-Real Gap in a Small-Scale Autonomous Platform" width="220">
+</a>
+<a href="Master_Thesis2025.pdf">
+  <img src="Resources/Thesis_2025.png" alt="Implementation of LiDAR and SLAM on a Small-Scale Autonomous Platform" width="220">
+</a>
+<a href="Master_Thesis2024.pdf">
+  <img src="Resources/Spring_2024/thesis.png" alt="Software pipeline for imitation learning using BC and HG-DAgger" width="220">
+</a>
+<a href="Master_Thesis2023.pdf">
+  <img src="Resources/thesis.png" alt="Design of a modular centralized E/E and software architecture for a small-scale automotive platform" width="220">
+</a>
 
 
 [![AP4 Autonomous Driving Navigation/SLAM](https://img.youtube.com/vi/hyw-hApxQHU/0.jpg)](https://www.youtube.com/watch?v=hyw-hApxQHU)

@@ -1,80 +1,22 @@
 ## Known issues
 
-### 2025 status report
+### 2026 status report
 
-SPCU:
-Current status is the the new SPCU on the new built Go Kart (AP4 version 2) is now working. I had some struggle with the DAC boards for actuation of throtthle/Brake) because a breaking wire. But yesterday and even today I could steer/accelerate and brake with the AP4_2 so that part is ready. Maybe someone would like to clean up and tie wome wires.
+## Main Gokart (the one with lidar and IMU):
+All main areas work as intended, steering is tuned and works reasonably well could be perfected but not necessary. The EKF setting work well could also be improved to be more responsive and with that tracks better in the short term. Right now it works well in the long term but not over shorter faster turns.
 
-Speed sensing:
-The speed sensing was not working completely well now, I saw when integrating the SPCU and looking at the outputs in Ros2. I suppose it's a sync issue of code between Speed Sensor bluepill node and the HWI. It looks like the speed sensor itself is sending data correcly on CAN (that can be seen as well on CAN and on the terminal output of the bluepill).
-
-Strongest recommendation would be to pull the latest code in the repo or whatever is used now in AP4_1 (Anton/Davids) and recompile on AP4_2.
-
-To cleanify the bluepill repo you may need to discard the  ./.pio/\* tree in the working dir of the platform io project for the speed sensor.
--    on HWI side, you need to remove (rm -rf) the build log and lib directories in the package including the c to ros translator.
-Just colcon build -clean does not clean out everything.
-
-The current problem is that you can see each speed sensor working if you observe the output terminal from the bluepill, but it doesn't show as it should in the ros topics. If you look at the topic for the LeftFront speed sensor you get data if the wheel is turning, but not the other wheels. I suppose that went wrong when I reprogrammed tha latest bluepill for the speed sensor wiht the latest mod from Anton/David without syncing the updated ros2 hwi library .
-
-Recommendations/notes
-
-- Add a few Ros2 commands to trigger acceleration / braking (in the README for Low level computer (raspberry pie). Easy for testing if the xbox controller is not willing to start.
-- Tighten the tops of the speed sensor and SPCU with screws/nuts.
-- Wire the fans to the 12V section.
-- Need to tie some wires with tie wraps.
-- Wire the power of the router from 12V.
-- Document the exp board picture in the repo. Not sure that I pushed that yet.
-- Propulsion actuators (mcp4725 DAC board) are now in a seperate box on the side of the SPCU. Pretty sure that they would just fit mounted on the experiment board. That would save a lot of wiring again and make it more neat and easy to follow.
-- Fine tune steering calibration on kangaroo board.
-- First review the mounting of the steering swithes, so they allow for max steering.  Then do a re-initialization of the kangaroo board and perform a new calibration.  Review the actual steering angles and see that it improved.
-- Charge the batteries now and then. Each Go Kart has a battery for the autonomous system and for the go kart engine. Charge them preferably every 2 months.
-
-/Marten
+## Secondary gokart:
+- SPCU and SSCU need to be rebuilt and probably reflashed.
+- The raspberry pi has outdated repo and needs to be updated.
+- Steering geometry has to be retuned and remeasured and then the steering motor has to be autotuned.
+- A IMU and LiDAR need to be purchased and mounted.
+- Speed sensors need to be wired.
 
 ### Priority : Fix known Bugs / Issues <a name="Known-Bugs-/-Issues"></a>
 
-There are some known bugs and issues and should have priority
+- Second gokart needs to be fixed.
+- SLAM algorithm needs to be fixed pointers on this can be read in the 2026 thesis.
 
-- Battery voltage drops during load and steering control is lost
-- Lost wifi connection during test day @ gokartcentralen
-- Raspberry Pi 4b SD card gets filled with junk files and breaks hardware interface software.
-
-It is a known problem that the raspberry pi 4b fills up with junk files and slows down the raspberry pi and eventually break things. Docker caches also grow in size over time. Possible solution get a bigger SD card? Find how to periodically remove junk files?
-
-- Raspberry Pi 4b corrupted files
-
-Over time files on the SD card gets corrupted and affects behavior.
-Common problems are that the docker container cannot be built. A cause for this may be the shutdown procedure of the raspberry pi. Unplugging it to power down may not be optimal. Need to find a solution for properly safely powering down the raspberry pi. Terminal output below.
-
-![Raspberry Pi 4b corrupted files](Resources/extra_documentation_images/raspberry_pi_corrupted_repository.png)
-
-See TEST_DEBUGGING.md to see how it is currently resolved.
-
-- Low voltage input to the raspberry pi makes it slow and unresponsive
-
-Needs to be resolved properly. Could become a problem once more data is sent to and from the hardware interface code.
-
-- PlatformIO build fails when repository is cloned to a path containing a whitespace
-
-Opening the embedded ECU software in platformIO and trying to build it fails when repository filepath has whitespace in it. See error output below. This was when trying to build firmware for SPCU.
-
-Filepath to SPCU was `C:\Users\erimag\OneDrive - Infotiv AB\Skrivbordet\git\autonomous_platform\CAN_Nodes_Microcontroller_Code\SPCU`
-
-```bash
-Linking .pio\build\bluepill_f103c8\firmware.elf
-arm-none-eabi-g++: error: Infotiv: No such file or directory
-arm-none-eabi-g++: error: AB/Skrivbordet/git/autonomous_platform/CAN_Nodes_Microcontroller_Code/SPCU/.pio/build/bluepill_f103c8/firmware.map: No such file or directory
-
-[.pio\build\bluepill_f103c8\firmware.elf] Error 1
-```
-
-I tried the solution presented in this [forum post](https://community.platformio.org/t/spaces-in-path-still-cause-problems-with-g/18214) but could still not get it to work. Temporary solution, clone the repository to a filepath without whitespace?
-
-If there is any error related to long path, open shell as administrator, configure git to use long path names, or else some files will be missed when cloning the repository
-
-```bash
-git config --system core.longpaths true
-```
 
 ## Issue with the LiDAR and SLAM autonomous navigation software
 
@@ -84,13 +26,6 @@ There are some issues with this and the hardware for the positioning/localizatio
 
 A issue with the steering that has been encountered and solved but could arise again, is that a slack in the steering power units drive shaft to the belt can occur. This causes the wheels to not being able to steer in the control units intended angle and also not being able to return to true zero in certain conditions. This can be solved by removing the belt and steering motor and readjusting the screw on the clamping timing pulley and applying a small amount of loctite to it since it can come loose after much use or not clamping it with adequate torque.
 
-### IMU issue
-
-There are some issues with the IMU and it seems that the IMU is drifting much in the physical environment. This would be good to fix in order to have a well function sensor fusion between the speed sensors and the IMU. One thing to look at is how the IMU is oriented in space and make sure that is correct in the ekf node. As well as that some tuning needs to be done.
-
-### Speed sensors/wheel encoders
-
-These works kind of well right now, but it can be benifitical to verify that they are measuring the correct distance and that the steering angle together with the speed sensors gives the correct position of the AP4. This is calculated in the `odom_publisher` node on the Raspberry Pi.
 
 ## Future work <a name="Future-Work"></a>
 
@@ -128,15 +63,6 @@ Analysis of power consumption of platform is insufficient. Platform blew a fuse 
 
 - Possible solution: Do a new power requirement analysis of the platform. Taking current spikes into account. Implement changes to the platform to avoid future problems.
 
-### High Level Control Software
-
-The high level control software is very much unfinished. So far a docker container has been setup with the correct environment and software installed.
-
-### Mounting High Performance Computer on AP4
-
-During spring 2023, the high performance computer was specified as the development laptop. It was sufficient for testing and connecting wirelessly to the hardware interface (Raspberry Pi 4b). When future AD/ADAS algorithms gets implemented it would be beneficial to have this computing unit mounted permanently onto the platform. This would remove any latency / range issues caused by the platform being controlled over wifi.
-
-Find a suitable Intel NUC mini PC and mount onto the back of Autonomous Platform Generation 4. Install the software currently running on the development laptop onto it.
 
 ### Sensor Measurements <a name="Sensor-Measurements"></a>
 
@@ -164,11 +90,6 @@ An Inertial Measurement Unit (IMU) provides information such as linear accelerat
 
 This requires an IMU sensor to be integrated onto the platform. See `HOW_TO_EXTEND.md` for general procedure of connecting a new functionality.
 
-### Sensor Fusion
-
-Sensor fusion is the process of combining multiple sensor values in order to get a better approximation of the vehicle state. The information from the sensors above, Camera, Velocity, Lidar and Radar can be combined using sensor fusion algorithms in order to get a better overview of the environment around the autonomous platform.
-
-This can be suitable as a thesis project as it is an advanced topic.
 
 ### Testing out existing Autonomous Drive algorithms
 
@@ -287,4 +208,4 @@ One future work to look at is to do sensor fusion between the LiDAR and the Came
 
 ### Additional LiDAR
 
-As for now in 2025 the AP4 only have one LiDAR mounted that only can see in front of the AP4, as the AP4 itself blocks everything behind the LiDAR. One future work could be to implement an additional LiDAR mounted on the back of the AP4 in order to have a view of the AP4 surroundings on the back as well. This will improve the view of the AP4 environment and probably will improve the navigation as well.
+As for now in 2026 the AP4 only has one LiDAR mounted that only can see in front of the AP4, as the AP4 itself blocks everything behind the LiDAR. One future work could be to implement an additional LiDAR mounted on the back of the AP4 in order to have a view of the AP4 surroundings on the back as well. This will improve the view of the AP4 environment and probably will improve the navigation as well.

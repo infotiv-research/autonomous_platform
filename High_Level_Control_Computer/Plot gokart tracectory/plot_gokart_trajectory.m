@@ -1,7 +1,7 @@
 %% plot_gokart_trajectory_fixed.m
 % Reads the ROS 2 bag SQLite file directly and plots gokart trajectory from
 % both raw odometry and filtered odometry.
-%
+%  
 % Optional:
 %   Add mocap ground-truth from a .mat recording and overlay it in the same plots.
 %   Includes automatic time synchronization based on motion onset.
@@ -13,33 +13,38 @@
 clear; clc; close all;
 
 %% User settings
-bagFile = 'odom1.db3';
+bagFile = 'centralen4.db3';
 topicName = '/odometry_test';
 showMarkers = true;
 
 % ===== Mocap ground-truth toggle =====
-useMocapGroundTruth = true;              % true = load and overlay mocap, false = ignore
-mocapFile = 'ap4.mat';               % mocap file
-mocapBodyName = 'duck4';                 % rigid body to extract from mocap
+useMocapGroundTruth = false;              % true = load and overlay mocap, false = ignore
+mocapFile = 'turn_right6.mat';               % mocap file
+mocapBodyName = 'AP4';                 % rigid body to extract from mocap
 mocapPositionScale = 1e-3;               % mm -> m (set to 1 if already meters)
 
 % Optional coordinate alignment between mocap and odometry
 mocapXOffset = 0;
 mocapYOffset = 0;
-mocapYawOffsetDeg = 95;
+mocapYawOffsetDeg = 0;
 
 % ===== Automatic sync settings =====
 autoSyncMocapToOdometry = true;          % true = align using detected motion onset
 syncReference = 'filtered';              % 'raw' or 'filtered'
 motionThresholdOdom = 0.05;              % [m/s]
-motionThresholdMocap = 0.05;             % [m/s]
+motionThresholdMocap = 0.01;             % [m/s]
 motionHoldTime = 0.20;                   % [s]
 speedSmoothWindow = 7;                   % moving-average window in samples
 showSyncDiagnosticPlot = true;           % plots speed used for sync
 
+% ===== Manual sync adjustment =====
+% Positive value shifts mocap later in time.
+% Negative value shifts mocap earlier in time.
+mocapManualTimeShift = -7.2;              % [s]
+
 % ===== Yaw plot settings =====
 unwrapYawForPlot = false;                % true = continuous yaw plot
-yawPlotLimits = [-60 5];                 % set to [] to disable ylim
+yawPlotLimits = [];                 % set to [] to disable ylim
 arrowLength = 0.5;                       % heading arrow length in XY plot
 
 %% Open SQLite database
@@ -142,10 +147,15 @@ if useMocapGroundTruth
             [mocap_t, mocap_x, mocap_y, mocap_yaw_deg] = loadMocapGroundTruth( ...
                 mocapFile, mocapBodyName, mocapPositionScale, ...
                 mocapXOffset, mocapYOffset, mocapYawOffsetDeg);
-
+        
+            % Shift mocap position so ground truth starts at zero
+            mocap_x = mocap_x - mocap_x(1);
+            mocap_y = mocap_y - mocap_y(1);
+        
             mocapLoaded = true;
             fprintf('Loaded mocap ground truth for body "%s" (%d samples)\n', ...
                 mocapBodyName, numel(mocap_t));
+        
         catch ME
             warning('Failed to load mocap ground truth: %s\nContinuing without it.', ME.message);
             mocapLoaded = false;
@@ -153,44 +163,60 @@ if useMocapGroundTruth
     end
 end
 
-%% Optional: automatically sync mocap to odometry using motion onset
+%% Optional: sync mocap to odometry
 odomSpeed = [];
 mocapSpeed = [];
 tMoveOdom = NaN;
 tMoveMocap = NaN;
-timeShift = 0;
 
-if mocapLoaded && autoSyncMocapToOdometry
+autoTimeShift = 0;
+totalTimeShift = 0;
 
-    switch lower(syncReference)
-        case 'raw'
-            ref_x = raw_x;
-            ref_y = raw_y;
-        case 'filtered'
-            ref_x = filt_x;
-            ref_y = filt_y;
-        otherwise
-            error('syncReference must be "raw" or "filtered".');
+if mocapLoaded
+
+    % ===== Automatic sync using detected motion onset =====
+    if autoSyncMocapToOdometry
+
+        switch lower(syncReference)
+            case 'raw'
+                ref_x = raw_x;
+                ref_y = raw_y;
+            case 'filtered'
+                ref_x = filt_x;
+                ref_y = filt_y;
+            otherwise
+                error('syncReference must be "raw" or "filtered".');
+        end
+
+        [tMoveOdom, odomSpeed] = detectMotionOnset( ...
+            time_s, ref_x, ref_y, motionThresholdOdom, motionHoldTime, speedSmoothWindow);
+
+        [tMoveMocap, mocapSpeed] = detectMotionOnset( ...
+            mocap_t, mocap_x, mocap_y, motionThresholdMocap, motionHoldTime, speedSmoothWindow);
+
+        if ~isnan(tMoveOdom) && ~isnan(tMoveMocap)
+            autoTimeShift = tMoveOdom - tMoveMocap;
+
+            fprintf('Auto-sync enabled:\n');
+            fprintf('  Odometry motion onset: %.3f s\n', tMoveOdom);
+            fprintf('  Mocap motion onset:    %.3f s\n', tMoveMocap);
+            fprintf('  Auto mocap shift:      %+0.3f s\n', autoTimeShift);
+        else
+            warning(['Automatic sync failed because motion onset could not be ', ...
+                     'detected in one or both datasets. Manual shift will still be applied.']);
+            autoTimeShift = 0;
+        end
     end
 
-    [tMoveOdom, odomSpeed] = detectMotionOnset( ...
-        time_s, ref_x, ref_y, motionThresholdOdom, motionHoldTime, speedSmoothWindow);
+    % ===== Manual sync correction =====
+    % The manual shift is added after automatic sync.
+    % Positive value shifts mocap later.
+    % Negative value shifts mocap earlier.
+    totalTimeShift = autoTimeShift + mocapManualTimeShift;
+    mocap_t = mocap_t + totalTimeShift;
 
-    [tMoveMocap, mocapSpeed] = detectMotionOnset( ...
-        mocap_t, mocap_x, mocap_y, motionThresholdMocap, motionHoldTime, speedSmoothWindow);
-
-    if ~isnan(tMoveOdom) && ~isnan(tMoveMocap)
-        timeShift = tMoveOdom - tMoveMocap;
-        mocap_t = mocap_t + timeShift;
-
-        fprintf('Auto-sync enabled:\n');
-        fprintf('  Odometry motion onset: %.3f s\n', tMoveOdom);
-        fprintf('  Mocap motion onset:    %.3f s\n', tMoveMocap);
-        fprintf('  Applied mocap shift:   %+0.3f s\n', timeShift);
-    else
-        warning(['Automatic sync failed because motion onset could not be ', ...
-                 'detected in one or both datasets.']);
-    end
+    fprintf('Manual mocap shift:    %+0.3f s\n', mocapManualTimeShift);
+    fprintf('Total mocap shift:     %+0.3f s\n', totalTimeShift);
 end
 
 %% Prepare yaw signals for plotting
@@ -218,8 +244,8 @@ end
 figure('Name', 'Gokart Trajectory', 'Color', 'w');
 hold on; grid on; axis equal;
 
-plot(raw_x,  raw_y,  'LineWidth', 1.2, 'DisplayName', 'Raw odometry');
-plot(filt_x, filt_y, 'LineWidth', 1.8, 'DisplayName', 'Filtered odometry');
+plot(raw_x,  raw_y,  'LineWidth', 1.2, 'DisplayName', 'Odometry');
+plot(filt_x, filt_y, 'LineWidth', 1.8, 'DisplayName', 'EKF');
 
 if mocapLoaded
     plot(mocap_x, mocap_y, 'LineWidth', 1.8, 'DisplayName', 'Ground truth (mocap)');
@@ -232,38 +258,38 @@ if showMarkers
     plot(filt_x(1),   filt_y(1),   'o', 'HandleVisibility', 'off');
     plot(filt_x(end), filt_y(end), 's', 'HandleVisibility', 'off');
 
-    text(raw_x(1),   raw_y(1),   '  raw start');
-    text(raw_x(end), raw_y(end), '  raw end');
-    text(filt_x(1),   filt_y(1),   '  filtered start');
-    text(filt_x(end), filt_y(end), '  filtered end');
+    %text(raw_x(1),   raw_y(1),   '  raw start');
+    %text(raw_x(end), raw_y(end), '  raw end');
+    %text(filt_x(1),   filt_y(1),   '  filtered start');
+    %text(filt_x(end), filt_y(end), '  filtered end');
 
     if mocapLoaded
         plot(mocap_x(1),   mocap_y(1),   'o', 'HandleVisibility', 'off');
         plot(mocap_x(end), mocap_y(end), 's', 'HandleVisibility', 'off');
 
-        text(mocap_x(1),   mocap_y(1),   '  gt start');
-        text(mocap_x(end), mocap_y(end), '  gt end');
+        %text(mocap_x(1),   mocap_y(1),   '  gt start');
+        %text(mocap_x(end), mocap_y(end), '  gt end');
     end
 end
 
 xlabel('X position [m]');
 ylabel('Y position [m]');
-title('Gokart trajectory from raw, filtered, and optional mocap ground truth');
+title('Gokart trajectory from odometry and EKF');
 
 % Heading arrows at end position
 quiver(raw_x(end), raw_y(end), ...
     arrowLength*cos(raw_yaw(end)), arrowLength*sin(raw_yaw(end)), ...
-    0, 'LineWidth', 1.5, 'MaxHeadSize', 2, 'DisplayName', 'Raw heading (end)');
+    0, 'LineWidth', 1.5, 'MaxHeadSize', 2, 'DisplayName', 'Odometry heading');
 
 quiver(filt_x(end), filt_y(end), ...
     arrowLength*cos(filt_yaw(end)), arrowLength*sin(filt_yaw(end)), ...
-    0, 'LineWidth', 2.0, 'MaxHeadSize', 2, 'DisplayName', 'Filtered heading (end)');
+    0, 'LineWidth', 2.0, 'MaxHeadSize', 2, 'DisplayName', 'EKF heading');
 
 if mocapLoaded
     mocap_yaw_end_rad = deg2rad(mocap_yaw_deg(end));
     quiver(mocap_x(end), mocap_y(end), ...
         arrowLength*cos(mocap_yaw_end_rad), arrowLength*sin(mocap_yaw_end_rad), ...
-        0, 'LineWidth', 2.0, 'MaxHeadSize', 2, 'DisplayName', 'Ground truth heading (end)');
+        0, 'LineWidth', 2.0, 'MaxHeadSize', 2, 'DisplayName', 'Ground truth heading');
 end
 
 legend('Location', 'best');
@@ -273,8 +299,8 @@ figure('Name', 'Position vs Time', 'Color', 'w');
 
 subplot(2,1,1);
 hold on; grid on;
-plot(time_s, raw_x,  'LineWidth', 1.1, 'DisplayName', 'Raw X');
-plot(time_s, filt_x, 'LineWidth', 1.4, 'DisplayName', 'Filtered X');
+plot(time_s, raw_x,  'LineWidth', 1.1, 'DisplayName', 'Odometry X');
+plot(time_s, filt_x, 'LineWidth', 1.4, 'DisplayName', 'EKF X');
 if mocapLoaded
     plot(mocap_t, mocap_x, 'LineWidth', 1.4, 'DisplayName', 'Ground truth X');
 end
@@ -284,8 +310,8 @@ legend('Location', 'best');
 
 subplot(2,1,2);
 hold on; grid on;
-plot(time_s, raw_y,  'LineWidth', 1.1, 'DisplayName', 'Raw Y');
-plot(time_s, filt_y, 'LineWidth', 1.4, 'DisplayName', 'Filtered Y');
+plot(time_s, raw_y,  'LineWidth', 1.1, 'DisplayName', 'Odometry Y');
+plot(time_s, filt_y, 'LineWidth', 1.4, 'DisplayName', 'EKF Y');
 if mocapLoaded
     plot(mocap_t, mocap_y, 'LineWidth', 1.4, 'DisplayName', 'Ground truth Y');
 end
@@ -523,4 +549,200 @@ function [tMove, speedSmooth] = detectMotionOnset(t, x, y, speedThreshold, holdT
             return;
         end
     end
+end
+
+%% Final numerical results for Excel
+% This section does not change any plotting.
+% It compares raw odometry and EKF against mocap ground truth.
+%
+% Error convention:
+%   error = estimate - ground truth
+%
+% RMSE metrics:
+%   RMSE Position       = fused x/y trajectory RMSE [m]
+%   RMSE Yaw            = wrapped yaw RMSE [deg]
+%   RMSE Weighted Pose  = sqrt(ex^2 + ey^2 + (L*eyaw_rad)^2) [m-equivalent]
+
+if mocapLoaded
+
+    % ===== Weighted pose RMSE setting =====
+    % L converts yaw error [rad] into meter-equivalent error.
+    %
+    % Example:
+    %   L = 1.0 means 0.1 rad yaw error contributes as 0.1 m
+    %   L = 2.0 means 0.1 rad yaw error contributes as 0.2 m
+    poseCharacteristicLength_m = 1.951;
+
+    % ===== Interpolate ground truth to odometry timestamps =====
+    overlapIdx = time_s >= mocap_t(1) & time_s <= mocap_t(end);
+
+    t_eval = time_s(overlapIdx);
+
+    raw_x_eval    = raw_x(overlapIdx);
+    raw_y_eval    = raw_y(overlapIdx);
+    raw_yaw_eval  = raw_yaw(overlapIdx);
+
+    ekf_x_eval    = filt_x(overlapIdx);
+    ekf_y_eval    = filt_y(overlapIdx);
+    ekf_yaw_eval  = filt_yaw(overlapIdx);
+
+    gt_x_eval = interp1(mocap_t, mocap_x, t_eval, 'linear');
+    gt_y_eval = interp1(mocap_t, mocap_y, t_eval, 'linear');
+
+    % Interpolate unwrapped yaw to avoid interpolation jumps around +/-180 deg.
+    gt_yaw_rad_unwrapped = unwrap(deg2rad(mocap_yaw_deg));
+    gt_yaw_eval = interp1(mocap_t, gt_yaw_rad_unwrapped, t_eval, 'linear');
+
+    validIdx = isfinite(gt_x_eval) & isfinite(gt_y_eval) & isfinite(gt_yaw_eval) & ...
+               isfinite(raw_x_eval) & isfinite(raw_y_eval) & isfinite(raw_yaw_eval) & ...
+               isfinite(ekf_x_eval) & isfinite(ekf_y_eval) & isfinite(ekf_yaw_eval);
+
+    t_eval       = t_eval(validIdx);
+
+    gt_x_eval    = gt_x_eval(validIdx);
+    gt_y_eval    = gt_y_eval(validIdx);
+    gt_yaw_eval  = gt_yaw_eval(validIdx);
+
+    raw_x_eval   = raw_x_eval(validIdx);
+    raw_y_eval   = raw_y_eval(validIdx);
+    raw_yaw_eval = raw_yaw_eval(validIdx);
+
+    ekf_x_eval   = ekf_x_eval(validIdx);
+    ekf_y_eval   = ekf_y_eval(validIdx);
+    ekf_yaw_eval = ekf_yaw_eval(validIdx);
+
+    if isempty(t_eval)
+        warning('No overlapping valid mocap/odometry samples found. Cannot compute Excel results.');
+    else
+
+        % ===== Full-trajectory error signals =====
+        odom_err_x = raw_x_eval - gt_x_eval;
+        odom_err_y = raw_y_eval - gt_y_eval;
+        odom_err_yaw_rad = wrapAnglePiLocal(raw_yaw_eval - gt_yaw_eval);
+
+        ekf_err_x = ekf_x_eval - gt_x_eval;
+        ekf_err_y = ekf_y_eval - gt_y_eval;
+        ekf_err_yaw_rad = wrapAnglePiLocal(ekf_yaw_eval - gt_yaw_eval);
+
+        % ===== RMSE 1: fused x/y position RMSE =====
+        odom_rmse_pos = sqrt(mean(odom_err_x.^2 + odom_err_y.^2, 'omitnan'));
+        ekf_rmse_pos  = sqrt(mean(ekf_err_x.^2  + ekf_err_y.^2,  'omitnan'));
+
+        % ===== RMSE 2: yaw RMSE =====
+        odom_rmse_yaw_rad = sqrt(mean(odom_err_yaw_rad.^2, 'omitnan'));
+        ekf_rmse_yaw_rad  = sqrt(mean(ekf_err_yaw_rad.^2,  'omitnan'));
+
+        odom_rmse_yaw_deg = rad2deg(odom_rmse_yaw_rad);
+        ekf_rmse_yaw_deg  = rad2deg(ekf_rmse_yaw_rad);
+
+        % ===== RMSE 3: weighted pose RMSE =====
+        odom_rmse_weighted_pose = sqrt(mean( ...
+            odom_err_x.^2 + ...
+            odom_err_y.^2 + ...
+            (poseCharacteristicLength_m * odom_err_yaw_rad).^2, ...
+            'omitnan'));
+
+        ekf_rmse_weighted_pose = sqrt(mean( ...
+            ekf_err_x.^2 + ...
+            ekf_err_y.^2 + ...
+            (poseCharacteristicLength_m * ekf_err_yaw_rad).^2, ...
+            'omitnan'));
+
+        % ===== Final sample values for Excel =====
+        iEnd = numel(t_eval);
+
+        gt_x_final = gt_x_eval(iEnd);
+        gt_y_final = gt_y_eval(iEnd);
+        gt_yaw_final_deg = rad2deg(wrapAnglePiLocal(gt_yaw_eval(iEnd)));
+
+        odom_x_final = raw_x_eval(iEnd);
+        odom_y_final = raw_y_eval(iEnd);
+        odom_yaw_final_deg = rad2deg(wrapAnglePiLocal(raw_yaw_eval(iEnd)));
+
+        ekf_x_final = ekf_x_eval(iEnd);
+        ekf_y_final = ekf_y_eval(iEnd);
+        ekf_yaw_final_deg = rad2deg(wrapAnglePiLocal(ekf_yaw_eval(iEnd)));
+
+        odom_err_x_final = odom_err_x(iEnd);
+        odom_err_y_final = odom_err_y(iEnd);
+        odom_err_yaw_final_deg = rad2deg(odom_err_yaw_rad(iEnd));
+
+        ekf_err_x_final = ekf_err_x(iEnd);
+        ekf_err_y_final = ekf_err_y(iEnd);
+        ekf_err_yaw_final_deg = rad2deg(ekf_err_yaw_rad(iEnd));
+
+        % ===== Structured result table =====
+        excelResult = table( ...
+            gt_x_final, gt_y_final, gt_yaw_final_deg, ...
+            odom_x_final, odom_y_final, odom_yaw_final_deg, ...
+            odom_err_x_final, odom_err_y_final, odom_err_yaw_final_deg, ...
+            ekf_x_final, ekf_y_final, ekf_yaw_final_deg, ...
+            ekf_err_x_final, ekf_err_y_final, ekf_err_yaw_final_deg, ...
+            odom_rmse_pos, ekf_rmse_pos, ...
+            odom_rmse_yaw_deg, ekf_rmse_yaw_deg, ...
+            odom_rmse_weighted_pose, ekf_rmse_weighted_pose, ...
+            'VariableNames', { ...
+                'GT_X', 'GT_Y', 'GT_Yaw', ...
+                'Odom_X', 'Odom_Y', 'Odom_Yaw', ...
+                'Odom_error_X', 'Odom_error_Y', 'Odom_error_Yaw', ...
+                'EKF_X', 'EKF_Y', 'EKF_Yaw', ...
+                'EKF_error_X', 'EKF_error_Y', 'EKF_error_Yaw', ...
+                'RMSE_Pos_Odom', 'RMSE_Pos_EKF', ...
+                'RMSE_Yaw_Odom', 'RMSE_Yaw_EKF', ...
+                'RMSE_Weighted_Pose_Odom', 'RMSE_Weighted_Pose_EKF' ...
+            });
+
+        fprintf('\n============================================================\n');
+        fprintf('FINAL RESULTS FOR EXCEL\n');
+        fprintf('============================================================\n');
+        fprintf('Compared samples: %d\n', numel(t_eval));
+        fprintf('Compared time interval: %.3f s to %.3f s\n', t_eval(1), t_eval(end));
+        fprintf('Error convention: estimate - ground truth\n');
+        fprintf('Yaw error wrapping: [-180 deg, 180 deg]\n');
+        fprintf('Weighted pose characteristic length L: %.3f m\n', poseCharacteristicLength_m);
+        fprintf('============================================================\n\n');
+
+        disp(excelResult);
+
+        % ===== Tab-separated row for direct copy into Google Sheets/Excel =====
+        excelHeaders = { ...
+            'GT X', 'GT Y', 'GT Yaw', ...
+            'Odom X', 'Odom Y', 'Odom Yaw', ...
+            'Odom error X', 'Odom error Y', 'Odom error Yaw', ...
+            'EKF X', 'EKF Y', 'EKF Yaw', ...
+            'EKF error X', 'EKF error Y', 'EKF error Yaw', ...
+            'RMSE Pos Odom', 'RMSE Pos EKF', ...
+            'RMSE Yaw Odom', 'RMSE Yaw EKF', ...
+            'RMSE Weighted Pose Odom', 'RMSE Weighted Pose EKF' ...
+        };
+
+        excelValues = table2array(excelResult);
+
+        fprintf('\nCopy-paste header row:\n');
+        fprintf('%s\n', strjoin(excelHeaders, sprintf('\t')));
+
+        fprintf('\nCopy-paste value row using decimal comma:\n');
+
+        valueStrings = strings(1, numel(excelValues));
+
+        for ii = 1:numel(excelValues)
+            valueStrings(ii) = strrep(sprintf('%.6f', excelValues(ii)), '.', ',');
+        end
+
+        fprintf('%s\n\n', strjoin(valueStrings, sprintf('\t')));
+
+        assignin('base', 'excelResult', excelResult);
+        fprintf('Additional variable exported to workspace: excelResult\n');
+    end
+
+else
+    fprintf('\nNo mocap ground truth loaded. Excel error/RMSE results were not computed.\n');
+end
+
+
+function angleWrapped = wrapAnglePiLocal(angleRad)
+    % Wrap angle in radians to [-pi, pi].
+    % This avoids requiring the Mapping Toolbox function wrapToPi.
+
+    angleWrapped = mod(angleRad + pi, 2*pi) - pi;
 end
