@@ -33,6 +33,8 @@ This is the repository for Autonomous Platform at Infotiv Technology Development
 </a>
 
 
+[![Bridging the Sim-to-Real Gap in a Small-Scale Autonomous Platform](https://img.youtube.com/vi/sxJn3AyyiFU/0.jpg)](https://www.youtube.com/watch?v=sxJn3AyyiFU)
+
 [![AP4 Autonomous Driving Navigation/SLAM](https://img.youtube.com/vi/hyw-hApxQHU/0.jpg)](https://www.youtube.com/watch?v=hyw-hApxQHU)
 
 
